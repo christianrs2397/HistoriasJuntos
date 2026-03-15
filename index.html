@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Para mi amor - Ghibli Style</title>
+<title>Nuestra Historia Juntos :)</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Quicksand:wght@400;600&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
 
@@ -59,12 +59,23 @@ body {
 }
 
 #typing-text {
-    font-family: 'Dancing Script', cursive;
+    font-family: 'Comic Sans MS', cursive;
     font-size: clamp(20px, 5vw, 28px);
     line-height: 1.4;
     color: #5d4157;
     min-height: 120px;
     margin-bottom: 20px;
+}
+
+#typing-textFree {
+    font-family: 'Comic Sans MS', cursive;
+    font-size: clamp(15px, 5vw, 20px);
+    line-height: 1.6;
+    color: #5d4157;
+    min-height: 120px;
+    margin: 20px auto;
+    text-align: center;
+    max-width: 420px;
 }
 
 .counter {
@@ -176,6 +187,21 @@ body {
     background: #d63384;
     color: white;
 }
+.button img{
+vertical-align: middle;
+margin-right:5px;
+}
+
+.icono{
+width:60px;
+cursor:pointer;
+padding:10px;
+border-radius:15px;
+background:white;
+border:2px solid #d63384;
+box-shadow:0 4px 10px rgba(0,0,0,0.15);
+transition:all 0.25s ease;
+}
 </style>
 </head>
 
@@ -199,11 +225,15 @@ body {
 <div class="container">
     <div id="seccion-amor">
         <img src="https://i.postimg.cc/WdkNQ8vF/IMG-20260123-WA0360.jpg" class="foto-amor" alt="Nosotros" onclick="explotarCorazones(event, '❤️')">
-        <div id="typing-text"></div>
+        <div id="typing-textFree"></div>
         <div class="counter" id="contador"></div>
         <div style="display: flex; justify-content: center; gap: 20px;">
-            <button id="btn-admin" onclick="mostrarSorpresaAdmin()">🧑‍💼</button>
-            <button id="btn-fotos" onclick="mostrarSeccionFotos()">📸</button>
+            <button id="btn-admin" onclick="mostrarSorpresaAdmin()">
+			<img src="icons/gerente.png" width="80" class="icono">
+			</button>
+            <button id="btn-fotos" onclick="mostrarSeccionFotos()">
+			<img src="icons/fotografo.png" width="80" class="icono">
+			</button>
         </div>
     </div>
 
@@ -219,7 +249,7 @@ body {
     </div>
 
     <div id="seccion-fotos">
-        <h2 style="font-family: 'Dancing Script'; color: #d63384; margin: 0 0 15px 0;">Nuestros Momentos</h2>
+        <h2 style="font-family: 'Dancing Script'; color: #d63384; margin: 0 0 15px 0;">Nuestros Momentos (︶▽︶)</h2>
         <div class="grid-fotos">
             <img src="https://i.postimg.cc/3dSQrchF/IMG-20260110-120046.jpg" class="foto-galeria" onclick="explotarCorazones(event, '🏐')">
             <img src="https://i.postimg.cc/DmcKHzMb/IMG-20260118-WA0233.jpg" class="foto-galeria" onclick="explotarCorazones(event, '💖')">
@@ -234,7 +264,7 @@ body {
 
 <script>
 const fechaInicio = new Date("2025-11-01T00:00:00");
-const mensaje = "Para el Goldito de mi vida:\n\nGracias por cada momento que hemos compartido juntos, por las sonrisas, los abrazos y todo el amor que construimos día a día.\nQue sigamos creando infinitos recuerdos juntos.\n\n— ¡Te Quiero Mucho Monguito!\n\nNuestra historia comenzó hace...";
+const mensaje = "Este será nuestro pequeño lugar para guardar cada momento que vivimos juntos.💚\nAquí quedarán nuestros recuerdos, nuestras risasツ y cada instante que queremos conservar para siempre ✨\n\nPara que, cuando volvamos aquí, podamos recordar todo lo hermoso que hemos construido juntos 👨‍❤️‍💋‍👨\n\n— ¡Te quiero mucho, Monguito! 💕\n\nNuestra historia comenzó hace...";
 
 let i = 0;
 let modoAdmin = false;
@@ -251,7 +281,8 @@ function iniciarSorpresa(archivoAudio) {
     setTimeout(() => {
         document.getElementById("overlay").style.display = "none";
         audio.play();
-        escribirTexto();
+        //escribirTexto();
+		escribirTextoFree();
         setInterval(actualizarContador, 1000);
         setInterval(crearElemento, 400);
     }, 500);
@@ -272,6 +303,15 @@ function explotarCorazones(e, emoji) {
     }
 }
 
+function escribirTextoFree() {
+       document.getElementById("typing-textFree").innerHTML = mensaje.replace(/\n/g, "<br>");
+        const btn1 = document.getElementById("btn-admin");
+        const btn2 = document.getElementById("btn-fotos");
+        btn1.style.display = "inline-block";
+        btn2.style.display = "inline-block";
+        setTimeout(() => { btn1.style.opacity = "1"; btn2.style.opacity = "1"; }, 100);
+}
+
 function escribirTexto() {
     if (i < mensaje.length) {
         let char = mensaje.charAt(i);
@@ -286,7 +326,6 @@ function escribirTexto() {
         setTimeout(() => { btn1.style.opacity = "1"; btn2.style.opacity = "1"; }, 100);
     }
 }
-
 function actualizarContador() {
     const ahora = new Date();
     const diferencia = ahora - fechaInicio;
