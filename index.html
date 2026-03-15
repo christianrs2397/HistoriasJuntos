@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para mi amor - Ghibli Style</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Quicksand:wght@400;600&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    background: linear-gradient(180deg, #a1c4fd 0%, #ffecd2 100%);
+    background-size: 400% 400%;
+    animation: gradientBG 20s ease infinite;
+    font-family: 'Quicksand', sans-serif;
+    overflow-x: hidden; /* Evita scroll horizontal */
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 50% 0%; }
+    50% { background-position: 50% 100%; }
+    100% { background-position: 50% 0%; }
+}
+
+.container {
+    text-align: center;
+    width: 90%; /* Un poco más ancho para móviles */
+    max-width: 500px;
+    padding: 30px 20px;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 50% 20% 50% 20% / 20% 50% 20% 50%;
+    backdrop-filter: blur(12px);
+    border: 3px double #d63384;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    animation: floatFrame 4s ease-in-out infinite;
+    position: relative;
+    transition: all 0.5s ease;
+    margin: 20px 0;
+}
+
+@keyframes floatFrame {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+#seccion-amor, #seccion-admin, #seccion-fotos {
+    transition: opacity 0.5s ease;
+}
+
+#seccion-admin, #seccion-fotos {
+    display: none;
+    opacity: 0;
+}
+
+#typing-text {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(20px, 5vw, 28px);
+    line-height: 1.4;
+    color: #5d4157;
+    min-height: 120px;
+    margin-bottom: 20px;
+}
+
+.counter {
+    font-size: clamp(16px, 4vw, 20px);
+    font-weight: 600;
+    color: #e63946;
+    margin-bottom: 15px;
+}
+
+/* --- ESTILO DE LAS FOTOS --- */
+.foto-amor, .foto-admin {
+    width: 100%;
+    max-width: 180px;
+    border-radius: 15px;
+    border: 4px solid #fff;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    margin-bottom: 10px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+/* --- GALERÍA CORREGIDA --- */
+.grid-fotos {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    padding: 10px 0;
+    /* Se eliminó el scroll interno para que se vea toda la galería */
+}
+
+.foto-galeria {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    background-color: white;
+    padding: 5px 5px 15px 5px; 
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.foto-galeria:nth-child(odd) { transform: rotate(-2deg); }
+.foto-galeria:nth-child(even) { transform: rotate(2deg); }
+
+.foto-galeria:hover {
+    transform: scale(1.05) rotate(0deg);
+    z-index: 5;
+}
+
+.btn-volver {
+    margin-top: 20px;
+    background: #ffffff;
+    border: 2px solid #d63384;
+    color: #d63384;
+    border-radius: 20px;
+    padding: 8px 25px;
+    cursor: pointer;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bold;
+}
+
+/* --- SECCIÓN ADMIN MEJORADA --- */
+.carta-admin-texto { 
+    font-family: 'Playfair Display', serif; 
+    font-size: clamp(16px, 4vw, 20px); 
+    color: #1b4332; 
+    line-height: 1.5; 
+    text-align: center;
+}
+
+.titulo-admin {
+    font-weight: bold;
+    font-size: clamp(18px, 5vw, 24px);
+    margin-bottom: 15px;
+    display: block;
+}
+
+/* Animaciones y otros */
+.corazon-clic { position: fixed; pointer-events: none; z-index: 1000; font-size: 30px; animation: flotarReaccion 1.5s ease-out forwards; }
+@keyframes flotarReaccion { 0% { transform: translateY(0) scale(0); opacity: 0; } 20% { opacity: 1; transform: translateY(-20px) scale(1.2); } 100% { transform: translateY(-200px) scale(1.5); opacity: 0; } }
+.falling { position: absolute; top: -50px; pointer-events: none; z-index: 1; animation: fallDown linear forwards; }
+@keyframes fallDown { 0% { transform: translateY(0) rotate(0deg); opacity: 0; } 10% { opacity: 0.8; } 100% { transform: translateY(110vh) rotate(720deg); opacity: 0; } }
+#overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, #fff9f0, #ffecd2); display: flex; justify-content: center; align-items: center; z-index: 100; text-align: center; }
+.start-btn { font-family: 'Dancing Script', cursive; font-size: 24px; color: #d63384; padding: 20px; }
+#btn-admin, #btn-fotos { display: none; background: none; border: none; font-size: 45px; cursor: pointer; margin-top: 10px; transition: opacity 0.5s; opacity: 0; }
+@keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+
+/* --- ESTILO SELECTOR MUSICA --- */
+.music-selector {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+.music-btn {
+    background: white;
+    border: 2px solid #d63384;
+    color: #d63384;
+    padding: 10px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bold;
+    width: 200px;
+    transition: 0.3s;
+}
+.music-btn:hover {
+    background: #d63384;
+    color: white;
+}
+</style>
+</head>
+
+<body>
+
+<div id="overlay">
+    <div class="start-btn">
+        <span style="font-size: 60px; animation: heartbeat 1.5s infinite; display: inline-block;">🌹</span><br>
+        Elige el ritmo de nuestro corazón:<br><br>(Sube el volumen🔊)
+        <div class="music-selector">
+            <button class="music-btn" onclick="iniciarSorpresa('music/cancion1.mp3')">🎵 Canción 1</button>
+            <button class="music-btn" onclick="iniciarSorpresa('music/cancion2.mp3')">🎵 Canción 2</button>
+        </div>
+    </div>
+</div>
+
+<audio id="musica" loop>
+    <source id="audioSource" src="" type="audio/mpeg">
+</audio>
+
+<div class="container">
+    <div id="seccion-amor">
+        <img src="https://i.postimg.cc/WdkNQ8vF/IMG-20260123-WA0360.jpg" class="foto-amor" alt="Nosotros" onclick="explotarCorazones(event, '❤️')">
+        <div id="typing-text"></div>
+        <div class="counter" id="contador"></div>
+        <div style="display: flex; justify-content: center; gap: 20px;">
+            <button id="btn-admin" onclick="mostrarSorpresaAdmin()">🧑‍💼</button>
+            <button id="btn-fotos" onclick="mostrarSeccionFotos()">📸</button>
+        </div>
+    </div>
+
+    <div id="seccion-admin">
+        <div class="carta-admin-texto">
+            <span class="titulo-admin">¡FELIZ DÍA DEL ADMINISTRADOR!🎉</span>
+            <img src="https://i.postimg.cc/mgMbBXf9/IMG-20260206-142351.jpg" class="foto-admin" alt="Nosotros" onclick="explotarCorazones(event, '💚')">
+            <p>Desde que te conocí me di cuenta de la gran persona y profesional que eres. Siempre buscando aprender más y capacitándote.</p>
+            <p>Esa constancia es lo que más admiro de ti. ✨ Estaré ahí para apoyarte en todo.</p>
+            <div style="font-style: italic; font-weight: bold; color: #2d6a4f; margin-top: 15px;">Atte. El Monito 🙊</div>
+            <button class="btn-volver" onclick="volverInicio()">Volver 🙈</button>
+        </div>
+    </div>
+
+    <div id="seccion-fotos">
+        <h2 style="font-family: 'Dancing Script'; color: #d63384; margin: 0 0 15px 0;">Nuestros Momentos</h2>
+        <div class="grid-fotos">
+            <img src="https://i.postimg.cc/3dSQrchF/IMG-20260110-120046.jpg" class="foto-galeria" onclick="explotarCorazones(event, '🏐')">
+            <img src="https://i.postimg.cc/DmcKHzMb/IMG-20260118-WA0233.jpg" class="foto-galeria" onclick="explotarCorazones(event, '💖')">
+            <img src="https://i.postimg.cc/hfPqBqkV/IMG-20260124-WA0107.jpg" class="foto-galeria" onclick="explotarCorazones(event, '🙊')">
+            <img src="https://i.postimg.cc/TpYX6Xzp/IMG-20260124-WA0517.jpg" class="foto-galeria" onclick="explotarCorazones(event, '🌹')">
+            <img src="https://i.postimg.cc/TpYX6Xzp/IMG-20260124-WA0517.jpg" class="foto-galeria" onclick="explotarCorazones(event, '✨')">
+            <img src="https://i.postimg.cc/ctLkVdvf/IMG-20260102-WA0503.jpg" class="foto-galeria" onclick="explotarCorazones(event, '💚')">
+        </div>
+        <button class="btn-volver" onclick="volverInicio()">Volver 🐒</button>
+    </div>
+</div>
+
+<script>
+const fechaInicio = new Date("2025-11-01T00:00:00");
+const mensaje = "Para el Goldito de mi vida:\n\nGracias por cada momento que hemos compartido juntos, por las sonrisas, los abrazos y todo el amor que construimos día a día.\nQue sigamos creando infinitos recuerdos juntos.\n\n— ¡Te Quiero Mucho Monguito!\n\nNuestra historia comenzó hace...";
+
+let i = 0;
+let modoAdmin = false;
+
+function iniciarSorpresa(archivoAudio) {
+    const audio = document.getElementById("musica");
+    const source = document.getElementById("audioSource");
+    
+    // Asignar el archivo seleccionado
+    source.src = archivoAudio;
+    audio.load();
+
+    document.getElementById("overlay").style.opacity = "0";
+    setTimeout(() => {
+        document.getElementById("overlay").style.display = "none";
+        audio.play();
+        escribirTexto();
+        setInterval(actualizarContador, 1000);
+        setInterval(crearElemento, 400);
+    }, 500);
+}
+
+function explotarCorazones(e, emoji) {
+    const totalCorazones = 6;
+    for (let j = 0; j < totalCorazones; j++) {
+        setTimeout(() => {
+            const c = document.createElement("div");
+            c.innerHTML = emoji;
+            c.className = "corazon-clic";
+            c.style.left = (e.clientX) + "px";
+            c.style.top = (e.clientY) + "px";
+            document.body.appendChild(c);
+            setTimeout(() => c.remove(), 1500);
+        }, j * 100);
+    }
+}
+
+function escribirTexto() {
+    if (i < mensaje.length) {
+        let char = mensaje.charAt(i);
+        document.getElementById("typing-text").innerHTML += char === "\n" ? "<br>" : char;
+        i++;
+        setTimeout(escribirTexto, 80);
+    } else {
+        const btn1 = document.getElementById("btn-admin");
+        const btn2 = document.getElementById("btn-fotos");
+        btn1.style.display = "inline-block";
+        btn2.style.display = "inline-block";
+        setTimeout(() => { btn1.style.opacity = "1"; btn2.style.opacity = "1"; }, 100);
+    }
+}
+
+function actualizarContador() {
+    const ahora = new Date();
+    const diferencia = ahora - fechaInicio;
+    const segundos = Math.floor(diferencia / 1000);
+    const dias = Math.floor(segundos / (3600*24));
+    const horas = Math.floor((segundos % (3600*24)) / 3600);
+    const minutos = Math.floor((segundos % 3600) / 60);
+    const seg = segundos % 60;
+    const contadorEl = document.getElementById("contador");
+    if(contadorEl) { contadorEl.innerHTML = dias + " días, " + horas + "h " + minutos + "m " + seg + "s"; }
+}
+
+function mostrarSorpresaAdmin() {
+    modoAdmin = true;
+    cambiarSeccion("seccion-admin", "3px double #2a9d8f", "20px");
+}
+
+function mostrarSeccionFotos() {
+    modoAdmin = false;
+    cambiarSeccion("seccion-fotos", "3px double #d63384", "20px");
+}
+
+function volverInicio() {
+    modoAdmin = false;
+    cambiarSeccion("seccion-amor", "3px double #d63384", "50% 20% 50% 20% / 20% 50% 20% 50%");
+}
+
+function cambiarSeccion(idMostrar, borde, radio) {
+    const secciones = ["seccion-amor", "seccion-admin", "seccion-fotos"];
+    const contenedor = document.querySelector(".container");
+    
+    secciones.forEach(id => {
+        const el = document.getElementById(id);
+        if(el.style.display === "block" || (id === "seccion-amor" && el.style.display !== "none")) {
+            el.style.opacity = "0";
+            setTimeout(() => { el.style.display = "none"; }, 500);
+        }
+    });
+
+    setTimeout(() => {
+        const destino = document.getElementById(idMostrar);
+        destino.style.display = "block";
+        contenedor.style.border = borde;
+        contenedor.style.borderRadius = radio;
+        setTimeout(() => { destino.style.opacity = "1"; }, 50);
+    }, 550);
+}
+
+function crearElemento() {
+    const el = document.createElement("div");
+    el.classList.add("falling");
+    let items = ["🌹", "❤️", "✨", "💚"];
+    if (modoAdmin) { items = ["📈", "💼", "📎", "📊", "✨"]; }
+    el.innerHTML = items[Math.floor(Math.random() * items.length)];
+    el.style.left = Math.random() * 100 + "vw";
+    el.style.fontSize = (Math.random() * 20 + 15) + "px";
+    el.style.animationDuration = (Math.random() * 3 + 4) + "s";
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 7000);
+}
+</script>
+
+</body>
+</html>
