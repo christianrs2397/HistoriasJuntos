@@ -250,13 +250,13 @@ transition:all 0.25s ease;
 
     <div id="seccion-fotos">
         <h2 style="font-family: 'Dancing Script'; color: #d63384; margin: 0 0 15px 0;">Nuestros Momentos (︶▽︶)</h2>
-        <div class="grid-fotos">
-            <img src="https://i.postimg.cc/3dSQrchF/IMG-20260110-120046.jpg" class="foto-galeria" onclick="explotarCorazones(event, '🏐')">
+        <div class="grid-fotos" id="contenedor-fotos">
+           <!-- <img src="https://i.postimg.cc/3dSQrchF/IMG-20260110-120046.jpg" class="foto-galeria" onclick="explotarCorazones(event, '🏐')">
             <img src="https://i.postimg.cc/DmcKHzMb/IMG-20260118-WA0233.jpg" class="foto-galeria" onclick="explotarCorazones(event, '💖')">
             <img src="https://i.postimg.cc/hfPqBqkV/IMG-20260124-WA0107.jpg" class="foto-galeria" onclick="explotarCorazones(event, '🙊')">
             <img src="https://i.postimg.cc/TpYX6Xzp/IMG-20260124-WA0517.jpg" class="foto-galeria" onclick="explotarCorazones(event, '🌹')">
             <img src="https://i.postimg.cc/TpYX6Xzp/IMG-20260124-WA0517.jpg" class="foto-galeria" onclick="explotarCorazones(event, '✨')">
-            <img src="https://i.postimg.cc/ctLkVdvf/IMG-20260102-WA0503.jpg" class="foto-galeria" onclick="explotarCorazones(event, '💚')">
+            <img src="https://i.postimg.cc/ctLkVdvf/IMG-20260102-WA0503.jpg" class="foto-galeria" onclick="explotarCorazones(event, '💚')">-->
         </div>
         <button class="btn-volver" onclick="volverInicio()">Volver 🐒</button>
     </div>
@@ -346,6 +346,7 @@ function mostrarSorpresaAdmin() {
 function mostrarSeccionFotos() {
     modoAdmin = false;
     cambiarSeccion("seccion-fotos", "3px double #d63384", "20px");
+	cargarFotosDesdeSheet(); // 👈 agregar esto
 }
 
 function volverInicio() {
@@ -386,6 +387,65 @@ function crearElemento() {
     document.body.appendChild(el);
     setTimeout(() => el.remove(), 7000);
 }
+
+async function cargarFotosDesdeSheet() {
+    const url = "https://opensheet.elk.sh/1fFLafCuTFUkTwfRBk3EHqlfN9cDVa0QUyOAIVMv6GLI/Hoja1";
+
+    try {
+        const res = await fetch(url);
+        const data = await res.json();
+
+        const contenedor = document.getElementById("contenedor-fotos");
+        contenedor.innerHTML = "";
+
+data.forEach((fila, index) => {
+    const link = convertirLinkDrive(fila.link);
+	console.log("LINK FINAL:", link);
+    if (link) {
+        const img = document.createElement("img");
+
+        img.src = link;
+        img.className = "foto-galeria fade-in";
+        img.style.animationDelay = (index * 0.1) + "s";
+
+        img.onclick = (e) => explotarCorazones(e, "💖");
+
+        contenedor.appendChild(img);
+    }
+});
+
+    } catch (error) {
+        console.error("Error cargando fotos:", error);
+    }
+}
+
+function convertirLinkDrive(link) {
+    if (!link) return "";
+
+    let id = "";
+
+    // /file/d/XXXXX/
+    if (link.includes("/file/d/")) {
+        id = link.split("/file/d/")[1].split("/")[0];
+    }
+    // open?id=XXXXX o uc?id=XXXXX
+    else if (link.includes("id=")) {
+        id = link.split("id=")[1].split("&")[0];
+    }
+    // ya es link directo de googleusercontent
+    else if (link.includes("googleusercontent.com")) {
+        return link;
+    }
+
+    if (!id) {
+        console.warn("No se pudo extraer ID:", link);
+        return link;
+    }
+
+    // 👇 este es el formato que quieres usar
+    return `https://lh3.googleusercontent.com/d/${id}`;
+}
+
 </script>
 
 </body>
