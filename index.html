@@ -162,7 +162,12 @@ body {
 .start-btn { font-family: 'Dancing Script', cursive; font-size: 24px; color: #F54927; padding: 20px; }
 #btn-admin, #btn-fotos { display: none; background: none; border: none; font-size: 45px; cursor: pointer; margin-top: 10px; transition: opacity 0.5s; opacity: 0; }
 @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
-
+@media (max-width: 480px) {
+    .album-btn img {
+        width: 100px;
+        height: 100px;
+    }
+}
 /* --- ESTILO SELECTOR MUSICA --- */
 .music-selector {
     margin-top: 20px;
@@ -212,17 +217,17 @@ transition:all 0.25s ease;
 }
 
 .album-btn img {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
+    width: 120px;   /* antes 80px */
+    height: 120px;  /* antes 80px */
+    border-radius: 200px; /* opcional: menos círculo, más tipo tarjeta */
     object-fit: cover;
     border: 3px solid #F54927;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.25);
     transition: 0.3s;
 }
 
 .album-btn img:hover {
-    transform: scale(1.1);
+    transform: scale(1.15);
 }
 
 .album-btn span {
@@ -290,7 +295,7 @@ transition:all 0.25s ease;
 		    </h2>
 
 		    <!-- 🔵 BOTONES REDONDOS -->
-		    <div id="menu-albumes" style="display:flex; justify-content:center; gap:15px; flex-wrap:wrap; margin-bottom:15px;">
+		    <div id="menu-albumes" style="display:flex; justify-content:center; gap:25px; flex-wrap:wrap;">
 		        
 		        <div class="album-btn" onclick="cargarFotosDesdeSheet('viajes')">
 		            <img src="https://i.postimg.cc/3dSQrchF/IMG-20260110-120046.jpg">
@@ -481,7 +486,7 @@ data.forEach((fila, index) => {
         console.error("Error cargando fotos:", error);
     }
 }*/
-async function cargarFotosDesdeSheet(tipo) {
+/*async function cargarFotosDesdeSheet(tipo) {
     const url = "https://opensheet.elk.sh/1fFLafCuTFUkTwfRBk3EHqlfN9cDVa0QUyOAIVMv6GLI/Hoja1";
 
     try {
@@ -503,7 +508,7 @@ async function cargarFotosDesdeSheet(tipo) {
             // 👉 filtra por tipo (columna en Excel)
             if (fila.tipo !== tipo) return;
 
-            const link = convertirLinkDrive(fila.link);
+            const link = 	(fila.link);
 
             if (link) {
                 const img = document.createElement("img");
@@ -517,6 +522,99 @@ async function cargarFotosDesdeSheet(tipo) {
                 contenedor.appendChild(img);
             }
         });
+
+    } catch (error) {
+        console.error("Error cargando fotos:", error);
+    }
+}*/
+let albumsData = {};
+
+async function cargarFotosDesdeSheet(tipo) {
+    const url = "https://opensheet.elk.sh/1fFLafCuTFUkTwfRBk3EHqlfN9cDVa0QUyOAIVMv6GLI/Hoja1";
+
+    try {
+        const res = await fetch(url);
+        const data = await res.json();
+
+        const contenedor = document.getElementById("contenedor-fotos");
+
+        // 👉 PRIMERA VEZ: construir estructura de álbumes
+        if (Object.keys(albumsData).length === 0) {
+
+            data.forEach(fila => {
+                const carpeta = fila.carpeta?.trim();
+
+                if (!carpeta) return;
+
+                // 👉 si NO es número = es álbum
+                if (isNaN(carpeta)) {
+                    albumsData[carpeta] = {
+                        portada: convertirLinkDrive(fila.link),
+                        fotos: []
+                    };
+                }
+            });
+
+            // 👉 ahora asignar fotos a cada álbum por número
+            data.forEach(fila => {
+                const carpeta = fila.carpeta?.trim();
+
+                if (!carpeta) return;
+
+                // 👉 si ES número = es foto
+                if (!isNaN(carpeta)) {
+                    const index = parseInt(carpeta) - 1;
+                    const albumKeys = Object.keys(albumsData);
+
+                    if (albumKeys[index]) {
+                        albumsData[albumKeys[index]].fotos.push(
+                            convertirLinkDrive(fila.link)
+                        );
+                    }
+                }
+            });
+
+            // 👉 pintar botones de álbum dinámicamente
+            const menu = document.getElementById("menu-albumes");
+            menu.innerHTML = "";
+
+            Object.keys(albumsData).forEach(nombre => {
+                const album = albumsData[nombre];
+
+                const div = document.createElement("div");
+                div.className = "album-btn";
+                div.onclick = () => cargarFotosDesdeSheet(nombre);
+
+                div.innerHTML = `
+                    <img src="${album.portada}">
+                   
+                `;
+
+                menu.appendChild(div);
+            });
+        }
+
+        // 👉 SI SE SELECCIONA UN ÁLBUM
+        if (tipo) {
+            contenedor.innerHTML = "";
+
+            document.getElementById("menu-albumes").style.display = "none";
+            document.getElementById("btn-volver-albumes").style.display = "inline-block";
+
+            const fotos = albumsData[tipo]?.fotos || [];
+
+            fotos.forEach((link, index) => {
+                const img = document.createElement("img");
+
+                img.src = link;
+                img.className = "foto-galeria";
+                img.style.animationDelay = (index * 0.1) + "s";
+
+                img.onclick = (e) => explotarCorazones(e, "💖");
+
+                contenedor.appendChild(img);
+            });
+        }
 
     } catch (error) {
         console.error("Error cargando fotos:", error);
