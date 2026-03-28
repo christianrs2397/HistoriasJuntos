@@ -367,8 +367,13 @@ function iniciarSorpresa(archivoAudio) {
         setInterval(actualizarContador, 1000);
         setInterval(crearElemento, 400);
 
-        const hoy = new Date();
-        const esCumple = hoy.getDate() === 28 && hoy.getMonth() === 2 && hoy.getFullYear() === 2026;
+        const hoy = new Date().toLocaleString("en-US", {
+  timeZone: "America/Lima"
+});
+        const fechaPeru = new Date(hoy);
+        console.log("fevha+"+fechaPeru);
+         console.log("hoy.getMonth()+"+fechaPeru.getMonth());
+        const esCumple = fechaPeru.getDate() === 22 && fechaPeru.getMonth()+1 === 4 && fechaPeru.getFullYear() === 2026;
         /*if (esCumple) {
             setTimeout(() => {
                 document.getElementById("modal-cumple").style.display = "flex";
@@ -517,7 +522,7 @@ function crearElemento() {
 let albumsData = {};
 
 async function cargarFotosDesdeSheet(tipo) {
-    const url = "https://opensheet.elk.sh/1fFLafCuTFUkTwfRBk3EHqlfN9cDVa0QUyOAIVMv6GLI/Hoja1";
+    const url = "https://opensheet.elk.sh/1ytc9OLnVTFOQ5GddnzLlLJ4o3J81QhWUC3smN0JeNs8/Hoja1";
     try {
         const res = await fetch(url);
         const data = await res.json();
