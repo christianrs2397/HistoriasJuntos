@@ -221,7 +221,7 @@ transition:all 0.25s ease;
     height: 120px;  /* antes 80px */
     border-radius: 200px; /* opcional: menos círculo, más tipo tarjeta */
     object-fit: cover;
-    border: 3px solid #F54927;
+    
     box-shadow: 0 6px 15px rgba(0,0,0,0.25);
     transition: 0.3s;
 }
@@ -297,7 +297,7 @@ transition:all 0.25s ease;
 		    <!-- 🔵 BOTONES REDONDOS -->
 		    <div id="menu-albumes" style="display:flex; justify-content:center; gap:25px; flex-wrap:wrap;">
 		        
-		        <div class="album-btn" onclick="cargarFotosDesdeSheet('viajes')">
+		        <!--<div class="album-btn" onclick="cargarFotosDesdeSheet('viajes')">
 		            <img src="https://i.postimg.cc/3dSQrchF/IMG-20260110-120046.jpg">
 		            <span>Viajes</span>
 		        </div>
@@ -305,7 +305,7 @@ transition:all 0.25s ease;
 		        <div class="album-btn" onclick="cargarFotosDesdeSheet('momentos')">
 		            <img src="https://i.postimg.cc/DmcKHzMb/IMG-20260118-WA0233.jpg">
 		            <span>Momentos</span>
-		        </div>
+		        </div>-->
 
 		    </div>
 
@@ -646,6 +646,7 @@ function convertirLinkDrive(link) {
 
     // 👇 este es el formato que quieres usar
     return `https://lh3.googleusercontent.com/d/${id}`;
+
 }
 
 </script>
