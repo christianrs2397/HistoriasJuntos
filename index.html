@@ -373,7 +373,7 @@ function iniciarSorpresa(archivoAudio) {
         const fechaPeru = new Date(hoy);
         console.log("fevha+"+fechaPeru);
          console.log("hoy.getMonth()+"+fechaPeru.getMonth());
-        const esCumple = fechaPeru.getDate() === 22 && fechaPeru.getMonth()+1 === 4 && fechaPeru.getFullYear() === 2026;
+        const esCumple = (fechaPeru.getDate() >= 28 && fechaPeru.getDate()  <= 31 ) && fechaPeru.getMonth()+1 === 3 && fechaPeru.getFullYear() === 2026;
         /*if (esCumple) {
             setTimeout(() => {
                 document.getElementById("modal-cumple").style.display = "flex";
