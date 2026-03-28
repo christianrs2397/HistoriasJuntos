@@ -360,6 +360,29 @@ function explotarCorazones(e, emoji) {
     }
 }
 
+function explotarElementoPro(e) {
+
+    const el = document.createElement("div");
+    el.classList.add("corazon-clic");
+
+    // 👉 mismos elementos que crearElemento
+    let items = ["🌹", "❤️", "✨", "💚","🖐️","👀","🐵","❣︎","😎","🌚","🙉","🔥"];
+    if (modoAdmin) {
+        items = ["📈", "💼", "📎", "📊", "✨"];
+    }
+
+    // 👉 solo uno random
+    el.innerHTML = items[Math.floor(Math.random() * items.length)];
+
+    // 👉 posición del click
+    el.style.left = e.clientX + "px";
+    el.style.top = e.clientY + "px";
+
+    document.body.appendChild(el);
+
+    setTimeout(() => el.remove(), 1500);
+}
+
 function escribirTextoFree() {
        document.getElementById("typing-textFree").innerHTML = mensaje.replace(/\n/g, "<br>");
         const btn1 = document.getElementById("btn-admin");
@@ -414,6 +437,8 @@ function volverInicio() {
     document.getElementById("menu-albumes").style.display = "flex";
     document.getElementById("contenedor-fotos").innerHTML = "";
     cambiarSeccion("seccion-amor", "3px double #F54927", "50% 20% 50% 20% / 20% 50% 20% 50%");
+    // 👇 ocultar este botón otra vez
+    document.getElementById("btn-volver-albumes").style.display = "none";
 }
 function volverAlbumes() {
     document.getElementById("contenedor-fotos").innerHTML = "";
@@ -538,63 +563,77 @@ async function cargarFotosDesdeSheet(tipo) {
 
         const contenedor = document.getElementById("contenedor-fotos");
 
-        // 👉 PRIMERA VEZ: construir estructura de álbumes
+        // 👉 PRIMERA VEZ: construir álbumes
         if (Object.keys(albumsData).length === 0) {
 
+            // 🔵 1. CREAR ÁLBUMES (solo los que tienen nombre archivo tipo imagen principal)
             data.forEach(fila => {
+                const nombre = fila.nombre?.trim();
                 const carpeta = fila.carpeta?.trim();
 
-                if (!carpeta) return;
+                if (!nombre || !carpeta) return;
 
-                // 👉 si NO es número = es álbum
+                // 👉 si carpeta NO es número → es álbum
                 if (isNaN(carpeta)) {
-                    albumsData[carpeta] = {
+
+                    // quitar extensión
+                    const nombreSinExt = nombre.replace(/\.[^/.]+$/, "").toLowerCase();
+
+                    albumsData[nombreSinExt] = {
+                        nombre: nombreSinExt,
                         portada: convertirLinkDrive(fila.link),
                         fotos: []
                     };
                 }
             });
 
-            // 👉 ahora asignar fotos a cada álbum por número
+            // 🔵 2. ASIGNAR FOTOS A SU ÁLBUM
             data.forEach(fila => {
                 const carpeta = fila.carpeta?.trim();
+                const link = convertirLinkDrive(fila.link);
 
-                if (!carpeta) return;
+                if (!carpeta || isNaN(carpeta)) return;
 
-                // 👉 si ES número = es foto
-                if (!isNaN(carpeta)) {
-                    const index = parseInt(carpeta) - 1;
-                    const albumKeys = Object.keys(albumsData);
+                // 👉 buscar álbum por índice (pero mejorado luego)
+                const albumKeys = Object.keys(albumsData);
 
-                    if (albumKeys[index]) {
-                        albumsData[albumKeys[index]].fotos.push(
-                            convertirLinkDrive(fila.link)
-                        );
-                    }
+                const index = parseInt(carpeta) - 1;
+
+                if (albumKeys[index]) {
+                    albumsData[albumKeys[index]].fotos.push(link);
                 }
             });
 
-            // 👉 pintar botones de álbum dinámicamente
+            // 🔵 3. ORDENAR ÁLBUMES POR NOMBRE
+            const albumsOrdenados = Object.values(albumsData)
+                .sort((a, b) => a.nombre.localeCompare(b.nombre));
+
+            // 🔵 4. PINTAR BOTONES
             const menu = document.getElementById("menu-albumes");
             menu.innerHTML = "";
 
-            Object.keys(albumsData).forEach(nombre => {
-                const album = albumsData[nombre];
+            albumsOrdenados.forEach(album => {
 
                 const div = document.createElement("div");
                 div.className = "album-btn";
-                div.onclick = () => cargarFotosDesdeSheet(nombre);
+                div.onclick = () => cargarFotosDesdeSheet(album.nombre);
 
                 div.innerHTML = `
                     <img src="${album.portada}">
-                   
+                    
                 `;
 
                 menu.appendChild(div);
             });
+
+            // 👉 reemplazar estructura con ordenada
+            albumsData = {};
+            albumsOrdenados.forEach(a => {
+                albumsData[a.nombre] = a;
+            });
         }
 
-        // 👉 SI SE SELECCIONA UN ÁLBUM
+        // 👉 MOSTRAR FOTOS DEL ÁLBUM
         if (tipo) {
             contenedor.innerHTML = "";
 
@@ -610,7 +649,7 @@ async function cargarFotosDesdeSheet(tipo) {
                 img.className = "foto-galeria";
                 img.style.animationDelay = (index * 0.1) + "s";
 
-                img.onclick = (e) => explotarCorazones(e, "💖");
+                img.onclick = (e) => explotarElementoPro(event);
 
                 contenedor.appendChild(img);
             });
@@ -620,7 +659,6 @@ async function cargarFotosDesdeSheet(tipo) {
         console.error("Error cargando fotos:", error);
     }
 }
-
 function convertirLinkDrive(link) {
     if (!link) return "";
 
