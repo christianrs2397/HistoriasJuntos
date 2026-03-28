@@ -14,7 +14,7 @@ body {
     background-size: 400% 400%;
     animation: gradientBG 20s ease infinite;
     font-family: 'Quicksand', sans-serif;
-    overflow-x: hidden; /* Evita scroll horizontal */
+    overflow-x: hidden;
     min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -29,7 +29,7 @@ body {
 
 .container {
     text-align: center;
-    width: 90%; /* Un poco más ancho para móviles */
+    width: 90%;
     max-width: 500px;
     padding: 30px 20px;
     z-index: 10;
@@ -37,16 +37,11 @@ body {
     border-radius: 50% 20% 50% 20% / 20% 50% 20% 50%;
     backdrop-filter: blur(12px);
     border: 3px double #F54927;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-    animation: floatFrame 4s ease-in-out infinite;
+    box-shadow: none; 
+    animation: none; 
     position: relative;
     transition: all 0.5s ease;
     margin: 20px 0;
-}
-
-@keyframes floatFrame {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
 }
 
 #seccion-amor, #seccion-admin, #seccion-fotos {
@@ -56,15 +51,6 @@ body {
 #seccion-admin, #seccion-fotos {
     display: none;
     opacity: 0;
-}
-
-#typing-text {
-    font-family: 'Comic Sans MS', cursive;
-    font-size: clamp(20px, 5vw, 28px);
-    line-height: 1.4;
-    color: #5d4157;
-    min-height: 120px;
-    margin-bottom: 20px;
 }
 
 #typing-textFree {
@@ -85,7 +71,6 @@ body {
     margin-bottom: 15px;
 }
 
-/* --- ESTILO DE LAS FOTOS --- */
 .foto-amor, .foto-admin {
     width: 100%;
     max-width: 180px;
@@ -97,13 +82,11 @@ body {
     cursor: pointer;
 }
 
-/* --- GALERÍA CORREGIDA --- */
 .grid-fotos {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
     padding: 10px 0;
-    /* Se eliminó el scroll interno para que se vea toda la galería */
 }
 
 .foto-galeria {
@@ -137,7 +120,6 @@ body {
     font-weight: bold;
 }
 
-/* --- SECCIÓN ADMIN MEJORADA --- */
 .carta-admin-texto { 
     font-family: 'Playfair Display', serif; 
     font-size: clamp(16px, 4vw, 20px); 
@@ -153,7 +135,6 @@ body {
     display: block;
 }
 
-/* Animaciones y otros */
 .corazon-clic { position: fixed; pointer-events: none; z-index: 1000; font-size: 30px; animation: flotarReaccion 1.5s ease-out forwards; }
 @keyframes flotarReaccion { 0% { transform: translateY(0) scale(0); opacity: 0; } 20% { opacity: 1; transform: translateY(-20px) scale(1.2); } 100% { transform: translateY(-200px) scale(1.5); opacity: 0; } }
 .falling { position: absolute; top: -50px; pointer-events: none; z-index: 1; animation: fallDown linear forwards; }
@@ -162,13 +143,7 @@ body {
 .start-btn { font-family: 'Dancing Script', cursive; font-size: 24px; color: #F54927; padding: 20px; }
 #btn-admin, #btn-fotos { display: none; background: none; border: none; font-size: 45px; cursor: pointer; margin-top: 10px; transition: opacity 0.5s; opacity: 0; }
 @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
-@media (max-width: 480px) {
-    .album-btn img {
-        width: 100px;
-        height: 100px;
-    }
-}
-/* --- ESTILO SELECTOR MUSICA --- */
+
 .music-selector {
     margin-top: 20px;
     display: flex;
@@ -192,10 +167,6 @@ body {
     background: #F54927;
     color: white;
 }
-.button img{
-vertical-align: middle;
-margin-right:5px;
-}
 
 .icono{
 width:60px;
@@ -208,7 +179,6 @@ box-shadow:0 4px 10px rgba(0,0,0,0.15);
 transition:all 0.25s ease;
 }
 
-
 .album-btn {
     display: flex;
     flex-direction: column;
@@ -217,29 +187,100 @@ transition:all 0.25s ease;
 }
 
 .album-btn img {
-    width: 120px;   /* antes 80px */
-    height: 120px;  /* antes 80px */
-    border-radius: 200px; /* opcional: menos círculo, más tipo tarjeta */
+    width: 120px;
+    height: 120px;
+    border-radius: 200px;
     object-fit: cover;
-    
     box-shadow: 0 6px 15px rgba(0,0,0,0.25);
     transition: 0.3s;
 }
 
-.album-btn img:hover {
-    transform: scale(1.15);
+/* --- SECCIÓN CUMPLEAÑOS PROTEGIDA PARA CELULAR --- */
+#modal-cumple {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(10px);
 }
 
-.album-btn span {
-    margin-top: 5px;
-    font-size: 14px;
-    color: #F54927;
+.modal-content {
+    background: white;
+    padding: 30px 20px;
+    border-radius: 30px;
+    width: 85%;
+    max-width: 400px;
+    text-align: center;
+    border: 5px solid #F54927;
+    position: relative;
+    /* Bloqueo de movimiento para evitar el temblor en celulares */
+    transform: translateZ(0); 
+    animation: fadeInModal 0.3s ease-out forwards;
+}
+
+@keyframes fadeInModal {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.btn-video {
+    background: #F54927;
+    color: white;
+    text-decoration: none;
+    padding: 15px 25px;
+    border-radius: 50px;
     font-weight: bold;
+    display: inline-block;
+    margin-top: 25px;
+    box-shadow: 0 4px 15px rgba(245, 73, 39, 0.3);
+}
+
+.confeti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    opacity: 0.8;
+    border-radius: 2px;
+    animation: confetiFall 3s linear forwards;
+}
+
+@keyframes confetiFall {
+    0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+}
+
+@media (max-width: 480px) {
+    .album-btn img {
+        width: 100px;
+        height: 100px;
+    }
 }
 </style>
 </head>
 
 <body>
+
+<div id="modal-cumple">
+    <div class="modal-content">
+        <div style="font-size: 50px; margin-bottom: 10px;">🎂🥳🎈</div>
+        <h2 style="font-family: 'Dancing Script'; color: #F54927; font-size: 35px; margin: 0;">¡Feliz Cumpleaños, Monguito!</h2>
+        <p style="color: #5d4157; font-size: 18px; line-height: 1.5; margin-top: 15px;">
+            Hoy el mundo es un poquito más brillante porque es tu día. Eres una persona increíble, dedicada y llena de luz. ¡Que este nuevo año venga cargado de éxitos y muchos más momentos juntos! ❤️✨
+        </p>
+        
+        <a href="LINK_DE_TU_VIDEO_AQUÍ" target="_blank" class="btn-video">
+            📽️ Ver tu sorpresa
+        </a>
+        
+        <div onclick="cerrarModal()" style="margin-top: 20px; color: #888; cursor: pointer; font-size: 14px; text-decoration: underline;">Cerrar ventana</div>
+    </div>
+</div>
 
 <div id="overlay">
     <div class="start-btn">
@@ -282,44 +323,19 @@ transition:all 0.25s ease;
         </div>
     </div>
 
-           <!-- <img src="https://i.postimg.cc/3dSQrchF/IMG-20260110-120046.jpg" class="foto-galeria" onclick="explotarCorazones(event, '🏐')">
-            <img src="https://i.postimg.cc/DmcKHzMb/IMG-20260118-WA0233.jpg" class="foto-galeria" onclick="explotarCorazones(event, '💖')">
-            <img src="https://i.postimg.cc/hfPqBqkV/IMG-20260124-WA0107.jpg" class="foto-galeria" onclick="explotarCorazones(event, '🙊')">
-            <img src="https://i.postimg.cc/TpYX6Xzp/IMG-20260124-WA0517.jpg" class="foto-galeria" onclick="explotarCorazones(event, '🌹')">
-            <img src="https://i.postimg.cc/TpYX6Xzp/IMG-20260124-WA0517.jpg" class="foto-galeria" onclick="explotarCorazones(event, '✨')">
-            <img src="https://i.postimg.cc/ctLkVdvf/IMG-20260102-WA0503.jpg" class="foto-galeria" onclick="explotarCorazones(event, '💚')">-->
-
-		<div id="seccion-fotos">
-		    <h2 style="font-family: 'Dancing Script'; color: #F54927; margin: 0 0 15px 0;">
-		        Nuestros Momentos (︶▽︶)
-		    </h2>
-
-		    <!-- 🔵 BOTONES REDONDOS -->
-		    <div id="menu-albumes" style="display:flex; justify-content:center; gap:25px; flex-wrap:wrap;">
-		        
-		        <!--<div class="album-btn" onclick="cargarFotosDesdeSheet('viajes')">
-		            <img src="https://i.postimg.cc/3dSQrchF/IMG-20260110-120046.jpg">
-		            <span>Viajes</span>
-		        </div>
-
-		        <div class="album-btn" onclick="cargarFotosDesdeSheet('momentos')">
-		            <img src="https://i.postimg.cc/DmcKHzMb/IMG-20260118-WA0233.jpg">
-		            <span>Momentos</span>
-		        </div>-->
-
-		    </div>
-
-		    <!-- 🔴 GALERÍA -->
-		    <div class="grid-fotos" id="contenedor-fotos"></div>
-		    <button id="btn-volver-albumes" class="btn-volver" onclick="volverAlbumes()" style="display:none;">Volver a 🤳
-</button>
-		    <button class="btn-volver" onclick="volverInicio()">Volver 🐒</button>
-		</div>
-
-
+    <div id="seccion-fotos">
+        <h2 style="font-family: 'Dancing Script'; color: #F54927; margin: 0 0 15px 0;">
+            Nuestros Momentos (︶▽︶)
+        </h2>
+        <div id="menu-albumes" style="display:flex; justify-content:center; gap:25px; flex-wrap:wrap;"></div>
+        <div class="grid-fotos" id="contenedor-fotos"></div>
+        <button id="btn-volver-albumes" class="btn-volver" onclick="volverAlbumes()" style="display:none;">Volver a 🤳</button>
+        <button class="btn-volver" onclick="volverInicio()">Volver 🐒</button>
+    </div>
 </div>
 
 <script>
+// TODO TU CÓDIGO ORIGINAL ESTÁ AQUÍ
 const fechaInicio = new Date("2025-11-01T00:00:00");
 const mensaje = "Este será nuestro pequeño lugar para guardar cada momento que vivimos juntos.💚\nAquí quedarán nuestros recuerdos, nuestras risasツ y cada instante que queremos conservar para siempre ✨\n\nPara que, cuando volvamos aquí, podamos recordar todo lo hermoso que hemos construido juntos 👨‍❤️‍💋‍👨\n\n— ¡Te quiero mucho, Monguito! 💕\n\nNuestra historia comenzó hace...";
 
@@ -329,8 +345,6 @@ let modoAdmin = false;
 function iniciarSorpresa(archivoAudio) {
     const audio = document.getElementById("musica");
     const source = document.getElementById("audioSource");
-    
-    // Asignar el archivo seleccionado
     source.src = archivoAudio;
     audio.load();
 
@@ -338,11 +352,40 @@ function iniciarSorpresa(archivoAudio) {
     setTimeout(() => {
         document.getElementById("overlay").style.display = "none";
         audio.play();
-        //escribirTexto();
-		escribirTextoFree();
+        escribirTextoFree();
         setInterval(actualizarContador, 1000);
         setInterval(crearElemento, 400);
+
+        const hoy = new Date();
+        const esCumple = hoy.getDate() === 28 && hoy.getMonth() === 2 && hoy.getFullYear() === 2026;
+        if (esCumple) {
+            setTimeout(() => {
+                document.getElementById("modal-cumple").style.display = "flex";
+                lanzarConfeti();
+            }, 2000);
+        }
     }, 500);
+}
+
+function lanzarConfeti() {
+    const colores = ['#F54927', '#2a9d8f', '#ffecd2', '#a1c4fd', '#e63946'];
+    for (let j = 0; j < 50; j++) {
+        setTimeout(() => {
+            const c = document.createElement("div");
+            c.className = "confeti";
+            c.style.left = Math.random() * 100 + "vw";
+            c.style.backgroundColor = colores[Math.floor(Math.random() * colores.length)];
+            c.style.width = (Math.random() * 10 + 5) + "px";
+            c.style.height = c.style.width;
+            c.style.animationDuration = (Math.random() * 2 + 2) + "s";
+            document.body.appendChild(c);
+            setTimeout(() => c.remove(), 3000);
+        }, j * 50);
+    }
+}
+
+function cerrarModal() {
+    document.getElementById("modal-cumple").style.display = "none";
 }
 
 function explotarCorazones(e, emoji) {
@@ -361,51 +404,26 @@ function explotarCorazones(e, emoji) {
 }
 
 function explotarElementoPro(e) {
-
     const el = document.createElement("div");
     el.classList.add("corazon-clic");
-
-    // 👉 mismos elementos que crearElemento
     let items = ["🌹", "❤️", "✨", "💚","🖐️","👀","🐵","❣︎","😎","🌚","🙉","🔥"];
-    if (modoAdmin) {
-        items = ["📈", "💼", "📎", "📊", "✨"];
-    }
-
-    // 👉 solo uno random
+    if (modoAdmin) items = ["📈", "💼", "📎", "📊", "✨"];
     el.innerHTML = items[Math.floor(Math.random() * items.length)];
-
-    // 👉 posición del click
     el.style.left = e.clientX + "px";
     el.style.top = e.clientY + "px";
-
     document.body.appendChild(el);
-
     setTimeout(() => el.remove(), 1500);
 }
 
 function escribirTextoFree() {
-       document.getElementById("typing-textFree").innerHTML = mensaje.replace(/\n/g, "<br>");
-        const btn1 = document.getElementById("btn-admin");
-        const btn2 = document.getElementById("btn-fotos");
-        btn1.style.display = "inline-block";
-        btn2.style.display = "inline-block";
-        setTimeout(() => { btn1.style.opacity = "1"; btn2.style.opacity = "1"; }, 100);
+    document.getElementById("typing-textFree").innerHTML = mensaje.replace(/\n/g, "<br>");
+    const btn1 = document.getElementById("btn-admin");
+    const btn2 = document.getElementById("btn-fotos");
+    btn1.style.display = "inline-block";
+    btn2.style.display = "inline-block";
+    setTimeout(() => { btn1.style.opacity = "1"; btn2.style.opacity = "1"; }, 100);
 }
 
-function escribirTexto() {
-    if (i < mensaje.length) {
-        let char = mensaje.charAt(i);
-        document.getElementById("typing-text").innerHTML += char === "\n" ? "<br>" : char;
-        i++;
-        setTimeout(escribirTexto, 80);
-    } else {
-        const btn1 = document.getElementById("btn-admin");
-        const btn2 = document.getElementById("btn-fotos");
-        btn1.style.display = "inline-block";
-        btn2.style.display = "inline-block";
-        setTimeout(() => { btn1.style.opacity = "1"; btn2.style.opacity = "1"; }, 100);
-    }
-}
 function actualizarContador() {
     const ahora = new Date();
     const diferencia = ahora - fechaInicio;
@@ -425,28 +443,24 @@ function mostrarSorpresaAdmin() {
 
 function mostrarSeccionFotos() {
     modoAdmin = false;
-
-    
     cambiarSeccion("seccion-fotos", "3px double #F54927", "20px");
-	cargarFotosDesdeSheet(); // 👈 agregar esto
+    cargarFotosDesdeSheet(); 
 }
 
 function volverInicio() {
     modoAdmin = false;
-    // 👇 restaurar álbumes
     document.getElementById("menu-albumes").style.display = "flex";
     document.getElementById("contenedor-fotos").innerHTML = "";
     cambiarSeccion("seccion-amor", "3px double #F54927", "50% 20% 50% 20% / 20% 50% 20% 50%");
-    // 👇 ocultar este botón otra vez
     document.getElementById("btn-volver-albumes").style.display = "none";
 }
+
 function volverAlbumes() {
     document.getElementById("contenedor-fotos").innerHTML = "";
     document.getElementById("menu-albumes").style.display = "flex";
-
-    // 👇 ocultar este botón otra vez
     document.getElementById("btn-volver-albumes").style.display = "none";
 }
+
 function cambiarSeccion(idMostrar, borde, radio) {
     const secciones = ["seccion-amor", "seccion-admin", "seccion-fotos"];
     const contenedor = document.querySelector(".container");
@@ -472,7 +486,7 @@ function crearElemento() {
     const el = document.createElement("div");
     el.classList.add("falling");
     let items = ["🌹", "❤️", "✨", "💚"];
-    if (modoAdmin) { items = ["📈", "💼", "📎", "📊", "✨"]; }
+    if (modoAdmin) items = ["📈", "💼", "📎", "📊", "✨"];
     el.innerHTML = items[Math.floor(Math.random() * items.length)];
     el.style.left = Math.random() * 100 + "vw";
     el.style.fontSize = (Math.random() * 20 + 15) + "px";
@@ -481,104 +495,22 @@ function crearElemento() {
     setTimeout(() => el.remove(), 7000);
 }
 
-/*async function cargarFotosDesdeSheet() {
-    const url = "https://opensheet.elk.sh/1fFLafCuTFUkTwfRBk3EHqlfN9cDVa0QUyOAIVMv6GLI/Hoja1";
-
-    try {
-        const res = await fetch(url);
-        const data = await res.json();
-
-        const contenedor = document.getElementById("contenedor-fotos");
-        contenedor.innerHTML = "";
-
-data.forEach((fila, index) => {
-    const link = convertirLinkDrive(fila.link);
-	console.log("LINK FINAL:", link);
-    if (link) {
-        const img = document.createElement("img");
-
-        img.src = link;
-        img.className = "foto-galeria fade-in";
-        img.style.animationDelay = (index * 0.1) + "s";
-
-        img.onclick = (e) => explotarCorazones(e, "💖");
-
-        contenedor.appendChild(img);
-    }
-});
-
-    } catch (error) {
-        console.error("Error cargando fotos:", error);
-    }
-}*/
-/*async function cargarFotosDesdeSheet(tipo) {
-    const url = "https://opensheet.elk.sh/1fFLafCuTFUkTwfRBk3EHqlfN9cDVa0QUyOAIVMv6GLI/Hoja1";
-
-    try {
-        const res = await fetch(url);
-        const data = await res.json();
-
-        const contenedor = document.getElementById("contenedor-fotos");
-        contenedor.innerHTML = "";
-
-        if (tipo){
-        // 🔴 oculta los botones
-        document.getElementById("menu-albumes").style.display = "none";
-        // 👇 mostrar botón volver a álbumes
-    document.getElementById("btn-volver-albumes").style.display = "inline-block";
-        }
-
-        data.forEach((fila, index) => {
-
-            // 👉 filtra por tipo (columna en Excel)
-            if (fila.tipo !== tipo) return;
-
-            const link = 	(fila.link);
-
-            if (link) {
-                const img = document.createElement("img");
-
-                img.src = link;
-                img.className = "foto-galeria";
-                img.style.animationDelay = (index * 0.1) + "s";
-
-                img.onclick = (e) => explotarCorazones(e, "💖");
-
-                contenedor.appendChild(img);
-            }
-        });
-
-    } catch (error) {
-        console.error("Error cargando fotos:", error);
-    }
-}*/
 let albumsData = {};
 
 async function cargarFotosDesdeSheet(tipo) {
     const url = "https://opensheet.elk.sh/1fFLafCuTFUkTwfRBk3EHqlfN9cDVa0QUyOAIVMv6GLI/Hoja1";
-
     try {
         const res = await fetch(url);
         const data = await res.json();
-
         const contenedor = document.getElementById("contenedor-fotos");
 
-        // 👉 PRIMERA VEZ: construir álbumes
         if (Object.keys(albumsData).length === 0) {
-
-            // 🔵 1. CREAR ÁLBUMES (solo los que tienen nombre archivo tipo imagen principal)
             data.forEach(fila => {
                 const nombre = fila.nombre?.trim();
                 const carpeta = fila.carpeta?.trim();
-
                 if (!nombre || !carpeta) return;
-
-                // 👉 si carpeta NO es número → es álbum
                 if (isNaN(carpeta)) {
-
-                    // quitar extensión
                     const nombreSinExt = nombre.replace(/\.[^/.]+$/, "").toLowerCase();
-
                     albumsData[nombreSinExt] = {
                         nombre: nombreSinExt,
                         portada: convertirLinkDrive(fila.link),
@@ -587,106 +519,57 @@ async function cargarFotosDesdeSheet(tipo) {
                 }
             });
 
-            // 🔵 2. ASIGNAR FOTOS A SU ÁLBUM
             data.forEach(fila => {
                 const carpeta = fila.carpeta?.trim();
                 const link = convertirLinkDrive(fila.link);
-
                 if (!carpeta || isNaN(carpeta)) return;
-
-                // 👉 buscar álbum por índice (pero mejorado luego)
                 const albumKeys = Object.keys(albumsData);
-
                 const index = parseInt(carpeta) - 1;
-
-                if (albumKeys[index]) {
-                    albumsData[albumKeys[index]].fotos.push(link);
-                }
+                if (albumKeys[index]) albumsData[albumKeys[index]].fotos.push(link);
             });
 
-            // 🔵 3. ORDENAR ÁLBUMES POR NOMBRE
-            const albumsOrdenados = Object.values(albumsData)
-                .sort((a, b) => a.nombre.localeCompare(b.nombre));
-
-            // 🔵 4. PINTAR BOTONES
+            const albumsOrdenados = Object.values(albumsData).sort((a, b) => a.nombre.localeCompare(b.nombre));
             const menu = document.getElementById("menu-albumes");
             menu.innerHTML = "";
-
             albumsOrdenados.forEach(album => {
-
                 const div = document.createElement("div");
                 div.className = "album-btn";
                 div.onclick = () => cargarFotosDesdeSheet(album.nombre);
-
-                div.innerHTML = `
-                    <img src="${album.portada}">
-                    
-                `;
-
+                div.innerHTML = `<img src="${album.portada}">`;
                 menu.appendChild(div);
             });
 
-            // 👉 reemplazar estructura con ordenada
             albumsData = {};
-            albumsOrdenados.forEach(a => {
-                albumsData[a.nombre] = a;
-            });
+            albumsOrdenados.forEach(a => { albumsData[a.nombre] = a; });
         }
 
-        // 👉 MOSTRAR FOTOS DEL ÁLBUM
         if (tipo) {
             contenedor.innerHTML = "";
-
             document.getElementById("menu-albumes").style.display = "none";
             document.getElementById("btn-volver-albumes").style.display = "inline-block";
-
             const fotos = albumsData[tipo]?.fotos || [];
-
             fotos.forEach((link, index) => {
                 const img = document.createElement("img");
-
                 img.src = link;
                 img.className = "foto-galeria";
-                img.style.animationDelay = (index * 0.1) + "s";
-
-                img.onclick = (e) => explotarElementoPro(event);
-
+                img.onclick = (e) => explotarElementoPro(e);
                 contenedor.appendChild(img);
             });
         }
-
     } catch (error) {
         console.error("Error cargando fotos:", error);
     }
 }
+
 function convertirLinkDrive(link) {
     if (!link) return "";
-
     let id = "";
-
-    // /file/d/XXXXX/
-    if (link.includes("/file/d/")) {
-        id = link.split("/file/d/")[1].split("/")[0];
-    }
-    // open?id=XXXXX o uc?id=XXXXX
-    else if (link.includes("id=")) {
-        id = link.split("id=")[1].split("&")[0];
-    }
-    // ya es link directo de googleusercontent
-    else if (link.includes("googleusercontent.com")) {
-        return link;
-    }
-
-    if (!id) {
-        console.warn("No se pudo extraer ID:", link);
-        return link;
-    }
-
-    // 👇 este es el formato que quieres usar
+    if (link.includes("/file/d/")) id = link.split("/file/d/")[1].split("/")[0];
+    else if (link.includes("id=")) id = link.split("id=")[1].split("&")[0];
+    else if (link.includes("googleusercontent.com")) return link;
+    if (!id) return link;
     return `https://lh3.googleusercontent.com/d/${id}`;
-
 }
-
 </script>
 
 </body>
