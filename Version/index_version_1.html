@@ -343,6 +343,39 @@ body.modal-open .falling {
         <button id="btn-volver-albumes" class="btn-volver" onclick="volverAlbumes()" style="display:none;">Volver a 🤳</button>
         <button class="btn-volver" onclick="volverInicio()">Volver 🐒</button>
     </div>
+
+<div id="seccion-mensajes" style="display:none; opacity:0; transition: opacity 0.5s;">
+    <h2 style="font-family: 'Dancing Script'; color: #F54927;">Frasquito de Notas ✨</h2>
+    <div id="nota-diaria" style="background: #fff9f0; padding: 20px; border-radius: 15px; border: 2px dashed #F54927; min-height: 80px; display: flex; align-items: center; justify-content: center; font-style: italic; margin-bottom: 15px;">
+        Haz clic en el botón para sacar una nota...
+    </div>
+    <button class="music-btn" onclick="sacarNota()" style="width: auto;">Abrir una nota 💌</button>
+    <br>
+    <button class="btn-volver" onclick="volverInicio()">Volver 🐒</button>
+</div>
+
+<div id="seccion-cupones" style="display:none; opacity:0; transition: opacity 0.5s;">
+    <h2 style="font-family: 'Dancing Script'; color: #F54927;">Vales de Amor 🎟️</h2>
+    <p style="font-size: 14px; color: #5d4157;">(Tócalos para "canjearlos")</p>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;" id="lista-cupones">
+        </div>
+    <button class="btn-volver" onclick="volverInicio()">Volver 🐒</button>
+</div>
+
+<div id="botones-extras" style="display: flex; justify-content: center; gap: 15px; margin-top: 10px;">
+    <button onclick="mostrarSeccion('seccion-mensajes')" style="background:none; border:none; cursor:pointer;">
+        <img src="https://cdn-icons-png.flaticon.com/512/3063/3063822.png" width="45" title="Notas">
+    </button>
+    <button onclick="mostrarSeccion('seccion-cupones')" style="background:none; border:none; cursor:pointer;">
+        <img src="https://cdn-icons-png.flaticon.com/512/726/726448.png" width="45" title="Cupones">
+    </button>
+</div>
+
+<div id="player-flotante" style="position: fixed; bottom: 20px; right: 20px; z-index: 999; background: white; padding: 10px; border-radius: 50px; border: 2px solid #F54927; display: flex; align-items: center; gap: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+    <button onclick="toggleMusica()" id="btn-play-pause" style="background: #F54927; border: none; color: white; border-radius: 50%; width: 35px; height: 35px; cursor: pointer;">⏸</button>
+    <span id="nombre-pista" style="font-size: 12px; font-weight: bold; color: #F54927;">Sonando...</span>
+</div>
+
 </div>
 
 <script>
@@ -595,9 +628,94 @@ function convertirLinkDrive(link) {
     return `https://lh3.googleusercontent.com/d/${id}`;
 }
 
-setTimeout(() => {
-    alert("💚 Gracias por compartir tu tiempo conmigo 💚");
-}, 40000);
+// --- FUNCIONES NUEVAS ---
+// --- FUNCIONES NUEVAS PERSONALIZADAS ---
+
+function mostrarSeccion(id) {
+    // Reutilizamos tu función original para mantener la estética
+    cambiarSeccion(id, "3px double #F54927", "20px");
+    if(id === 'seccion-cupones') generarCupones();
+}
+
+// 1. EL FRASQUITO DE NOTAS (Mensajes para Monguito)
+const notas = [
+    "Eres mi persona favorita en todo el mundo, Monguito. 🌍💚",
+    "Gracias por cada risa, por tus ocurrencias y por estar conmigo. ツ",
+    "Admiro demasiado lo profesional y dedicado que eres. ¡Eres un crack! 💪✨",
+    "¿Ya te dije hoy que te ves guapísimo? (Aunque seas un pedorrín). 😍😂",
+    "Eres el mejor compañero de aventuras que la vida me pudo dar. 🐒",
+    "Tu sonrisa es, sin duda, mi parte favorita del día. 🌟",
+    "Pedorrín pero mi pedorrín... ¡Te quiero muchísimo! 🙊💕",
+    "Cada momento a tu lado es un recuerdo que guardo con llave. 🔑❤️",
+    "Gracias por ser mi paz y mi alegría al mismo tiempo. 🌿"
+];
+
+function sacarNota() {
+    const random = Math.floor(Math.random() * notas.length);
+    const caja = document.getElementById("nota-diaria");
+    
+    // Efecto de desvanecimiento para el cambio de texto
+    caja.style.opacity = "0";
+    setTimeout(() => {
+        caja.innerText = notas[random];
+        caja.style.opacity = "1";
+    }, 300);
+}
+
+// 2. VALES DE AMOR (Cupones Canjeables)
+const cupones = [
+    { txt: "Vale por una Cena de tu elección", icono: "🍕" },
+    { txt: "Vale por un Masaje relajante", icono: "💆‍♂️" },
+    { txt: "Vale por una Tarde de películas y snacks", icono: "🎬" },
+    { txt: "Vale por un Beso Infinito (o muchos)", icono: "💋" },
+    { txt: "Vale por un Paseo a cualquier lugar", icono: "🚗" },
+    { txt: "Vale por una Salida a comer helado", icono: "🍦" }
+];
+
+function generarCupones() {
+    const contenedor = document.getElementById("lista-cupones");
+    contenedor.innerHTML = "";
+    cupones.forEach(c => {
+        const div = document.createElement("div");
+        div.style = "background: white; border: 2px solid #F54927; padding: 10px; border-radius: 15px; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.1);";
+        div.innerHTML = `
+            <div style="font-size:25px">${c.icono}</div>
+            <div style="font-size:12px; font-weight:bold; color: #5d4157;">${c.txt}</div>
+        `;
+        
+        // Función para "canjear" el cupón
+        div.onclick = function() {
+            this.style.opacity = "0.5";
+            this.style.background = "#ffe5e0";
+            this.style.transform = "scale(0.95)";
+            this.innerHTML += "<div style='color:#e63946; font-size:10px; font-weight:bold; margin-top:5px;'>🔖 ¡CANJEADO!</div>";
+            this.onclick = null; // Deshabilita el clic después de canjeado
+        };
+        contenedor.appendChild(div);
+    });
+}
+
+// 3. CONTROLADOR DE MÚSICA (Audio Manager)
+function toggleMusica() {
+    const audio = document.getElementById("musica");
+    const btn = document.getElementById("btn-play-pause");
+    if (audio.paused) {
+        audio.play();
+        btn.innerText = "⏸";
+    } else {
+        audio.pause();
+        btn.innerText = "▶️";
+    }
+}
+
+// Pequeño ajuste para que el reproductor muestre qué canción elegiste al inicio
+const originalIniciarSorpresa = iniciarSorpresa;
+iniciarSorpresa = function(archivoAudio) {
+    originalIniciarSorpresa(archivoAudio);
+    const nombre = archivoAudio.includes("cancion1") ? "Melodía 1 🎵" : "Melodía 2 🎵";
+    const status = document.getElementById("nombre-pista");
+    if(status) status.innerText = nombre;
+};
 
 </script>
 
