@@ -285,9 +285,13 @@ body.modal-open .falling {
             Y míralo ahora… robándose mi corazón 💚 <br>¡Te deseo muchos éxitos y seguir compartiendo momentos contigo! ✨
         </p>
         
-        <a href="https://www.youtube.com/watch?v=V0T_6bxb73Q&list=RDGzfHGc6CEgQ&index=8" target="_blank" class="btn-video">
-            📽️ Ver tu sorpresa
-        </a>
+        <p style="margin-top:15px; font-weight:bold; color:#F54927;">
+			🔊 Sube el volumen antes de ver tu sorpresa
+			</p>
+
+			<a href="#" onclick="verVideoLocal()" class="btn-video">
+				📽️ Ver tu sorpresa
+			</a>
         
         <div onclick="cerrarModal()" style="margin-top: 20px; color: #888; cursor: pointer; font-size: 14px; text-decoration: underline;">Cerrar ventana</div>
     </div>
@@ -344,7 +348,12 @@ body.modal-open .falling {
         <button class="btn-volver" onclick="volverInicio()">Volver 🐒</button>
     </div>
 </div>
-
+<div id="video-container" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:black; z-index:99999; justify-content:center; align-items:center;">
+    <video id="video-sorpresa" controls style="width:90%; max-width:500px;">
+        <source src="video/sorpresa.mp4" type="video/mp4">
+        Tu navegador no soporta video.
+    </video>
+</div>
 <script>
 // TODO TU CÓDIGO ORIGINAL ESTÁ AQUÍ
 const fechaInicio = new Date("2025-11-01T00:00:00");
@@ -598,7 +607,22 @@ function convertirLinkDrive(link) {
 setTimeout(() => {
     alert("💚 Gracias por compartir tu tiempo conmigo 💚");
 }, 40000);
+function verVideoLocal() {
+    // ⛔ Pausar música de fondo
+    const audio = document.getElementById("musica");
+    audio.pause();
 
+    // Ocultar modal
+    document.getElementById("modal-cumple").style.display = "none";
+
+    // Mostrar video
+    const contenedor = document.getElementById("video-container");
+    contenedor.style.display = "flex";
+
+    const video = document.getElementById("video-sorpresa");
+    video.currentTime = 0;
+    video.play();
+}
 </script>
 
 </body>
