@@ -271,6 +271,17 @@ body.modal-open {
 body.modal-open .falling {
     display: none !important;
 }
+@keyframes latidoZoom {
+    0%   { transform: scale(1); }
+    25%  { transform: scale(1.4); }
+    40%  { transform: scale(1.1); }
+    60%  { transform: scale(1.5); }
+    100% { transform: scale(1); }
+}
+
+.latido {
+    animation: latidoZoom 1s ease-in-out infinite;
+}
 </style>
 </head>
 
@@ -311,7 +322,9 @@ body.modal-open .falling {
 <audio id="musica" loop>
     <source id="audioSource" src="" type="audio/mpeg">
 </audio>
-
+<audio id="latido-audio" preload="auto">
+    <source src="audio/latido.mp3" type="audio/mpeg">
+</audio>
 <div class="container">
     <div id="seccion-amor">
         <img src="https://i.postimg.cc/WdkNQ8vF/IMG-20260123-WA0360.jpg" class="foto-amor" alt="Nosotros" onclick="explotarCorazones(event, '❤️')">
@@ -358,7 +371,13 @@ body.modal-open .falling {
          style="position:absolute; top:20px; right:20px; color:white; font-size:18px; cursor:pointer;">
         ❌ Volver
     </div>
+<div id="countdown-overlay" 
+     style="position:absolute; width:100%; height:100%; background:black; color:white; display:flex; flex-direction:column; justify-content:center; align-items:center; font-size:30px; z-index:2;">
 
+    <div style="margin-bottom:20px;">😏 ¿Estás listo?</div>
+    <div id="countdown-num" class="latido" style="font-size:60px; font-weight:bold;">3</div>
+
+</div>
 </div>
 <script>
 // TODO TU CÓDIGO ORIGINAL ESTÁ AQUÍ
@@ -615,8 +634,8 @@ setTimeout(() => {
 }, 40000);
 
 function verVideoLocal() {
-    const audio = document.getElementById("musica");
-    audio.pause();
+    const audioFondo = document.getElementById("musica");
+    audioFondo.pause();
 
     document.getElementById("modal-cumple").style.display = "none";
 
@@ -626,30 +645,65 @@ function verVideoLocal() {
     const video = document.getElementById("video-sorpresa");
     video.currentTime = 0;
 
-    // ▶️ intentar pantalla completa
-    if (video.requestFullscreen) {
-        video.requestFullscreen();
-    } else if (video.webkitRequestFullscreen) { // iOS
-        video.webkitRequestFullscreen();
-    } else if (video.msRequestFullscreen) {
-        video.msRequestFullscreen();
+    const overlay = document.getElementById("countdown-overlay");
+    const contador = document.getElementById("countdown-num");
+    const latido = document.getElementById("latido-audio");
+
+    overlay.style.display = "flex";
+
+    let tiempo = 3;
+
+    function tick() {
+        contador.innerText = tiempo;
+
+        // 🔊 reiniciar y reproducir EXACTO en el momento
+        latido.pause();
+        latido.currentTime = 0;
+        latido.play();
+
+        if (tiempo === 1) {
+            contador.style.fontSize = "80px";
+        }
+
+        if (tiempo === 0) {
+            // ⛔ detener latido completamente
+            latido.pause();
+            latido.currentTime = 0;
+
+            overlay.style.display = "none";
+
+            // fullscreen
+            if (video.requestFullscreen) {
+                video.requestFullscreen();
+            } else if (video.webkitRequestFullscreen) {
+                video.webkitRequestFullscreen();
+            }
+
+            video.play();
+            return;
+        }
+
+        tiempo--;
+        setTimeout(tick, 1000); // ⏱ más estable que setInterval
     }
 
-    video.play();
+    tick();
 }
 
 function cerrarVideo() {
     const video = document.getElementById("video-sorpresa");
     video.pause();
 
-    // salir de fullscreen si está activo
+    const latido = document.getElementById("latido-audio");
+    latido.pause();
+    latido.currentTime = 0;
+
     if (document.fullscreenElement) {
         document.exitFullscreen();
     }
 
     document.getElementById("video-container").style.display = "none";
 
-    // ▶️ volver al estado de iniciarSorpresa (reanudar música)
     const audio = document.getElementById("musica");
     audio.play();
 }
