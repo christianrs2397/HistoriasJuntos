@@ -348,11 +348,17 @@ body.modal-open .falling {
         <button class="btn-volver" onclick="volverInicio()">Volver 🐒</button>
     </div>
 </div>
-<div id="video-container" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:black; z-index:99999; justify-content:center; align-items:center;">
-    <video id="video-sorpresa" controls style="width:90%; max-width:500px;">
+<div id="video-container" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:black; z-index:99999; justify-content:center; align-items:center; flex-direction:column;">
+
+    <video id="video-sorpresa" controls style="width:100%; height:100%; object-fit:contain;">
         <source src="video/sorpresa.mp4" type="video/mp4">
-        Tu navegador no soporta video.
     </video>
+
+    <div onclick="cerrarVideo()" 
+         style="position:absolute; top:20px; right:20px; color:white; font-size:18px; cursor:pointer;">
+        ❌ Volver
+    </div>
+
 </div>
 <script>
 // TODO TU CÓDIGO ORIGINAL ESTÁ AQUÍ
@@ -607,22 +613,47 @@ function convertirLinkDrive(link) {
 setTimeout(() => {
     alert("💚 Gracias por compartir tu tiempo conmigo 💚");
 }, 40000);
+
 function verVideoLocal() {
-    // ⛔ Pausar música de fondo
     const audio = document.getElementById("musica");
     audio.pause();
 
-    // Ocultar modal
     document.getElementById("modal-cumple").style.display = "none";
 
-    // Mostrar video
     const contenedor = document.getElementById("video-container");
     contenedor.style.display = "flex";
 
     const video = document.getElementById("video-sorpresa");
     video.currentTime = 0;
+
+    // ▶️ intentar pantalla completa
+    if (video.requestFullscreen) {
+        video.requestFullscreen();
+    } else if (video.webkitRequestFullscreen) { // iOS
+        video.webkitRequestFullscreen();
+    } else if (video.msRequestFullscreen) {
+        video.msRequestFullscreen();
+    }
+
     video.play();
 }
+
+function cerrarVideo() {
+    const video = document.getElementById("video-sorpresa");
+    video.pause();
+
+    // salir de fullscreen si está activo
+    if (document.fullscreenElement) {
+        document.exitFullscreen();
+    }
+
+    document.getElementById("video-container").style.display = "none";
+
+    // ▶️ volver al estado de iniciarSorpresa (reanudar música)
+    const audio = document.getElementById("musica");
+    audio.play();
+}
+
 </script>
 
 </body>
