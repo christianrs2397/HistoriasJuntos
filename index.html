@@ -464,9 +464,21 @@ function escribirTextoFree() {
     const btn1 = document.getElementById("btn-admin");
     const btn2 = document.getElementById("btn-fotos");
 	const btnVideo = document.getElementById("btn-reproducir-video"); // Nuevo
+	
+	// Lógica de fecha (Misma que usas para el modal)
+    const hoy = new Date().toLocaleString("en-US", { timeZone: "America/Lima" });
+    const fechaPeru = new Date(hoy);
+	// Verifica si es el rango de fechas de su cumple en 2026
+    const esCumple = (fechaPeru.getDate() >= 22)  && (fechaPeru.getMonth() + 1 === 4) && (fechaPeru.getFullYear() === 2026);
+	
     btn1.style.display = "inline-block";
     btn2.style.display = "inline-block";
-	btnVideo.style.display = "inline-block"; // Mostrar nuevo botón
+	// El botón de video SOLO se muestra si es su cumple
+    if (esCumple) {
+        btnVideo.style.display = "inline-block";
+    } else {
+        btnVideo.style.display = "none";
+    }
     setTimeout(() => { btn1.style.opacity = "1"; btn2.style.opacity = "1"; btnVideo.style.opacity = "1"; // Aparecer nuevo botón
 	}, 100);
 }
