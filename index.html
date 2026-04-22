@@ -256,18 +256,26 @@ body.modal-open {
 
 /* ESTILO BOTÓN VOLVER PANTALLA COMPLETA */
 .btn-fullscreen-back {
+    display: none; /* Inicialmente oculto */
     position: absolute; 
     top: 25px; 
     right: 25px; 
     color: white; 
-    font-size: 20px; 
+    font-size: 18px; 
     cursor: pointer; 
-    z-index: 2147483647; /* Máximo posible para estar sobre el video nativo */
-    background: rgba(0,0,0,0.5);
-    padding: 10px 15px;
-    border-radius: 10px;
+    z-index: 2147483647; 
+    background: rgba(245, 73, 39, 0.8);
+    padding: 12px 20px;
+    border-radius: 12px;
     font-family: 'Quicksand', sans-serif;
     font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 </style>
 </head>
@@ -346,10 +354,11 @@ body.modal-open {
 </div>
 
 <div id="video-container" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:black; z-index:99999; justify-content:center; align-items:center; flex-direction:column;">
-    <video id="video-sorpresa" controls style="width:100%; height:100%; object-fit:contain;">
+    <video id="video-sorpresa" style="width:100%; height:100%; object-fit:contain;">
         <source src="video/sorpresa.mp4" type="video/mp4">
     </video>
-    <div onclick="cerrarVideo()" class="btn-fullscreen-back">❌ Volver</div>
+    
+    <div id="btn-cerrar-video" onclick="cerrarVideo()" class="btn-fullscreen-back">❌ Volver a la historia</div>
     
     <div id="countdown-overlay" style="position:absolute; width:100%; height:100%; background:black; color:white; display:flex; flex-direction:column; justify-content:center; align-items:center; font-size:30px; z-index:2;">
         <div style="margin-bottom:20px; font-family: 'Quicksand';">💚 Disfrútalo...</div>
@@ -361,7 +370,6 @@ body.modal-open {
 const fechaInicio = new Date("2025-11-01T00:00:00");
 const mensaje = "Este será nuestro pequeño lugar para guardar cada momento que vivimos juntos.💚\nAquí quedarán nuestros recuerdos, nuestras risasツ y cada instante que queremos conservar para siempre ✨\n\nPara que, cuando volvamos aquí, podamos recordar todo lo hermoso que hemos construido juntos 👨‍❤️‍💋‍👨\n\n— ¡Te quiero mucho, Monguito! 💕\n\nNuestra historia comenzó hace...";
 
-let i = 0;
 let modoAdmin = false;
 
 function iniciarSorpresa(archivoAudio) {
@@ -592,18 +600,24 @@ function verVideoLocal() {
     document.getElementById("modal-cumple").style.display = "none";
     
     const contenedor = document.getElementById("video-container");
-    contenedor.style.display = "flex";
-    
     const video = document.getElementById("video-sorpresa");
+    const btnCerrar = document.getElementById("btn-cerrar-video");
+    
+    contenedor.style.display = "flex";
+    btnCerrar.style.display = "none"; // Asegurar que esté oculto al empezar
     video.currentTime = 0;
     
+    // Listener para detectar cuando termina el video
+    video.onended = function() {
+        btnCerrar.style.display = "block";
+    };
+
     const overlay = document.getElementById("countdown-overlay");
     const contador = document.getElementById("countdown-num");
     const latido = document.getElementById("latido-audio");
     
     overlay.style.display = "flex";
 
-    // Activamos Pantalla Completa
     if (contenedor.requestFullscreen) {
         contenedor.requestFullscreen();
     } else if (contenedor.webkitRequestFullscreen) { 
@@ -637,7 +651,6 @@ function cerrarVideo() {
     latido.pause();
     latido.currentTime = 0;
     
-    // Salir de pantalla completa si está activo
     if (document.fullscreenElement || document.webkitFullscreenElement) {
         if (document.exitFullscreen) document.exitFullscreen();
         else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
@@ -645,13 +658,11 @@ function cerrarVideo() {
     
     document.getElementById("video-container").style.display = "none";
     
-    // REINICIAR AL SELECTOR DE MÚSICA (Overlay inicial)
     document.body.classList.remove("modal-open");
     const mainOverlay = document.getElementById("overlay");
     mainOverlay.style.display = "flex";
     mainOverlay.style.opacity = "1";
     
-    // Detener la música de fondo si estuviera sonando
     const audio = document.getElementById("musica");
     audio.pause();
     audio.currentTime = 0;
