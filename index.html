@@ -409,7 +409,7 @@ function iniciarSorpresa(archivoAudio) {
 
         const hoy = new Date().toLocaleString("en-US", { timeZone: "America/Lima" });
         const fechaPeru = new Date(hoy);
-        const esCumple = fechaPeru.getDate() = 21  && fechaPeru.getMonth()+1 === 4 && fechaPeru.getFullYear() === 2026;
+        const esCumple = fechaPeru.getDate() === 21  && fechaPeru.getMonth()+1 === 4 && fechaPeru.getFullYear() === 2026;
         
         if (esCumple) {
             setTimeout(() => {
