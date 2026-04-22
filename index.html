@@ -619,40 +619,44 @@ function verVideoLocal() {
     const video = document.getElementById("video-sorpresa");
     const btnCerrar = document.getElementById("btn-cerrar-video");
     const btnReplay = document.getElementById("btn-replay-video");
+    const overlay = document.getElementById("countdown-overlay");
+    const contador = document.getElementById("countdown-num");
+    const latido = document.getElementById("latido-audio");
     
+    // 1. ACTIVAR PANTALLA COMPLETA INMEDIATAMENTE AL CLIC
+    // Esto es vital para que el navegador lo permita
+    if (contenedor.requestFullscreen) {
+        contenedor.requestFullscreen();
+    } else if (contenedor.webkitRequestFullscreen) { 
+        contenedor.webkitRequestFullscreen();
+    } else if (contenedor.msRequestFullscreen) {
+        contenedor.msRequestFullscreen();
+    }
+
+    // 2. Preparar la vista
     contenedor.style.display = "flex";
     btnCerrar.style.display = "none"; 
     btnReplay.style.display = "none";
+    overlay.style.display = "flex";
     video.currentTime = 0;
     
-    // Al terminar el video
     video.onended = function() {
         btnCerrar.style.display = "block";
         btnReplay.style.display = "block";
     };
 
-    const overlay = document.getElementById("countdown-overlay");
-    const contador = document.getElementById("countdown-num");
-    const latido = document.getElementById("latido-audio");
-    
-    overlay.style.display = "flex";
-
-    if (contenedor.requestFullscreen) {
-        contenedor.requestFullscreen();
-    } else if (contenedor.webkitRequestFullscreen) { 
-        contenedor.webkitRequestFullscreen();
-    }
-
+    // 3. Iniciar el contador
     let tiempo = 3;
     function tick() {
         contador.innerText = tiempo;
+        
+        // Reproducir sonido de latido
         latido.pause();
         latido.currentTime = 0;
-        latido.play();
+        latido.play().catch(e => console.log("Audio bloqueado"));
         
         if (tiempo === 0) {
             latido.pause();
-            latido.currentTime = 0;
             overlay.style.display = "none";
             video.play();
             return;
