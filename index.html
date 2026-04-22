@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Nuestra Historia Juntos :)</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Quicksand:wght@400;600&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
@@ -29,19 +29,19 @@ body {
 
 .container {
     text-align: center;
-    width: 90%;
-    max-width: 500px;
-    padding: 30px 20px;
+    width: 95%;
+    max-width: 600px;
+    padding: 40px 20px;
     z-index: 10;
-    background: rgba(255, 255, 255, 0.85);
-    border-radius: 50% 20% 50% 20% / 20% 50% 20% 50%;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
     backdrop-filter: blur(12px);
-    border: 3px double #F54927;
-    box-shadow: none; 
-    animation: none; 
+    border: 2px solid #F54927;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
     position: relative;
-    transition: all 0.5s ease;
-    margin: 20px 0;
+    transition: all 0.3s ease;
+    margin: 20px;
+    box-sizing: border-box;
 }
 
 #seccion-amor, #seccion-admin, #seccion-fotos {
@@ -54,30 +54,30 @@ body {
 }
 
 #typing-textFree {
-    font-family: 'Comic Sans MS', cursive;
-    font-size: clamp(15px, 5vw, 20px);
+    font-family: 'Quicksand', sans-serif;
+    font-size: clamp(16px, 4.5vw, 19px);
     line-height: 1.6;
     color: #5d4157;
     min-height: 120px;
     margin: 20px auto;
     text-align: center;
-    max-width: 420px;
+    max-width: 100%;
 }
 
 .counter {
-    font-size: clamp(16px, 4vw, 20px);
+    font-size: clamp(18px, 5vw, 22px);
     font-weight: 600;
     color: #e63946;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 .foto-amor, .foto-admin {
     width: 100%;
-    max-width: 180px;
+    max-width: 220px;
     border-radius: 15px;
     border: 4px solid #fff;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     object-fit: cover;
     cursor: pointer;
 }
@@ -85,7 +85,7 @@ body {
 .grid-fotos {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    gap: 15px;
     padding: 10px 0;
 }
 
@@ -97,7 +97,8 @@ body {
     padding: 8px 8px 30px 8px; 
     box-shadow: 0 8px 15px rgba(0,0,0,0.1);
     transition: all 0.3s ease;
-    border-radius: 2px;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
 .foto-galeria:nth-child(odd) { transform: rotate(-2deg); }
@@ -113,11 +114,13 @@ body {
     background: #ffffff;
     border: 2px solid #F54927;
     color: #F54927;
-    border-radius: 20px;
-    padding: 8px 25px;
+    border-radius: 30px;
+    padding: 10px 30px;
     cursor: pointer;
     font-family: 'Quicksand', sans-serif;
     font-weight: bold;
+    text-transform: uppercase;
+    font-size: 14px;
 }
 
 .carta-admin-texto { 
@@ -125,58 +128,62 @@ body {
     font-size: clamp(16px, 4vw, 20px); 
     color: #1b4332; 
     line-height: 1.5; 
-    text-align: center;
 }
 
 .titulo-admin {
     font-weight: bold;
-    font-size: clamp(18px, 5vw, 24px);
-    margin-bottom: 15px;
+    font-size: clamp(20px, 6vw, 26px);
+    margin-bottom: 20px;
     display: block;
+    color: #2a9d8f;
 }
 
 .corazon-clic { position: fixed; pointer-events: none; z-index: 1000; font-size: 30px; animation: flotarReaccion 1.5s ease-out forwards; }
 @keyframes flotarReaccion { 0% { transform: translateY(0) scale(0); opacity: 0; } 20% { opacity: 1; transform: translateY(-20px) scale(1.2); } 100% { transform: translateY(-200px) scale(1.5); opacity: 0; } }
 .falling { position: absolute; top: -50px; pointer-events: none; z-index: 1; animation: fallDown linear forwards; }
 @keyframes fallDown { 0% { transform: translateY(0) rotate(0deg); opacity: 0; } 10% { opacity: 0.8; } 100% { transform: translateY(110vh) rotate(720deg); opacity: 0; } }
-#overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, #fff9f0, #ffecd2); display: flex; justify-content: center; align-items: center; z-index: 100; text-align: center; }
+
+#overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, #fff9f0, #ffecd2); display: flex; justify-content: center; align-items: center; z-index: 100; text-align: center; transition: opacity 0.5s ease; }
 .start-btn { font-family: 'Dancing Script', cursive; font-size: 24px; color: #F54927; padding: 20px; }
-#btn-admin, #btn-fotos { display: none; background: none; border: none; font-size: 45px; cursor: pointer; margin-top: 10px; transition: opacity 0.5s; opacity: 0; }
-@keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+
+#btn-admin, #btn-fotos , #btn-reproducir-video { 
+    display: none; 
+    background: none; 
+    border: none; 
+    cursor: pointer; 
+    margin-top: 15px; 
+    transition: transform 0.3s ease, opacity 0.5s; 
+    opacity: 0; 
+}
 
 .music-selector {
     margin-top: 20px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
     align-items: center;
 }
 .music-btn {
     background: white;
     border: 2px solid #F54927;
     color: #F54927;
-    padding: 10px 20px;
+    padding: 12px 25px;
     border-radius: 30px;
     cursor: pointer;
     font-family: 'Quicksand', sans-serif;
     font-weight: bold;
-    width: 200px;
+    width: 220px;
     transition: 0.3s;
 }
-.music-btn:hover {
-    background: #F54927;
-    color: white;
-}
 
-.icono{
-width:60px;
-cursor:pointer;
-padding:10px;
-border-radius:15px;
-background:white;
-border:2px solid #F54927;
-box-shadow:0 4px 10px rgba(0,0,0,0.15);
-transition:all 0.25s ease;
+.icono {
+    width: 70px;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 15px;
+    background: white;
+    border: 2px solid #F54927;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 .album-btn {
@@ -189,44 +196,37 @@ transition:all 0.25s ease;
 .album-btn img {
     width: 120px;
     height: 120px;
-    border-radius: 200px;
+    border-radius: 50%;
     object-fit: cover;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.25);
-    transition: 0.3s;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    border: 3px solid white;
 }
 
-/* --- SECCIÓN CUMPLEAÑOS PROTEGIDA PARA CELULAR --- */
 #modal-cumple {
     display: none;
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100dvh;
-    background: rgba(0, 0, 0, 0.85);
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.9);
     z-index: 9999;
     justify-content: center;
     align-items: center;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    overflow: hidden;
 }
 
 .modal-content {
     background: white;
     padding: 30px 20px;
-    border-radius: 30px;
+    border-radius: 20px;
     width: 85%;
     max-width: 400px;
     text-align: center;
-    border: 5px solid #F54927;
+    border: 4px solid #F54927;
     position: relative;
-    /* Bloqueo de movimiento para evitar el temblor en celulares */
-    transform: translateZ(0); 
-    animation: fadeInModal 0.3s ease-out forwards;
-}
-
-@keyframes fadeInModal {
-    from { opacity: 0; }
-    to { opacity: 1; }
 }
 
 .btn-video {
@@ -238,38 +238,56 @@ transition:all 0.25s ease;
     font-weight: bold;
     display: inline-block;
     margin-top: 25px;
-    box-shadow: 0 4px 15px rgba(245, 73, 39, 0.3);
-}
-
-.confeti {
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    opacity: 0.8;
-    border-radius: 2px;
-    animation: confetiFall 3s linear forwards;
-}
-
-@keyframes confetiFall {
-    0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
-    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
 }
 
 @media (max-width: 480px) {
-    .album-btn img {
-        width: 100px;
-        height: 100px;
-    }
-
+    .container { padding: 25px 15px; margin: 10px; }
 }
 
-body.modal-open {
-    overflow: hidden;
-    height: 100dvh;
+body.modal-open { 
+    overflow: hidden !important; 
+    position: fixed; 
+    width: 100%;
 }
 
-body.modal-open .falling {
-    display: none !important;
+@keyframes latidoZoom { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+.latido { animation: latidoZoom 1s ease-in-out infinite; }
+
+/* CONTROLES PERSONALIZADOS VIDEO */
+.btn-fullscreen-top {
+    display: none; 
+    position: absolute; 
+    top: 20px; 
+    right: 20px; 
+    color: white; 
+    font-size: 16px; 
+    cursor: pointer; 
+    z-index: 2147483647; 
+    background: rgba(0, 0, 0, 0.6);
+    padding: 10px 15px;
+    border-radius: 30px;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bold;
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+.btn-replay-center {
+    display: none; 
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    color: white; 
+    font-size: 18px; 
+    cursor: pointer; 
+    z-index: 2147483647; 
+    background: #F54927;
+    padding: 15px 25px;
+    border-radius: 50px;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bold;
+    box-shadow: 0 0 20px rgba(245, 73, 39, 0.5);
+    text-align: center;
 }
 </style>
 </head>
@@ -282,13 +300,12 @@ body.modal-open .falling {
         <h2 style="font-family: 'Dancing Script'; color: #F54927; font-size: 35px; margin: 0;">¡Feliz Cumpleaños, Monguito!</h2>
         <p style="color: #5d4157; font-size: 18px; line-height: 1.5; margin-top: 15px;">
             Un día como hoy nació un pedorrín alegre y bailarín 😄🎉 <br>
-            Y míralo ahora… robándose mi corazón 💚 <br>¡Te deseo muchos éxitos y seguir compartiendo momentos contigo! ✨
+            Y míralo ahora… robándose mi corazón 💚
         </p>
-        
-        <a href="https://www.youtube.com/watch?v=V0T_6bxb73Q&list=RDGzfHGc6CEgQ&index=8" target="_blank" class="btn-video">
-            📽️ Ver tu sorpresa
-        </a>
-        
+        <p style="margin-top:15px; font-weight:bold; color:#F54927; font-size: 19px;">
+            🎧 Ponte tus auriculares y sube el volumen...
+        </p>
+        <a href="#" onclick="verVideoLocal()" class="btn-video">📽️ Estoy listo, ver sorpresa</a>
         <div onclick="cerrarModal()" style="margin-top: 20px; color: #888; cursor: pointer; font-size: 14px; text-decoration: underline;">Cerrar ventana</div>
     </div>
 </div>
@@ -307,20 +324,28 @@ body.modal-open .falling {
 <audio id="musica" loop>
     <source id="audioSource" src="" type="audio/mpeg">
 </audio>
+<audio id="latido-audio" preload="auto">
+    <source src="audio/latido.mp3" type="audio/mpeg">
+</audio>
 
 <div class="container">
     <div id="seccion-amor">
         <img src="https://i.postimg.cc/WdkNQ8vF/IMG-20260123-WA0360.jpg" class="foto-amor" alt="Nosotros" onclick="explotarCorazones(event, '❤️')">
         <div id="typing-textFree"></div>
         <div class="counter" id="contador"></div>
-        <div style="display: flex; justify-content: center; gap: 20px;">
-            <button id="btn-admin" onclick="mostrarSorpresaAdmin()">
-			<img src="icons/gerente.png" width="80" class="icono">
-			</button>
-            <button id="btn-fotos" onclick="mostrarSeccionFotos()">
-			<img src="icons/fotografo.png" width="80" class="icono">
-			</button>
-        </div>
+			<div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+				<button id="btn-admin" onclick="mostrarSorpresaAdmin()">
+					<img src="icons/gerente.png" width="80" class="icono">
+				</button>
+				
+				<button id="btn-reproducir-video" onclick="verVideoLocal()" style="display: none; opacity: 0; transition: all 0.3s ease;">
+					<img src="icons/video.png" width="80" class="icono">
+				</button>
+
+				<button id="btn-fotos" onclick="mostrarSeccionFotos()">
+					<img src="icons/fotografo.png" width="80" class="icono">
+				</button>
+			</div>
     </div>
 
     <div id="seccion-admin">
@@ -345,12 +370,27 @@ body.modal-open .falling {
     </div>
 </div>
 
+<div id="video-container" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:black; z-index:99999; justify-content:center; align-items:center;">
+    
+    <div id="btn-cerrar-video" onclick="cerrarVideo()" class="btn-fullscreen-top">❌ Volver</div>
+    
+    <div id="btn-replay-video" onclick="repetirVideo()" class="btn-replay-center">▶️ Ver de nuevo</div>
+
+    <video id="video-sorpresa" controls style="width:100%; height:100%; object-fit:contain;">
+        <source src="video/sorpresa.mp4" type="video/mp4">
+    </video>
+    
+    <div id="countdown-overlay" style="position:absolute; width:100%; height:100%; background:black; color:white; display:flex; flex-direction:column; justify-content:center; align-items:center; font-size:30px; z-index:2;">
+        <div style="margin-bottom:20px; font-family: 'Quicksand';">💚 Disfrútalo...</div>
+        <div id="countdown-num" class="latido" style="font-size:80px; font-weight:bold; color: #F54927;">3</div>
+    </div>
+</div>
+
 <script>
-// TODO TU CÓDIGO ORIGINAL ESTÁ AQUÍ
+// Lógica original conservada
 const fechaInicio = new Date("2025-11-01T00:00:00");
 const mensaje = "Este será nuestro pequeño lugar para guardar cada momento que vivimos juntos.💚\nAquí quedarán nuestros recuerdos, nuestras risasツ y cada instante que queremos conservar para siempre ✨\n\nPara que, cuando volvamos aquí, podamos recordar todo lo hermoso que hemos construido juntos 👨‍❤️‍💋‍👨\n\n— ¡Te quiero mucho, Monguito! 💕\n\nNuestra historia comenzó hace...";
 
-let i = 0;
 let modoAdmin = false;
 
 function iniciarSorpresa(archivoAudio) {
@@ -367,26 +407,17 @@ function iniciarSorpresa(archivoAudio) {
         setInterval(actualizarContador, 1000);
         setInterval(crearElemento, 400);
 
-        const hoy = new Date().toLocaleString("en-US", {
-  timeZone: "America/Lima"
-});
+        const hoy = new Date().toLocaleString("en-US", { timeZone: "America/Lima" });
         const fechaPeru = new Date(hoy);
-        console.log("fevha+"+fechaPeru);
-         console.log("hoy.getMonth()+"+fechaPeru.getMonth());
-        const esCumple = fechaPeru.getDate() === 22 && fechaPeru.getMonth()+1 === 4 && fechaPeru.getFullYear() === 2026;
-        /*if (esCumple) {
+        const esCumple = (fechaPeru.getDate() >= 17 && fechaPeru.getDate()  <= 31 ) && fechaPeru.getMonth()+1 === 4 && fechaPeru.getFullYear() === 2026;
+        
+        if (esCumple) {
             setTimeout(() => {
+                document.body.classList.add("modal-open");
                 document.getElementById("modal-cumple").style.display = "flex";
                 lanzarConfeti();
             }, 2000);
-        }*/
-        if (esCumple) {
-    setTimeout(() => {
-        document.body.classList.add("modal-open"); // 🔒 bloquea scroll
-        document.getElementById("modal-cumple").style.display = "flex";
-        lanzarConfeti();
-    }, 2000);
-}
+        }
     }, 500);
 }
 
@@ -400,7 +431,8 @@ function lanzarConfeti() {
             c.style.backgroundColor = colores[Math.floor(Math.random() * colores.length)];
             c.style.width = (Math.random() * 10 + 5) + "px";
             c.style.height = c.style.width;
-            c.style.animationDuration = (Math.random() * 2 + 2) + "s";
+            c.style.position = "absolute";
+            c.style.animation = "confetiFall 3s linear forwards";
             document.body.appendChild(c);
             setTimeout(() => c.remove(), 3000);
         }, j * 50);
@@ -409,7 +441,7 @@ function lanzarConfeti() {
 
 function cerrarModal() {
     document.getElementById("modal-cumple").style.display = "none";
-    document.body.classList.remove("modal-open"); // 🔓 vuelve todo normal
+    document.body.classList.remove("modal-open");
 }
 
 function explotarCorazones(e, emoji) {
@@ -427,25 +459,16 @@ function explotarCorazones(e, emoji) {
     }
 }
 
-function explotarElementoPro(e) {
-    const el = document.createElement("div");
-    el.classList.add("corazon-clic");
-    let items = ["🌹", "❤️", "✨", "💚","🖐️","👀","🐵","❣︎","😎","🌚","🙉","🔥"];
-    if (modoAdmin) items = ["📈", "💼", "📎", "📊", "✨"];
-    el.innerHTML = items[Math.floor(Math.random() * items.length)];
-    el.style.left = e.clientX + "px";
-    el.style.top = e.clientY + "px";
-    document.body.appendChild(el);
-    setTimeout(() => el.remove(), 1500);
-}
-
 function escribirTextoFree() {
     document.getElementById("typing-textFree").innerHTML = mensaje.replace(/\n/g, "<br>");
     const btn1 = document.getElementById("btn-admin");
     const btn2 = document.getElementById("btn-fotos");
+	const btnVideo = document.getElementById("btn-reproducir-video"); // Nuevo
     btn1.style.display = "inline-block";
     btn2.style.display = "inline-block";
-    setTimeout(() => { btn1.style.opacity = "1"; btn2.style.opacity = "1"; }, 100);
+	btnVideo.style.display = "inline-block"; // Mostrar nuevo botón
+    setTimeout(() => { btn1.style.opacity = "1"; btn2.style.opacity = "1"; btnVideo.style.opacity = "1"; // Aparecer nuevo botón
+	}, 100);
 }
 
 function actualizarContador() {
@@ -462,12 +485,12 @@ function actualizarContador() {
 
 function mostrarSorpresaAdmin() {
     modoAdmin = true;
-    cambiarSeccion("seccion-admin", "3px double #2a9d8f", "20px");
+    cambiarSeccion("seccion-admin", "2px solid #2a9d8f", "20px");
 }
 
 function mostrarSeccionFotos() {
     modoAdmin = false;
-    cambiarSeccion("seccion-fotos", "3px double #F54927", "20px");
+    cambiarSeccion("seccion-fotos", "2px solid #F54927", "20px");
     cargarFotosDesdeSheet(); 
 }
 
@@ -475,7 +498,7 @@ function volverInicio() {
     modoAdmin = false;
     document.getElementById("menu-albumes").style.display = "flex";
     document.getElementById("contenedor-fotos").innerHTML = "";
-    cambiarSeccion("seccion-amor", "3px double #F54927", "50% 20% 50% 20% / 20% 50% 20% 50%");
+    cambiarSeccion("seccion-amor", "2px solid #F54927", "20px");
     document.getElementById("btn-volver-albumes").style.display = "none";
 }
 
@@ -593,6 +616,94 @@ function convertirLinkDrive(link) {
     else if (link.includes("googleusercontent.com")) return link;
     if (!id) return link;
     return `https://lh3.googleusercontent.com/d/${id}`;
+}
+
+function verVideoLocal() {
+    const audioFondo = document.getElementById("musica");
+    audioFondo.pause();
+    document.getElementById("modal-cumple").style.display = "none";
+    
+    const contenedor = document.getElementById("video-container");
+    const video = document.getElementById("video-sorpresa");
+    const btnCerrar = document.getElementById("btn-cerrar-video");
+    const btnReplay = document.getElementById("btn-replay-video");
+    const overlay = document.getElementById("countdown-overlay");
+    const contador = document.getElementById("countdown-num");
+    const latido = document.getElementById("latido-audio");
+    
+    // 1. ACTIVAR PANTALLA COMPLETA INMEDIATAMENTE AL CLIC
+    // Esto es vital para que el navegador lo permita
+    if (contenedor.requestFullscreen) {
+        contenedor.requestFullscreen();
+    } else if (contenedor.webkitRequestFullscreen) { 
+        contenedor.webkitRequestFullscreen();
+    } else if (contenedor.msRequestFullscreen) {
+        contenedor.msRequestFullscreen();
+    }
+
+    // 2. Preparar la vista
+    contenedor.style.display = "flex";
+    btnCerrar.style.display = "none"; 
+    btnReplay.style.display = "none";
+    overlay.style.display = "flex";
+    video.currentTime = 0;
+    
+    video.onended = function() {
+        btnCerrar.style.display = "block";
+        btnReplay.style.display = "block";
+    };
+
+    // 3. Iniciar el contador
+    let tiempo = 4;
+    function tick() {
+        contador.innerText = tiempo;
+        
+        // Reproducir sonido de latido
+        latido.pause();
+        latido.currentTime = 0;
+        latido.play().catch(e => console.log("Audio bloqueado"));
+        
+        if (tiempo === 0) {
+            latido.pause();
+            overlay.style.display = "none";
+            video.play();
+            return;
+        }
+        tiempo--;
+        setTimeout(tick, 1000);
+    }
+    tick();
+}
+
+function repetirVideo() {
+    const video = document.getElementById("video-sorpresa");
+    const btnCerrar = document.getElementById("btn-cerrar-video");
+    const btnReplay = document.getElementById("btn-replay-video");
+    
+    btnCerrar.style.display = "none";
+    btnReplay.style.display = "none";
+    video.currentTime = 0;
+    video.play();
+}
+
+function cerrarVideo() {
+    const video = document.getElementById("video-sorpresa");
+    video.pause();
+    const latido = document.getElementById("latido-audio");
+    latido.pause();
+    latido.currentTime = 0;
+    
+    if (document.fullscreenElement || document.webkitFullscreenElement) {
+        if (document.exitFullscreen) document.exitFullscreen();
+        else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+    }
+    
+    document.getElementById("video-container").style.display = "none";
+    document.body.classList.remove("modal-open");
+
+    // REANUDAR MÚSICA DE FONDO
+    const audio = document.getElementById("musica");
+    audio.play().catch(e => console.log("Esperando interacción para música"));
 }
 </script>
 
