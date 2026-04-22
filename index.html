@@ -303,7 +303,7 @@ body.modal-open {
             Y míralo ahora… robándose mi corazón 💚
         </p>
         <p style="margin-top:15px; font-weight:bold; color:#F54927; font-size: 19px;">
-            🎧 Ponte tus auriculares y sube el volumen antes de continuar...
+            🎧 Ponte tus auriculares y sube el volumen...
         </p>
         <a href="#" onclick="verVideoLocal()" class="btn-video">📽️ Estoy listo, ver sorpresa</a>
         <div onclick="cerrarModal()" style="margin-top: 20px; color: #888; cursor: pointer; font-size: 14px; text-decoration: underline;">Cerrar ventana</div>
@@ -333,14 +333,19 @@ body.modal-open {
         <img src="https://i.postimg.cc/WdkNQ8vF/IMG-20260123-WA0360.jpg" class="foto-amor" alt="Nosotros" onclick="explotarCorazones(event, '❤️')">
         <div id="typing-textFree"></div>
         <div class="counter" id="contador"></div>
-        <div style="display: flex; justify-content: center; gap: 20px;">
-            <button id="btn-admin" onclick="mostrarSorpresaAdmin()">
-			    <img src="icons/gerente.png" width="80" class="icono">
-			</button>
-            <button id="btn-fotos" onclick="mostrarSeccionFotos()">
-			    <img src="icons/fotografo.png" width="80" class="icono">
-			</button>
-        </div>
+			<div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+				<button id="btn-admin" onclick="mostrarSorpresaAdmin()">
+					<img src="icons/gerente.png" width="80" class="icono">
+				</button>
+				
+				<button id="btn-reproducir-video" onclick="verVideoLocal()" style="display: none; opacity: 0; transition: all 0.3s ease;">
+					<img src="icons/video.png" width="80" class="icono">
+				</button>
+
+				<button id="btn-fotos" onclick="mostrarSeccionFotos()">
+					<img src="icons/fotografo.png" width="80" class="icono">
+				</button>
+			</div>
     </div>
 
     <div id="seccion-admin">
@@ -458,9 +463,12 @@ function escribirTextoFree() {
     document.getElementById("typing-textFree").innerHTML = mensaje.replace(/\n/g, "<br>");
     const btn1 = document.getElementById("btn-admin");
     const btn2 = document.getElementById("btn-fotos");
+	const btnVideo = document.getElementById("btn-reproducir-video"); // Nuevo
     btn1.style.display = "inline-block";
     btn2.style.display = "inline-block";
-    setTimeout(() => { btn1.style.opacity = "1"; btn2.style.opacity = "1"; }, 100);
+	btnVideo.style.display = "inline-block"; // Mostrar nuevo botón
+    setTimeout(() => { btn1.style.opacity = "1"; btn2.style.opacity = "1"; btnVideo.style.opacity = "1"; // Aparecer nuevo botón
+	}, 100);
 }
 
 function actualizarContador() {
@@ -646,7 +654,7 @@ function verVideoLocal() {
     };
 
     // 3. Iniciar el contador
-    let tiempo = 3;
+    let tiempo = 4;
     function tick() {
         contador.innerText = tiempo;
         
@@ -691,15 +699,11 @@ function cerrarVideo() {
     }
     
     document.getElementById("video-container").style.display = "none";
-    
     document.body.classList.remove("modal-open");
-    const mainOverlay = document.getElementById("overlay");
-    mainOverlay.style.display = "flex";
-    mainOverlay.style.opacity = "1";
-    
+
+    // REANUDAR MÚSICA DE FONDO
     const audio = document.getElementById("musica");
-    audio.pause();
-    audio.currentTime = 0;
+    audio.play().catch(e => console.log("Esperando interacción para música"));
 }
 </script>
 
