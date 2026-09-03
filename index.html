@@ -558,22 +558,28 @@ let albumsData = {};
 
 async function cargarFotosDesdeSheet(tipo) {
     const url = "https://opensheet.elk.sh/1ytc9OLnVTFOQ5GddnzLlLJ4o3J81QhWUC3smN0JeNs8/Hoja1";
+
     try {
         const res = await fetch(url);
         const data = await res.json();
         const contenedor = document.getElementById("contenedor-fotos");
 
         if (Object.keys(albumsData).length === 0) {
+
             data.forEach(fila => {
                 const nombre = fila.nombre?.trim();
                 const carpeta = fila.carpeta?.trim();
+
                 if (!nombre || !carpeta) return;
+
                 if (isNaN(carpeta)) {
                     const nombreSinExt = nombre.replace(/\.[^/.]+$/, "").toLowerCase();
+
                     albumsData[nombreSinExt] = {
                         nombre: nombreSinExt,
                         portada: convertirLinkDrive(fila.link),
-                        fotos: []
+                        fotos: [],
+                        carpeta: parseInt(nombreSinExt)
                     };
                 }
             });
@@ -581,40 +587,65 @@ async function cargarFotosDesdeSheet(tipo) {
             data.forEach(fila => {
                 const carpeta = fila.carpeta?.trim();
                 const link = convertirLinkDrive(fila.link);
+
                 if (!carpeta || isNaN(carpeta)) return;
+
                 const albumKeys = Object.keys(albumsData);
-                const index = parseInt(carpeta) - 1;
-                if (albumKeys[index]) albumsData[albumKeys[index]].fotos.push(link);
+
+                const album = Object.values(albumsData)
+                    .find(a => a.carpeta === parseInt(carpeta));
+
+                if (album) {
+                    album.fotos.push(link);
+                }
             });
 
-            const albumsOrdenados = Object.values(albumsData).sort((a, b) => a.nombre.localeCompare(b.nombre));
+            // Ordenar los álbumes por número de carpeta
+            const albumsOrdenados = Object.values(albumsData)
+                .sort((a, b) => a.carpeta - b.carpeta);
+
             const menu = document.getElementById("menu-albumes");
             menu.innerHTML = "";
+
             albumsOrdenados.forEach(album => {
                 const div = document.createElement("div");
+
                 div.className = "album-btn";
+
                 div.onclick = () => cargarFotosDesdeSheet(album.nombre);
+
                 div.innerHTML = `<img src="${album.portada}">`;
+
                 menu.appendChild(div);
             });
 
             albumsData = {};
-            albumsOrdenados.forEach(a => { albumsData[a.nombre] = a; });
+
+            albumsOrdenados.forEach(a => {
+                albumsData[a.nombre] = a;
+            });
         }
 
         if (tipo) {
             contenedor.innerHTML = "";
+
             document.getElementById("menu-albumes").style.display = "none";
             document.getElementById("btn-volver-albumes").style.display = "inline-block";
+
             const fotos = albumsData[tipo]?.fotos || [];
+
             fotos.forEach((link, index) => {
                 const img = document.createElement("img");
+
                 img.src = link;
                 img.className = "foto-galeria";
+
                 img.onclick = (e) => explotarElementoPro(e);
+
                 contenedor.appendChild(img);
             });
         }
+
     } catch (error) {
         console.error("Error cargando fotos:", error);
     }
