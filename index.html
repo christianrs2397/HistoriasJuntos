@@ -3,578 +3,1741 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Nuestra Historia Juntos :)</title>
+<title>Nuestro Recuerdos Juntos 💚</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Quicksand:wght@400;600&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:ital,wght@0,600;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
+:root {
+    --primary: #e85d3f;
+    --primary-soft: #fff0ec;
+    --secondary: #2a9d8f;
+    --secondary-soft: #e8f6f4;
+    --bg-warm: #fdf8f5;
+    --card-bg: rgba(255, 255, 255, 0.92);
+    --text-main: #2d2424;
+    --text-muted: #6b5e5e;
+    --border-soft: rgba(232, 93, 63, 0.18);
+    --shadow-soft: 0 12px 35px rgba(61, 35, 20, 0.08);
+}
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
 body {
     margin: 0;
-    background: linear-gradient(180deg, #a1c4fd 0%, #ffecd2 100%);
-    background-size: 400% 400%;
-    animation: gradientBG 20s ease infinite;
-    font-family: 'Quicksand', sans-serif;
-    overflow-x: hidden;
+    background: linear-gradient(135deg, #fdf6f0 0%, #fceae3 50%, #e8f4f2 100%);
+    background-attachment: fixed;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: var(--text-main);
     min-height: 100vh;
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden;
+    padding-bottom: 40px;
+}
+
+/* NAVEGACIÓN SUPERIOR ESTILO CÁPSULA (5 PESTAÑAS RESPONSIVE) */
+.navbar-wrapper {
+    position: sticky;
+    top: 10px;
+    z-index: 100;
+    width: 100%;
+    max-width: 640px;
+    padding: 0 10px;
+    margin-top: 10px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    padding: 5px;
+    border-radius: 50px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.85);
+    gap: 2px;
+}
+
+.nav-item {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 9px 4px;
+    border-radius: 40px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
     justify-content: center;
+    gap: 4px;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    white-space: nowrap;
+}
+
+.nav-item span.icon {
+    font-size: 14px;
+}
+
+.nav-item.active {
+    background: var(--primary);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(232, 93, 63, 0.3);
+}
+
+.nav-item.active.nav-admin {
+    background: var(--secondary);
+    box-shadow: 0 4px 12px rgba(42, 157, 143, 0.3);
+}
+
+/* CONTENEDOR PRINCIPAL */
+.container {
+    width: 94%;
+    max-width: 620px;
+    margin-top: 16px;
+    padding: 28px 20px;
+    background: var(--card-bg);
+    border-radius: 28px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1.5px solid var(--border-soft);
+    box-shadow: var(--shadow-soft);
+    position: relative;
+    z-index: 10;
+    transition: border-color 0.3s ease;
+}
+
+.seccion {
+    display: none;
+    animation: fadeIn 0.4s ease forwards;
+}
+
+.seccion.activa {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* SECCIÓN INICIO */
+.header-titulo {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(32px, 7vw, 42px);
+    color: var(--primary);
+    margin: 0 0 16px 0;
+    text-align: center;
+}
+
+.foto-principal-wrap {
+    position: relative;
+    width: 190px;
+    height: 190px;
+    margin: 0 auto 20px auto;
+}
+
+.foto-amor {
+    width: 100%;
+    height: 100%;
+    border-radius: 24px;
+    border: 5px solid #ffffff;
+    box-shadow: 0 10px 25px rgba(232, 93, 63, 0.18);
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.foto-amor:active {
+    transform: scale(0.96);
+}
+
+.badge-tap {
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    background: #ffffff;
+    border: 1.5px solid var(--border-soft);
+    border-radius: 20px;
+    padding: 4px 10px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--primary);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    pointer-events: none;
+}
+
+.mensaje-box {
+    font-size: clamp(15px, 3.8vw, 16.5px);
+    line-height: 1.65;
+    color: #4a3f3f;
+    text-align: center;
+    margin-bottom: 22px;
+    padding: 0 6px;
+}
+
+/* CONTADOR DE TIEMPO */
+.contador-card {
+    background: var(--primary-soft);
+    border: 1px solid rgba(232, 93, 63, 0.2);
+    border-radius: 20px;
+    padding: 16px 12px;
+    text-align: center;
+    margin-bottom: 22px;
+}
+
+.contador-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 10px;
+    display: block;
+}
+
+.contador-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+}
+
+.tiempo-bloque {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 10px 4px;
+    box-shadow: 0 3px 10px rgba(232, 93, 63, 0.06);
+}
+
+.tiempo-num {
+    display: block;
+    font-size: clamp(20px, 5vw, 26px);
+    font-weight: 700;
+    color: var(--primary);
+    line-height: 1.1;
+}
+
+.tiempo-txt {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+/* BOTÓN PRINCIPAL EN INICIO: SORPRÉNDEME CON UN MOMENTO */
+.cta-baul {
+    width: 100%;
+    background: linear-gradient(135deg, #e85d3f 0%, #f27a5e 100%);
+    color: white;
+    border: none;
+    border-radius: 18px;
+    padding: 15px 20px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 8px 20px rgba(232, 93, 63, 0.25);
+    transition: transform 0.2s ease;
+}
+
+.cta-baul:active {
+    transform: scale(0.98);
+}
+
+/* SECCIÓN MEMORIAS (ÁLBUMES REDONDOS) */
+.baul-header {
+    text-align: center;
+    margin-bottom: 22px;
+}
+
+.baul-subtitulo {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    margin: 4px 0 0 0;
+}
+
+.grid-albumes {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 22px;
+    padding: 6px 0;
+}
+
+.album-card {
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: transform 0.25s ease;
+    display: flex;
+    flex-direction: column;
     align-items: center;
 }
 
-@keyframes gradientBG {
-    0% { background-position: 50% 0%; }
-    50% { background-position: 50% 100%; }
-    100% { background-position: 50% 0%; }
+.album-card:hover, .album-card:active {
+    transform: scale(1.06);
 }
 
-.container {
-    text-align: center;
-    width: 95%;
-    max-width: 600px;
-    padding: 40px 20px;
-    z-index: 10;
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 20px;
-    backdrop-filter: blur(12px);
-    border: 2px solid #F54927;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+.album-portada-wrap {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
     position: relative;
-    transition: all 0.3s ease;
-    margin: 20px;
-    box-sizing: border-box;
+    border: 4px solid #ffffff;
+    box-shadow: 0 8px 22px rgba(232, 93, 63, 0.2);
 }
 
-#seccion-amor, #seccion-admin, #seccion-fotos {
-    transition: opacity 0.5s ease;
-}
-
-#seccion-admin, #seccion-fotos {
-    display: none;
-    opacity: 0;
-}
-
-#typing-textFree {
-    font-family: 'Quicksand', sans-serif;
-    font-size: clamp(16px, 4.5vw, 19px);
-    line-height: 1.6;
-    color: #5d4157;
-    min-height: 120px;
-    margin: 20px auto;
-    text-align: center;
-    max-width: 100%;
-}
-
-.counter {
-    font-size: clamp(18px, 5vw, 22px);
-    font-weight: 600;
-    color: #e63946;
-    margin-bottom: 20px;
-}
-
-.foto-amor, .foto-admin {
+.album-portada-wrap img {
     width: 100%;
-    max-width: 220px;
-    border-radius: 15px;
-    border: 4px solid #fff;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    margin-bottom: 15px;
+    height: 100%;
+    border-radius: 50%;
     object-fit: cover;
+    display: block;
+}
+
+.album-badge {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    background: var(--primary);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 20px;
+    border: 2px solid #ffffff;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* GALERÍA DE FOTOS DENTRO DE UN ÁLBUM */
+.barra-album-activo {
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-soft);
+}
+
+.btn-chip-volver {
+    background: var(--primary-soft);
+    color: var(--primary);
+    border: none;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
     cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.titulo-album-abierto {
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--primary);
+    text-transform: capitalize;
 }
 
 .grid-fotos {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-    padding: 10px 0;
+    gap: 14px;
 }
 
-.foto-galeria {
-    width: 100%;
-    aspect-ratio: 1/1;
-    object-fit: cover;
-    background-color: white;
-    padding: 8px 8px 30px 8px; 
-    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-    transition: all 0.3s ease;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-.foto-galeria:nth-child(odd) { transform: rotate(-2deg); }
-.foto-galeria:nth-child(even) { transform: rotate(2deg); }
-
-.foto-galeria:hover {
-    transform: scale(1.05) rotate(0deg);
-    z-index: 5;
-}
-
-.btn-volver {
-    margin-top: 20px;
+.polaroid-item {
     background: #ffffff;
-    border: 2px solid #F54927;
-    color: #F54927;
-    border-radius: 30px;
-    padding: 10px 30px;
+    padding: 7px 7px 22px 7px;
+    border-radius: 10px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+    border: 1px solid rgba(0,0,0,0.04);
     cursor: pointer;
-    font-family: 'Quicksand', sans-serif;
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: 14px;
+    transition: transform 0.25s ease;
 }
 
-.carta-admin-texto { 
-    font-family: 'Playfair Display', serif; 
-    font-size: clamp(16px, 4vw, 20px); 
-    color: #1b4332; 
-    line-height: 1.5; 
+.polaroid-item:nth-child(odd) { transform: rotate(-1.5deg); }
+.polaroid-item:nth-child(even) { transform: rotate(1.5deg); }
+.polaroid-item:hover { transform: scale(1.03) rotate(0deg); z-index: 2; }
+
+.polaroid-item img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 6px;
+    display: block;
+}
+
+.loader-baul {
+    text-align: center;
+    padding: 30px 10px;
+    color: var(--text-muted);
+    font-size: 14px;
+    width: 100%;
+}
+
+/* NUEVA SECCIÓN: NUESTRA RUTA (LÍNEA DE TIEMPO) */
+.timeline {
+    position: relative;
+    padding-left: 26px;
+    margin-top: 10px;
+}
+
+.timeline::before {
+    content: "";
+    position: absolute;
+    left: 9px;
+    top: 6px;
+    bottom: 6px;
+    width: 3px;
+    background: linear-gradient(180deg, var(--primary) 0%, var(--secondary) 100%);
+    border-radius: 3px;
+    opacity: 0.35;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 18px;
+    background: #ffffff;
+    border: 1.5px solid var(--border-soft);
+    border-radius: 18px;
+    padding: 14px 16px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.04);
+    cursor: pointer;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-item:active {
+    transform: scale(0.98);
+    border-color: var(--primary);
+}
+
+.timeline-dot {
+    position: absolute;
+    left: -24px;
+    top: 16px;
+    width: 15px;
+    height: 15px;
+    background: var(--primary);
+    border: 3px solid #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px rgba(232, 93, 63, 0.25);
+}
+
+.timeline-item:nth-child(even) .timeline-dot {
+    background: var(--secondary);
+    box-shadow: 0 0 0 2px rgba(42, 157, 143, 0.25);
+}
+
+.timeline-fecha {
+    display: inline-block;
+    background: var(--primary-soft);
+    color: var(--primary);
+    font-size: 11.5px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 12px;
+    margin-bottom: 6px;
+}
+
+.timeline-item:nth-child(even) .timeline-fecha {
+    background: var(--secondary-soft);
+    color: var(--secondary);
+}
+
+.timeline-titulo {
+    font-size: 15.5px;
+    font-weight: 700;
+    color: var(--text-main);
+    margin: 0 0 4px 0;
+}
+
+.timeline-desc {
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+/* SECCIÓN DEDICATORIA (ADMIN) */
+.carta-papel {
+    background: #fcfdfd;
+    border: 1.5px solid rgba(42, 157, 143, 0.25);
+    border-radius: 22px;
+    padding: 24px 18px;
+    text-align: center;
 }
 
 .titulo-admin {
-    font-weight: bold;
-    font-size: clamp(20px, 6vw, 26px);
-    margin-bottom: 20px;
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    font-size: clamp(22px, 5.5vw, 28px);
+    color: var(--secondary);
+    margin: 0 0 16px 0;
     display: block;
-    color: #2a9d8f;
 }
 
-.corazon-clic { position: fixed; pointer-events: none; z-index: 1000; font-size: 30px; animation: flotarReaccion 1.5s ease-out forwards; }
-@keyframes flotarReaccion { 0% { transform: translateY(0) scale(0); opacity: 0; } 20% { opacity: 1; transform: translateY(-20px) scale(1.2); } 100% { transform: translateY(-200px) scale(1.5); opacity: 0; } }
-.falling { position: absolute; top: -50px; pointer-events: none; z-index: 1; animation: fallDown linear forwards; }
-@keyframes fallDown { 0% { transform: translateY(0) rotate(0deg); opacity: 0; } 10% { opacity: 0.8; } 100% { transform: translateY(110vh) rotate(720deg); opacity: 0; } }
-
-#overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, #fff9f0, #ffecd2); display: flex; justify-content: center; align-items: center; z-index: 100; text-align: center; transition: opacity 0.5s ease; }
-.start-btn { font-family: 'Dancing Script', cursive; font-size: 24px; color: #F54927; padding: 20px; }
-
-#btn-admin, #btn-fotos , #btn-reproducir-video { 
-    display: none; 
-    background: none; 
-    border: none; 
-    cursor: pointer; 
-    margin-top: 15px; 
-    transition: transform 0.3s ease, opacity 0.5s; 
-    opacity: 0; 
-}
-
-.music-selector {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    align-items: center;
-}
-.music-btn {
-    background: white;
-    border: 2px solid #F54927;
-    color: #F54927;
-    padding: 12px 25px;
-    border-radius: 30px;
-    cursor: pointer;
-    font-family: 'Quicksand', sans-serif;
-    font-weight: bold;
-    width: 220px;
-    transition: 0.3s;
-}
-
-.icono {
-    width: 70px;
-    cursor: pointer;
-    padding: 10px;
-    border-radius: 15px;
-    background: white;
-    border: 2px solid #F54927;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-.album-btn {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    cursor: pointer;
-}
-
-.album-btn img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
+.foto-admin {
+    width: 180px;
+    height: 180px;
+    border-radius: 20px;
+    border: 4px solid #ffffff;
+    box-shadow: 0 8px 20px rgba(42, 157, 143, 0.18);
     object-fit: cover;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-    border: 3px solid white;
+    margin-bottom: 16px;
+    cursor: pointer;
 }
 
+.carta-admin-texto p {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(16px, 4vw, 18.5px);
+    color: #1b4332;
+    line-height: 1.65;
+    margin: 0 0 14px 0;
+}
+
+.firma-monito {
+    font-family: 'Dancing Script', cursive;
+    font-size: 26px;
+    color: var(--secondary);
+    margin-top: 12px;
+}
+
+/* LIGHTBOX VISOR DE FOTO EN GRANDE */
+#lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 12, 12, 0.92);
+    z-index: 10000;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    backdrop-filter: blur(8px);
+}
+
+.lightbox-tag {
+    background: rgba(232, 93, 63, 0.9);
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 6px 16px;
+    border-radius: 30px;
+    margin-bottom: 12px;
+    letter-spacing: 0.3px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+#lightbox img {
+    max-width: 95%;
+    max-height: 70vh;
+    border-radius: 14px;
+    border: 3px solid #fff;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+    object-fit: contain;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.lightbox-acciones {
+    margin-top: 18px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.btn-lightbox {
+    background: rgba(255,255,255,0.15);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 10px 16px;
+    border-radius: 30px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600;
+    font-size: 13.5px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.btn-lightbox:active {
+    background: rgba(255,255,255,0.3);
+}
+
+/* MODAL CUMPLEAÑOS */
 #modal-cumple {
     display: none;
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.9);
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
     z-index: 9999;
     justify-content: center;
     align-items: center;
     backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    overflow: hidden;
+    padding: 16px;
 }
 
 .modal-content {
     background: white;
-    padding: 30px 20px;
-    border-radius: 20px;
-    width: 85%;
+    padding: 30px 22px;
+    border-radius: 24px;
+    width: 100%;
     max-width: 400px;
     text-align: center;
-    border: 4px solid #F54927;
-    position: relative;
+    border: 3px solid var(--primary);
 }
 
 .btn-video {
-    background: #F54927;
+    background: var(--primary);
     color: white;
     text-decoration: none;
-    padding: 15px 25px;
+    padding: 14px 24px;
     border-radius: 50px;
-    font-weight: bold;
+    font-weight: 700;
     display: inline-block;
-    margin-top: 25px;
+    margin-top: 20px;
+    box-shadow: 0 6px 18px rgba(232, 93, 63, 0.35);
 }
 
-@media (max-width: 480px) {
-    .container { padding: 25px 15px; margin: 10px; }
-}
-
-body.modal-open { 
-    overflow: hidden !important; 
-    position: fixed; 
-    width: 100%;
-}
-
-@keyframes latidoZoom { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
-.latido { animation: latidoZoom 1s ease-in-out infinite; }
-
-/* CONTROLES PERSONALIZADOS VIDEO */
+/* VIDEO FULLSCREEN */
 .btn-fullscreen-top {
-    display: none; 
-    position: absolute; 
-    top: 20px; 
-    right: 20px; 
-    color: white; 
-    font-size: 16px; 
-    cursor: pointer; 
-    z-index: 2147483647; 
-    background: rgba(0, 0, 0, 0.6);
-    padding: 10px 15px;
+    display: none;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    z-index: 2147483647;
+    background: rgba(0, 0, 0, 0.65);
+    padding: 10px 16px;
     border-radius: 30px;
-    font-family: 'Quicksand', sans-serif;
-    font-weight: bold;
+    font-weight: 700;
     border: 1px solid rgba(255,255,255,0.3);
 }
 
 .btn-replay-center {
-    display: none; 
-    position: absolute; 
-    top: 50%; 
-    left: 50%; 
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%);
-    color: white; 
-    font-size: 18px; 
-    cursor: pointer; 
-    z-index: 2147483647; 
-    background: #F54927;
+    color: white;
+    font-size: 17px;
+    cursor: pointer;
+    z-index: 2147483647;
+    background: var(--primary);
     padding: 15px 25px;
     border-radius: 50px;
-    font-family: 'Quicksand', sans-serif;
-    font-weight: bold;
-    box-shadow: 0 0 20px rgba(245, 73, 39, 0.5);
-    text-align: center;
+    font-weight: 700;
+    box-shadow: 0 0 20px rgba(232, 93, 63, 0.6);
+}
+
+/* ANIMACIONES DE CORAZONES Y CONFETI */
+.corazon-clic {
+    position: fixed;
+    pointer-events: none;
+    z-index: 10005;
+    font-size: 28px;
+    animation: flotarReaccion 1.4s ease-out forwards;
+}
+
+@keyframes flotarReaccion {
+    0% { transform: translateY(0) scale(0.3); opacity: 0; }
+    25% { opacity: 1; transform: translateY(-25px) scale(1.2); }
+    100% { transform: translateY(-180px) scale(1.4); opacity: 0; }
+}
+
+.falling {
+    position: fixed;
+    top: -40px;
+    pointer-events: none;
+    z-index: 1;
+    animation: fallDown linear forwards;
+}
+
+@keyframes fallDown {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+    15% { opacity: 0.7; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+}
+
+@keyframes confetiFall {
+    0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(105vh) rotate(720deg); opacity: 0; }
+}
+
+@keyframes latidoZoom {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+.latido { animation: latidoZoom 1s ease-in-out infinite; }
+
+@media (max-width: 400px) {
+    .nav-item { font-size: 11px; padding: 8px 2px; gap: 3px; }
+    .nav-item span.icon { font-size: 13px; }
+    .container { padding: 22px 14px; }
+    .album-portada-wrap { width: 115px; height: 115px; }
 }
 </style>
 </head>
 
 <body>
 
-<div id="modal-cumple">
-    <div class="modal-content">
-        <div style="font-size: 50px; margin-bottom: 10px;">🎂🥳🎈</div>
-        <h2 style="font-family: 'Dancing Script'; color: #F54927; font-size: 35px; margin: 0;">¡Feliz Cumpleaños, Monguito!</h2>
-        <p style="color: #5d4157; font-size: 18px; line-height: 1.5; margin-top: 15px;">
-            Un día como hoy nació un pedorrín alegre y bailarín 😄🎉 <br>
-            Y míralo ahora… robándose mi corazón 💚
-        </p>
-        <p style="margin-top:15px; font-weight:bold; color:#F54927; font-size: 19px;">
-            🎧 Ponte tus auriculares y sube el volumen...
-        </p>
-        <a href="#" onclick="verVideoLocal()" class="btn-video">📽️ Estoy listo, ver sorpresa</a>
-        <div onclick="cerrarModal()" style="margin-top: 20px; color: #888; cursor: pointer; font-size: 14px; text-decoration: underline;">Cerrar ventana</div>
-    </div>
-</div>
-
-<div id="overlay">
-    <div class="start-btn">
-        <span style="font-size: 60px; animation: heartbeat 1.5s infinite; display: inline-block;">🌹</span><br>
-        Elige el ritmo de nuestro corazón:<br><br>(Sube el volumen🔊)
-        <div class="music-selector">
-            <button class="music-btn" onclick="iniciarSorpresa('music/cancion1.mp3')">🎵 Canción 1</button>
-            <button class="music-btn" onclick="iniciarSorpresa('music/cancion2.mp3')">🎵 Canción 2</button>
-        </div>
-    </div>
-</div>
-
-<audio id="musica" loop>
-    <source id="audioSource" src="" type="audio/mpeg">
-</audio>
+<!-- AUDIO SOLO PARA EL LATIDO DEL VIDEO -->
 <audio id="latido-audio" preload="auto">
     <source src="audio/latido.mp3" type="audio/mpeg">
 </audio>
 
-<div class="container">
-    <div id="seccion-amor">
-        <img src="https://i.postimg.cc/WdkNQ8vF/IMG-20260123-WA0360.jpg" class="foto-amor" alt="Nosotros" onclick="explotarCorazones(event, '❤️')">
-        <div id="typing-textFree"></div>
-        <div class="counter" id="contador"></div>
-			<div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
-				<button id="btn-admin" onclick="mostrarSorpresaAdmin()">
-					<img src="icons/gerente.png" width="80" class="icono">
-				</button>
-				
-				<button id="btn-reproducir-video" onclick="verVideoLocal()" style="display: none; opacity: 0; transition: all 0.3s ease;">
-					<img src="icons/video.png" width="80" class="icono">
-				</button>
-
-				<button id="btn-fotos" onclick="mostrarSeccionFotos()">
-					<img src="icons/fotografo.png" width="80" class="icono">
-				</button>
-			</div>
+<!-- MODAL CUMPLEAÑOS -->
+<div id="modal-cumple">
+    <div class="modal-content">
+        <div style="font-size: 48px; margin-bottom: 8px;">🎂🥳🎈</div>
+        <h2 style="font-family: 'Dancing Script'; color: var(--primary); font-size: 34px; margin: 0;">¡Feliz Cumpleaños, Monguito!</h2>
+        <p style="color: #5d4157; font-size: 16px; line-height: 1.5; margin-top: 12px;">
+            Un día como hoy nació un pedorrín alegre y bailarín 😄🎉 <br>
+            Y míralo ahora… robándose mi corazón 💚
+        </p>
+        <p style="margin-top:12px; font-weight:700; color:var(--primary); font-size: 16px;">
+            🎧 Ponte tus auriculares y sube el volumen...
+        </p>
+        <a href="#" onclick="verVideoLocal(); return false;" class="btn-video">📽️ Estoy listo, ver sorpresa</a>
+        <div onclick="cerrarModal()" style="margin-top: 18px; color: #888; cursor: pointer; font-size: 13px; text-decoration: underline;">Cerrar ventana</div>
     </div>
+</div>
 
-    <div id="seccion-admin">
-        <div class="carta-admin-texto">
+<!-- NUEVO MENÚ DE NAVEGACIÓN SUPERIOR (5 PESTAÑAS) -->
+<div class="navbar-wrapper">
+    <nav class="navbar">
+        <button class="nav-item active" id="tab-inicio" onclick="navegar('inicio')">
+            <span class="icon">🏠</span> Inicio
+        </button>
+        <button class="nav-item" id="tab-baul" onclick="navegar('baul')">
+            <span class="icon">🎞️</span> Memorias
+        </button>
+        <button class="nav-item" id="tab-ruta" onclick="navegar('ruta')">
+            <span class="icon">📍</span> Ruta
+        </button>
+       <!-- <button class="nav-item nav-admin" id="tab-dedicatoria" onclick="navegar('dedicatoria')">
+            <span class="icon">💌</span> Para Ti
+        </button>-->
+        <button class="nav-item" id="tab-video" onclick="verVideoLocal()">
+            <span class="icon">🎬</span> Video
+        </button>
+    </nav>
+</div>
+
+<!-- CONTENEDOR PRINCIPAL -->
+<div class="container" id="main-container">
+
+    <!-- 1. SECCIÓN INICIO -->
+    <section id="seccion-inicio" class="seccion activa">
+        <h1 class="header-titulo">Nuestra Historia 💚</h1>
+
+        <div class="foto-principal-wrap">
+            <img src="https://i.postimg.cc/WdkNQ8vF/IMG-20260123-WA0360.jpg" class="foto-amor" alt="Nosotros" onclick="explotarCorazones(event, '❤️')">
+            <span class="badge-tap">Tócame ❤️</span>
+        </div>
+
+        <div class="mensaje-box" id="typing-textFree"></div>
+
+        <div class="contador-card">
+            <span class="contador-label">⏳ Tiempo compartiendo juntos</span>
+            <div class="contador-grid">
+                <div class="tiempo-bloque">
+                    <span class="tiempo-num" id="cnt-dias">0</span>
+                    <span class="tiempo-txt">Días</span>
+                </div>
+                <div class="tiempo-bloque">
+                    <span class="tiempo-num" id="cnt-horas">0</span>
+                    <span class="tiempo-txt">Horas</span>
+                </div>
+                <div class="tiempo-bloque">
+                    <span class="tiempo-num" id="cnt-min">0</span>
+                    <span class="tiempo-txt">Min</span>
+                </div>
+                <div class="tiempo-bloque">
+                    <span class="tiempo-num" id="cnt-seg">0</span>
+                    <span class="tiempo-txt">Seg</span>
+                </div>
+            </div>
+        </div>
+
+        <button class="cta-baul" onclick="abrirRecuerdoAleatorio(event)">
+            <span>✨</span> Sorpréndeme con un momento
+        </button>
+    </section>
+
+    <!-- 2. SECCIÓN MEMORIAS (ÁLBUMES REDONDOS DE EXCEL) -->
+    <section id="seccion-baul" class="seccion">
+        <div class="baul-header" id="baul-header-principal">
+            <h2 class="header-titulo" style="margin-bottom: 4px;">Nuestros Recuerdos 📷</h2>
+            <p class="baul-subtitulo">Cada mes guardado con cariño (︶▽︶)</p>
+        </div>
+
+        <!-- Barra superior cuando abres un mes específico -->
+        <div class="barra-album-activo" id="barra-album-activo">
+            <button class="btn-chip-volver" onclick="volverAlbumes()">← Meses</button>
+            <span class="titulo-album-abierto" id="titulo-album-abierto">Mes</span>
+        </div>
+
+        <!-- Vista de carpetas / meses (REDONDAS) -->
+        <div class="grid-albumes" id="menu-albumes">
+            <div class="loader-baul">Abriendo y cargando recuerdos... ✨</div>
+        </div>
+
+        <!-- Vista de fotos del mes seleccionado -->
+        <div class="grid-fotos" id="contenedor-fotos" style="display: none;"></div>
+    </section>
+
+    <!-- 3. NUEVA SECCIÓN: NUESTRA RUTA (LÍNEA DE TIEMPO) -->
+    <section id="seccion-ruta" class="seccion">
+        <div class="baul-header">
+            <h2 class="header-titulo" style="margin-bottom: 4px;">Nuestra Ruta 📍</h2>
+            <p class="baul-subtitulo">Las fechas que marcaron nuestra historia ✨</p>
+        </div>
+
+        <div class="timeline" id="contenedor-ruta">
+            <!-- Se llena automáticamente desde nuestraRutaData en el script -->
+        </div>
+    </section>
+
+    <!-- 4. SECCIÓN DEDICATORIA / AGRADECIMIENTO -->
+    <section id="seccion-dedicatoria" class="seccion">
+        <div class="carta-papel carta-admin-texto">
             <span class="titulo-admin">¡Para mi profesional favorito! ✨</span>
             <img src="https://i.postimg.cc/mgMbBXf9/IMG-20260206-142351.jpg" class="foto-admin" alt="Nosotros" onclick="explotarCorazones(event, '💚')">
             <p>Desde que te conocí me di cuenta de la gran persona y profesional que eres. Siempre buscando aprender más y capacitándote.</p>
             <p>Esa constancia es lo que más admiro de ti. ✨ Estaré ahí para apoyarte en todo.</p>
-            <div style="font-style: italic; font-weight: bold; color: #2d6a4f; margin-top: 15px;">Atte. El Monito 🙊</div>
-            <button class="btn-volver" onclick="volverInicio()">Volver 🙈</button>
+            <div class="firma-monito">Atte. El Monito 🙊</div>
         </div>
-    </div>
+    </section>
 
-    <div id="seccion-fotos">
-        <h2 style="font-family: 'Dancing Script'; color: #F54927; margin: 0 0 15px 0;">
-            Nuestros Momentos (︶▽︶)
-        </h2>
-        <div id="menu-albumes" style="display:flex; justify-content:center; gap:25px; flex-wrap:wrap;"></div>
-        <div class="grid-fotos" id="contenedor-fotos"></div>
-        <button id="btn-volver-albumes" class="btn-volver" onclick="volverAlbumes()" style="display:none;">Volver a 🤳</button>
-        <button class="btn-volver" onclick="volverInicio()">Volver 🐒</button>
+</div>
+
+<!-- LIGHTBOX PARA VER FOTOS EN GRANDE EN CELULAR -->
+<div id="lightbox" onclick="cerrarLightbox(event)">
+    <div class="lightbox-tag" id="lightbox-tag">Nuestro Recuerdo 💚</div>
+    <img id="lightbox-img" src="" alt="Recuerdo ampliado">
+    <div class="lightbox-acciones">
+        <button class="btn-lightbox" onclick="explotarCorazones(event, '💚')">💚 Me encanta</button>
+        <!--<button class="btn-lightbox" onclick="abrirRecuerdoAleatorio(event)">🎲 Otro recuerdo</button>-->
+        <button class="btn-lightbox" onclick="cerrarLightbox(event, true)">✕ Cerrar</button>
     </div>
 </div>
 
-<div id="video-container" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:black; z-index:99999; justify-content:center; align-items:center;">
-    
+<!-- REPRODUCTOR DE VIDEO SORPRESA -->
+<div id="video-container" style="display:none; position:fixed; inset:0; width:100vw; height:100vh; background:black; z-index:99999; justify-content:center; align-items:center;">
     <div id="btn-cerrar-video" onclick="cerrarVideo()" class="btn-fullscreen-top">❌ Volver</div>
-    
     <div id="btn-replay-video" onclick="repetirVideo()" class="btn-replay-center">▶️ Ver de nuevo</div>
 
-    <video id="video-sorpresa" controls style="width:100%; height:100%; object-fit:contain;">
+    <video id="video-sorpresa" controls playsinline style="width:100%; height:100%; object-fit:contain;">
         <source src="video/sorpresa.mp4" type="video/mp4">
     </video>
-    
-    <div id="countdown-overlay" style="position:absolute; width:100%; height:100%; background:black; color:white; display:flex; flex-direction:column; justify-content:center; align-items:center; font-size:30px; z-index:2;">
-        <div style="margin-bottom:20px; font-family: 'Quicksand';">💚 Disfrútalo...</div>
-        <div id="countdown-num" class="latido" style="font-size:80px; font-weight:bold; color: #F54927;">3</div>
+
+    <div id="countdown-overlay" style="position:absolute; inset:0; background:black; color:white; display:flex; flex-direction:column; justify-content:center; align-items:center; font-size:28px; z-index:2;">
+        <div style="margin-bottom:20px;">💚 Disfrútalo...</div>
+        <div id="countdown-num" class="latido" style="font-size:80px; font-weight:bold; color: var(--primary);">3</div>
     </div>
 </div>
 
 <script>
-// Lógica original conservada
+// CONFIGURACIÓN Y MENSAJE ORIGINAL
 const fechaInicio = new Date("2025-11-01T00:00:00");
-const mensaje = "Este será nuestro pequeño lugar para guardar cada momento que vivimos juntos.💚\nAquí quedarán nuestros recuerdos, nuestras risasツ y cada instante que queremos conservar para siempre ✨\n\nPara que, cuando volvamos aquí, podamos recordar todo lo hermoso que hemos construido juntos 👨‍❤️‍💋‍👨\n\n— ¡Te quiero mucho, Monguito! 💕\n\nNuestra historia comenzó hace...";
+const mensaje = "No fuiste ni antes ni después, fuiste a tiempo.💚\nA tiempo para que me enamorara de ti ✨\n 👨‍❤️‍💋‍👨\n\n— ¡Te quiero mucho, Goldito! 💕";
+
+// =========================================================================
+// EDITA AQUÍ TUS FECHAS Y MOMENTOS DE "NUESTRA RUTA" 📍
+// =========================================================================
+
+const nuestraRutaData = [
+    {
+        fecha: "16 de Noviembre, 2026",
+        titulo: "Home office y cuidados para mi diente 🦷💚",
+        descripcion: "El Elfito tuvo trabajo remoto, la pasamos súper tranqui cerquita evitando el tráfico y me cuidó muy bonito mi diente."
+    },
+    {
+        fecha: "14 de Noviembre, 2026",
+        titulo: "Evento anime y canciones favoritas 🎶📸",
+        descripcion: "Disfrutamos tu evento escuchando tus canciones de anime favoritas, tomándonos muchas fotos y quedándonos hasta el final."
+    },
+    {
+        fecha: "12 de Noviembre, 2026",
+        titulo: "Visita a su YESO y chifa 🥡",
+        descripcion: "El Goldito fue a ver a su yeso, comí chifa cerca a Arenales y el Elfito por fin se dio un baño."
+    },
+    {
+        fecha: "10 y 11 de Noviembre, 2026",
+        titulo: "Modo chimuelo y contratiempos 🦷",
+        descripcion: "Me sacaron la muela quedando chimuelo mientras el pedorrito corría con sus tareas y se quedaba varado."
+    },
+    {
+        fecha: "09 de Noviembre, 2026",
+        titulo: "Entradas para ver a su YESO 🦴",
+        descripcion: "El Goldito consiguió sus entradas súper contento y nos fuimos a dormir juntitos y darnos besitos."
+    },
+    {
+        fecha: "08 de Noviembre, 2026",
+        titulo: "Cita dental, Plaza Norte y vóley nocturno 🦷🎄",
+        descripcion: "Fuimos a mi cita dental, paseamos por Plaza Norte viendo cositas navideñas y cartas de Jujutsu, y cerramos viéndote pegar duro en el vóley."
+    },
+    {
+        fecha: "07 de Noviembre, 2026",
+        titulo: "Campeonato del Goldito y barra incondicional 🏐🏆",
+        descripcion: "El Elfito estuvo ahí alentándome y grabándome en mi campeonato antes de celebrar con medio pollo a la brasa."
+    },
+    {
+        fecha: "06 de Noviembre, 2026",
+        titulo: "Regreso a La Cueva y costillitas Chinito 🐽🃏",
+        descripcion: "Volvimos a La Cueva por funditas para tus cartas valiosas y disfrutamos unas ricas costillitas."
+    },
+    {
+        fecha: "03 de Noviembre, 2026",
+        titulo: "El pedorrito defendiendo con todo en el vóley 🏐",
+        descripcion: "Mientras preparabas tu avance laboral, fuimos con tus amigos a verte jugar y defender cada balón en la cancha."
+    },
+    {
+        fecha: "02 de Noviembre, 2026",
+        titulo: "Un año desde el inicio y 7 meses de novios 💚🇪🇸",
+        descripcion: "Volvimos a Barranco a celebrar un año de nuestra primera salida y 7 meses de enamorados entre pastas, pizzas, helados, regalito y mil risas."
+    },
+    {
+        fecha: "01 de Noviembre, 2026",
+        titulo: "Tortita post-vóley 🍰",
+        descripcion: "Vi al Elfito apuradín para su partido y recién pudimos comernos la tortita de Halloween acompañados de algo rico."
+    },
+    {
+        fecha: "31 de Octubre, 2026",
+        titulo: "Halloween de vaqueros 🤠🎃",
+        descripcion: "Nos disfrazamos de vaqueros, juntamos muchos dulces y llevé tortita para compartir."
+    },
+    {
+        fecha: "30 de Octubre, 2026",
+        titulo: "Práctica de vóley y cine 🏐🎬",
+        descripcion: "Me enseñaste con paciencia y por fin me salían mejor las jugadas de vóley antes de ir al cine."
+    },
+    {
+        fecha: "29 de Octubre, 2026",
+        titulo: "Politos negros emparejados y chaufa 🖤🥡",
+        descripcion: "Buscamos disfraces, compramos polos negros iguales para estar combinados y llevamos chaufa para comer."
+    },
+    {
+        fecha: "26 de Octubre, 2026",
+        titulo: "Conversación sincera y compromiso 💚",
+        descripcion: "Un día de charla profunda reconociendo que nada es fácil, pero poniendo ambos de nuestra parte para seguir construyendo nuestra felicidad."
+    },
+    {
+        fecha: "24 de Octubre, 2026",
+        titulo: "Figura esperada y noche de fiesta 🕺🏻🍻",
+        descripcion: "Por fin recogiste tu figura esperada y nos fuimos a bailar y tomar hasta tarde en la fiestita."
+    },
+    {
+        fecha: "23 de Octubre, 2026",
+        titulo: "Carta valiosa, regalo para Hostin y Clayface 🎬",
+        descripcion: "El Elfito recogió una carta súper valiosa, compramos mochila por el cumple de Hostin, comimos hamburguesa fake y vimos Clayface."
+    },
+    {
+        fecha: "19 de Octubre, 2026",
+        titulo: "Maratón de cine y espíritu navideño 🎬🎄",
+        descripcion: "Fuimos a ver Street para cumplir la meta de cine del Goldito y vimos que ya armaban el árbol de Navidad en el Centro Cívico."
+    },
+    {
+        fecha: "18 de Octubre, 2026",
+        titulo: "App de vóley y cenita 3B 💻",
+        descripcion: "El pedorrín estuvo creando una app para el vóley de Mari y yo le compré su cenita buena, bonita y barata."
+    },
+    {
+        fecha: "17 de Octubre, 2026",
+        titulo: "Noche improvisada en La Agencia 🕺🏻",
+        descripcion: "Fuimos sin querer a La Agencia donde el pedorro terminó usando ropa de fiesta y faltando a sus clases al día siguiente."
+    },
+    {
+        fecha: "16 de Octubre, 2026",
+        titulo: "Video especial, makis y película Hope ☕❤️",
+        descripcion: "Te hice un video súper tierno con nuestros recuerdos, comimos makis y vimos Hope."
+    },
+    {
+        fecha: "14 de Octubre, 2026",
+        titulo: "Blue Lock y canchita morada 🔹🇯🇵",
+        descripcion: "Vimos el live action de Blue Lock bien abrazaditos comiendo canchita de turrón."
+    },
+    {
+        fecha: "13 de Octubre, 2026",
+        titulo: "Emoliente, La Tribu y preventa de Avengers 🦥🎬",
+        descripcion: "Tomamos emoliente, vimos la película La Tribu que estuvo súper bonita y aseguramos preventa para Avengers."
+    },
+    {
+        fecha: "11 de Octubre, 2026",
+        titulo: "Tarde de teatro y hamburguesas 🎭🍔",
+        descripcion: "Fuimos al teatro (9 puntos para el Elfito, 7 para el Goldito) y repetimos hamburguesas."
+    },
+    {
+        fecha: "10 de Octubre, 2026",
+        titulo: "Clase de vóley, helados Frēh y comida marina 🏐🍦🐟",
+        descripcion: "Por fin me moví más en la clase de vóley, compramos cartas, helados aesthetic, comida marina y hamburguesas."
+    },
+    {
+        fecha: "07 de Octubre, 2026",
+        titulo: "Salió el Mewtwo carísimo 🐈✨",
+        descripcion: "En la dinámica del Elfito salió una carta de Mewtwo valiosísima mientras el Goldito tenía su reunión."
+    },
+    {
+        fecha: "06 de Octubre, 2026",
+        titulo: "Peli del perrito y revisión de tesis 🐶🎓",
+        descripcion: "Vimos una película súper emotiva de un perrito, el Elfito vendió varias cartas y por fin revisaron su tesis."
+    },
+    {
+        fecha: "04 de Octubre, 2026",
+        titulo: "Elecciones y flash electoral en la tiendita 🗳️🛒",
+        descripcion: "Fuimos a votar juntos, vimos el flash electoral en la tienda y luego acompañamos al Elfito al vóley."
+    },
+    {
+        fecha: "03 de Octubre, 2026",
+        titulo: "Cumpleaños de la suegris 🎂🙂‍↔️",
+        descripcion: "En pleno cumpleaños de tu mamá, tu hermana escuchó el nombre del Goldito y casi nos descubren."
+    },
+    {
+        fecha: "02 de Octubre, 2026",
+        titulo: "Medio año de enamorados 6️⃣🍕",
+        descripcion: "Celebramos 6 meses juntos comiendo pizzas, tomando fotos aesthetic y brindando por muchos más."
+    },
+    {
+        fecha: "29 de Septiembre, 2026",
+        titulo: "Papa con huevo e inauguración 🥚🏐",
+        descripcion: "Comimos papa con huevo después de un año y fuimos a la inauguración del campeonato."
+    },
+    {
+        fecha: "27 de Septiembre, 2026",
+        titulo: "Compras para la parrilla y encuentro con el jefe 🛒",
+        descripcion: "Fuimos al mercado por las cosas de la parrilla (donde nos vio tu jefe), cantamos, comimos a las 5 PM y cerramos en el vóley."
+    },
+    {
+        fecha: "25 de Septiembre, 2026",
+        titulo: "Tarde en la habitación y Campollo 🍗",
+        descripcion: "Pasamos un rato súper rico en cuatro paredes, cenamos en Campollo y hasta nos pidieron ser padrinos."
+    },
+    {
+        fecha: "23 de Septiembre, 2026",
+        titulo: "Planes por separado y reunión de tesis 📚",
+        descripcion: "El Goldito fue a un cumpleaños a comer pastas mientras yo jugaba vóley y regresaba temprano para mi reunión con el profesor."
+    },
+    {
+        fecha: "22 de Septiembre, 2026",
+        titulo: "Cine: Álbum Familiar y vóley 🇵🇪🏐",
+        descripcion: "El pedorrín se quedó dormido en el hombro del Goldito viendo la película y luego fuimos a ver vóley."
+    },
+    {
+        fecha: "21 de Septiembre, 2026",
+        titulo: "Flores amarillas y cheesecake de pistacho 💛🥮",
+        descripcion: "Nos encontramos en Central, comiste cheesecake de pistacho, te di tus flores amarillas de Havanna, compartimos bon o bon y viste tu video con IA."
+    },
+    {
+        fecha: "20 de Septiembre, 2026",
+        titulo: "Tarde de cariñitos y makis 🍥",
+        descripcion: "Pasamos una tarde súper acaramelados y volvimos a comer unos makis deliciosos después de tiempo."
+    },
+    {
+        fecha: "17 de Septiembre, 2026",
+        titulo: "Productos del 30th y cena en Fridays 🃏🍔",
+        descripcion: "Después de renegar con Ripley conseguimos productos del 30 aniversario, abrimos sobres bonitos y cenamos en Fridays."
+    },
+    {
+        fecha: "15 de Septiembre, 2026",
+        titulo: "Figuras Pokémon y lonche de agradecimiento 🎁☕",
+        descripcion: "El Goldito fue a comprar mis figuras de Pokémon y yo le invité su lonche para engreírlo."
+    },
+    {
+        fecha: "13 de Septiembre, 2026",
+        titulo: "Mañana de masajes y cachanga 💆🏻‍♂️",
+        descripcion: "Dormimos súper tranquilos con masajito incluido y comimos cachanga para picar algo aunque cancelaron el vóley."
+    },
+    {
+        fecha: "12 de Septiembre, 2026",
+        titulo: "Campeonato, chifa y chelas 🏐🍻",
+        descripcion: "El Elfito ganó su apuesta en el campeonato, comimos chifa por el frío y terminamos tomando unas chelas."
+    },
+    {
+        fecha: "11 de Septiembre, 2026",
+        titulo: "Teatro con actores favoritos y cena en El Cabezón 🎭",
+        descripcion: "El Elfito estuvo feliz viendo de cerca a sus actores favoritos en el teatro y cerramos comiendo riquísimo en El Cabezón."
+    },
+    {
+        fecha: "09 de Septiembre, 2026",
+        titulo: "Cine, cariñitos y gaseosa derramada 👨‍❤️‍💋‍👨🥤",
+        descripcion: "Cenamos ligero en Subway antes de ir al cine, donde entre cariñitos al pedorrito se le cayó encima su gaseosa helada."
+    },
+    {
+        fecha: "06 de Septiembre, 2026",
+        titulo: "Evento Pokémon y modo ahorro 🃏💰",
+        descripcion: "El Goldito me acompañó al evento Pokémon donde compré muchas cartas antes de entrar en modo ahorro para el 30th."
+    },
+    {
+        fecha: "05 de Septiembre, 2026",
+        titulo: "Regalos de cumpleaños para la Sra. 🎁",
+        descripcion: "Salimos juntos a buscar una camisita y un polo de pijama por su cumpleaños."
+    },
+    {
+        fecha: "04 de Septiembre, 2026",
+        titulo: "Cine subtitulado en modo brasileño 🇧🇷🎬",
+        descripcion: "Fuimos a ver una película subtitulada rodeados de extranjeros mientras yo disimulaba que era brasileño."
+    },
+    {
+        fecha: "02 de Septiembre, 2026",
+        titulo: "5 meses juntos, E y G 👥💚",
+        descripcion: "Celebramos cinco meses de novios cenando pastas y pasando un momento súper bonito juntos."
+    },
+    {
+        fecha: "30 de Agosto, 2026",
+        titulo: "Cena en Coyote y peli con siestita 🍝🎬",
+        descripcion: "Cenamos pastas y molleja en Coyote y vimos una película en la que me quedé dormido un ratito."
+    },
+    {
+        fecha: "29 de Agosto, 2026",
+        titulo: "El debut oficial del Goldito en el vóley 🏐",
+        descripcion: "El Goldito se animó a jugar en el campeonato y luego fue a verme jugar a mí."
+    },
+    {
+        fecha: "28 de Agosto, 2026",
+        titulo: "Cine y tarjetitas de emprendimiento 🎬💼",
+        descripcion: "Volvimos al cine y aprovechamos para repartir tarjetitas del emprendimiento del Elfito, siempre apoyándonos."
+    },
+    {
+        fecha: "26 de Agosto, 2026",
+        titulo: "Parrilla en D'Kyaras con Mari 🥩",
+        descripcion: "Fuimos a comer parrilla con Mari, donde el pedorro le quitó el rachi, las mollejas y el choclo a su plato."
+    },
+    {
+        fecha: "24 de Agosto, 2026",
+        titulo: "Baño de espuma y desayuno buffet 🛁🍳",
+        descripcion: "El Elfito disfrutó un baño en espuma, pedí doble omelette en el buffet y tomamos Frutix sin tapioca."
+    },
+    {
+        fecha: "22 de Agosto, 2026",
+        titulo: "Fiestita del Elfito 🎉🍻",
+        descripcion: "Una celebración súper divertida donde el Goldito terminó alegre entre brindis y risas."
+    },
+    {
+        fecha: "17 al 21 de Agosto, 2026",
+        titulo: "Viajecito con mal de altura 🏔️",
+        descripcion: "Cinco días de viaje donde el Elfito decía que estaba bien pero sufrió con el mal de altura."
+    },
+    {
+        fecha: "11 de Agosto, 2026",
+        titulo: "Ramen casero sin verduritas 🍜",
+        descripcion: "Fuimos al centro por su champú y comimos ramen casero donde el Goldito apartó todo lo verde."
+    },
+    {
+        fecha: "10 de Agosto, 2026",
+        titulo: "Casi completando la colección First Partner 🃏",
+        descripcion: "El Elfito estuvo a un paso de completar su colección de cartas acompañado siempre por el Goldito."
+    },
+    {
+        fecha: "09 de Agosto, 2026",
+        titulo: "Caminata en Plaza San Miguel y Don Tito 🍗",
+        descripcion: "Caminamos muchísimo buscando zapatillas, comimos rico en Don Tito y fuimos a descansar (aunque no dormimos nada)."
+    },
+    {
+        fecha: "02 de Agosto, 2026",
+        titulo: "Festín gigante en Madam Tusan 🥡",
+        descripcion: "El pedorro pidió un plato gigante en Madam Tusan que estaba buenísimo y nos alcanzó hasta para llevar a casa."
+    },
+    {
+        fecha: "28 de Julio, 2026",
+        titulo: "Fiestas Patrias en Miraflores 🇵🇪💚",
+        descripcion: "Pasamos el feriado largo juntos; el Goldito cocinó pastas y yo le preparé su omelette creando recuerdos muy lindos."
+    },
+    {
+        fecha: "20 de Julio, 2026",
+        titulo: "Noche de pastas invitadas 🍝",
+        descripcion: "El Goldito me invitó unas pastas deliciosas y luego me acompañó hasta mi casita."
+    },
+    {
+        fecha: "18 de Julio, 2026",
+        titulo: "Makis, broaster y sobres Pokémon 🍣🍗",
+        descripcion: "Probamos unos makis que no nos convencieron, abrimos preventas y comimos un broaster buenazo que al día siguiente le pasó factura al Goldito."
+    },
+    {
+        fecha: "13 de Julio, 2026",
+        titulo: "El mono y el pájaro 🐒🐦",
+        descripcion: "Un hallazgo curioso más durante nuestras salidas juntos."
+    },
+    {
+        fecha: "11 de Julio, 2026",
+        titulo: "Exposición exitosa y clases de portugués 👔📚",
+        descripcion: "El Goldito estrenó camisa y le fue súper bien en su exposición mientras yo tomaba clases de portugués en casa."
+    },
+    {
+        fecha: "10 de Julio, 2026",
+        titulo: "Sustos con Dead Evil en día libre 🎬",
+        descripcion: "Disfrutamos tu día libre viendo Dead Evil en el cine entre sustos e impactos."
+    },
+    {
+        fecha: "09 de Julio, 2026",
+        titulo: "Cuidados, caldito de gallina y café 🐔☕",
+        descripcion: "Estaba enfermito y el Goldito me engrió mandándome caldo de gallina y cuidándome con café caliente y mucha charla."
+    },
+    {
+        fecha: "07 de Julio, 2026",
+        titulo: "Supergirl y el hot dog olvidado 🌭🎬",
+        descripcion: "Fuimos al cine a ver Supergirl y en la emoción nos olvidamos un hot dog."
+    },
+    {
+        fecha: "05 de Julio, 2026",
+        titulo: "Chicharrones en el Barrio Chino 🥢",
+        descripcion: "Fuimos a Abancay a comer ricos chicharrones hasta llenar la panza y buscar pokémones."
+    },
+    {
+        fecha: "28 de Junio, 2026",
+        titulo: "Haciendo barra con agüita 💦",
+        descripcion: "El Goldito volvió a verme jugar; arrugó cuando casi lo meten a la cancha pero me hizo barra con mi agüita."
+    },
+    {
+        fecha: "26 de Junio, 2026",
+        titulo: "Paseo frente al mar y arrebozado 🌊",
+        descripcion: "Aunque llegaste cuando acabó el evento, te llevé tu arrebozado y paseamos viendo el mar recordando momentos bonitos."
+    },
+    {
+        fecha: "25 de Junio, 2026",
+        titulo: "Vóley y carita de ternura 🏐💚",
+        descripcion: "Fuimos al vóley y el Goldito me miraba jugar con una carita que me daba demasiada ternura."
+    },
+    {
+        fecha: "20 de Junio, 2026",
+        titulo: "Juane y fiestita 🍛",
+        descripcion: "Comimos un rico juane antes de ir a la fiesta donde el pedorro andaba con sueño."
+    },
+    {
+        fecha: "14 de Junio, 2026",
+        titulo: "Mañana de anime de terror abrazaditos 📺",
+        descripcion: "Pasamos la mañana bien abrazados viendo anime de terror como en nuestros días en Ayacucho."
+    },
+    {
+        fecha: "12 de Junio, 2026",
+        titulo: "Compras en La Rambla y comida en Chili's 👟",
+        descripcion: "Compramos ropita y zapatillas para el pedorrito y comimos en Chili's mientras el Goldito estaba en reunión."
+    },
+    {
+        fecha: "07 de Junio, 2026",
+        titulo: "El Elfito dejándolo todo en la cancha 🏐",
+        descripcion: "Volví a ver al Elfito jugar vóley después de tiempo, dándolo todo en el segundo partido."
+    },
+    {
+        fecha: "05 de Junio, 2026",
+        titulo: "Cine de suspenso: Obsesión 🍿",
+        descripcion: "Vimos una película buenísima donde el Goldito terminó pegándose un buen susto."
+    },
+    {
+        fecha: "02 de Junio, 2026",
+        titulo: "Cena aesthetic y tortita sorpresa 🍝🎂",
+        descripcion: "Comimos pastas en un lugar muy bonito y me sorprendiste con una tortita de feliz aniversario que no esperaba."
+    },
+    {
+        fecha: "30 de Mayo, 2026",
+        titulo: "Rifas en Pokeworld 🎟️",
+        descripcion: "Fuimos al Pokeworld y compramos un montón de rifas probando nuestra suerte."
+    },
+    {
+        fecha: "27 de Mayo, 2026",
+        titulo: "Compras, figura Pokémon y Backrooms 🎬",
+        descripcion: "Buscando camisas encontré una figura Pokémon que me dejó en shock y luego vimos Backrooms agarraditos del brazo."
+    },
+    {
+        fecha: "23 de Mayo, 2026",
+        titulo: "Alianza campeón 🏆",
+        descripcion: "El Goldito estuvo súper feliz celebrando el campeonato de su equipo."
+    },
+    {
+        fecha: "22 de Mayo, 2026",
+        titulo: "Baile y copas en Le Paris 🕺🏻🍻",
+        descripcion: "Bailamos muchísimo y la pasamos súper bonito en Le Paris hasta llegar directo a dormir."
+    },
+    {
+        fecha: "18 de Mayo, 2026",
+        titulo: "Noche de anticuchos 🍢",
+        descripcion: "El pedorro se dio su gustito comiendo unos buenos anticuchos."
+    },
+    {
+        fecha: "15 de Mayo, 2026",
+        titulo: "Visita sorpresa en el trabajo 🔋",
+        descripcion: "Fui por tu trabajo quedándome sin batería y te embarqué rápido para que llegaras a tu reunión."
+    },
+    {
+        fecha: "11 de Mayo, 2026",
+        titulo: "Aniversario de mis papás 📱",
+        descripcion: "Un día familiar importante donde además se dieron cuenta del tema del iPhone."
+    },
+    {
+        fecha: "10 de Mayo, 2026",
+        titulo: "Día de la Madre con desayuno buffet 💐",
+        descripcion: "Celebramos junto a nuestras mamitas con un desayuno buffet preparado por el Goldito."
+    },
+    {
+        fecha: "08 de Mayo, 2026",
+        titulo: "Café aesthetic en Rutina Café ☕",
+        descripcion: "Mientras el Monito estaba ocupado en su reunión, yo elegí todo lo que le gusta en una cafetería súper aesthetic."
+    },
+    {
+        fecha: "06 de Mayo, 2026",
+        titulo: "La carta Jumbo del pedorrín 🃏",
+        descripcion: "Fuimos a recoger una carta Jumbo especial para seguir agrandando la colección."
+    },
+    {
+        fecha: "03 de Mayo, 2026",
+        titulo: "Regreso a casa y final de vóley 🏐",
+        descripcion: "Volvimos cansados a Lima pero igual fuimos a la final de vóley donde el Goldito celebró feliz el triunfo de Alianza."
+    },
+    {
+        fecha: "02 de Mayo, 2026",
+        titulo: "Segundo mes en el centro de Arequipa 💚",
+        descripcion: "Celebramos dos meses juntos paseando por el centro mientras el Goldito se alistaba para su boda y me decía que olía a calle."
+    },
+    {
+        fecha: "01 de Mayo, 2026",
+        titulo: "Llegada y tour en Arequipa ☕🌋",
+        descripcion: "Llegamos a la Ciudad Blanca, tomamos café para despertar y salimos de tour bajo el sol fuerte."
+    },
+    {
+        fecha: "30 de Abril, 2026",
+        titulo: "Salsa hasta las 3 AM rumbo al aeropuerto 💃🏻✈️",
+        descripcion: "Bailamos hasta la madrugada en La Casa de la Salsa y nos fuimos directo con sueño al aeropuerto."
+    },
+    {
+        fecha: "25 de Abril, 2026",
+        titulo: "Terno nuevo y práctica de vóley 👔🏐",
+        descripcion: "Compramos terno para el Goldito pedorrín y después de sus clases fuimos a practicar vóley."
+    },
+    {
+        fecha: "24 de Abril, 2026",
+        titulo: "Cartas, ramen en Shimaya y siesta 🍜💨",
+        descripcion: "Recogimos cartas donde el Goldito también se animó a comprar, comimos ramen que nos dio gases y dormimos un buen rato."
+    },
+    {
+        fecha: "23 de Abril, 2026",
+        titulo: "Día de Michael ✨",
+        descripcion: "Un día especial más sumado a nuestro calendario de recuerdos."
+    },
+    {
+        fecha: "22 de Abril, 2026",
+        titulo: "Tu cumpleaños, Monguito 🎂♨️",
+        descripcion: "Celebramos tu día con familia y amigos, regalos, hotel con jacuzzi en Santa Anita y Four Loko; yo lo peché todito ese día."
+    },
+    {
+        fecha: "18 de Abril, 2026",
+        titulo: "Fiesta en yate y besos en el mar ⛵💋",
+        descripcion: "La pasamos increíble en el yate con amigos; el Goldito borrachito me dio besos en el mar y luego cuidamos a Hostin antes de ir a dormir."
+    },
+    {
+        fecha: "17 de Abril, 2026",
+        titulo: "Decepción de Club Sandwich 🥪",
+        descripcion: "Pedimos club sandwich pero esta vez no estaba tan bueno como el anterior."
+    },
+    {
+        fecha: "15 de Abril, 2026",
+        titulo: "Outfits de yate y Bembos 🍔⛵",
+        descripcion: "Salimos a buscar la ropa perfecta para el paseo en yate y cerramos comiendo Bembos."
+    },
+    {
+        fecha: "13 de Abril, 2026",
+        titulo: "Antojo de Subway 🥖",
+        descripcion: "Una salida tranqui para engreír al Monito con un buen Subway."
+    },
+    {
+        fecha: "10 de Abril, 2026",
+        titulo: "Rescatando los 2 soles y cine 🎬",
+        descripcion: "El Sr. Jaime recogió nuestros pedidos, logramos que nos devolvieran 2 soles que cobraron de más y fuimos a ver 'El Drama'."
+    },
+    {
+        fecha: "08 de Abril, 2026",
+        titulo: "Atrapados por el sticker 🤭",
+        descripcion: "Una compañera de trabajo del Goldito descubrió nuestro sticker en pleno horario laboral."
+    },
+    {
+        fecha: "07 de Abril, 2026",
+        titulo: "Noche de pizzas y charla bonita 🍕💟",
+        descripcion: "Comimos pizzas porque ya extrañaba muchísimo al Monito y pasamos un rato súper lindo conversando."
+    },
+    {
+        fecha: "05 de Abril, 2026",
+        titulo: "Vuelo de regreso y mapa completo ✈️💚",
+        descripcion: "Fuimos los últimos en subir al avión, desayunamos en el aire y completé mi mapa viajero gracias a ti."
+    },
+    {
+        fecha: "04 de Abril, 2026",
+        titulo: "Monito internacional en la triple frontera 🇧🇷🌎",
+        descripcion: "El Goldito me salvó de casi ser deportado, compramos dulces, llaveros y conocimos la triple frontera."
+    },
+    {
+        fecha: "03 de Abril, 2026",
+        titulo: "Aventura y guiso de castaña 🌳",
+        descripcion: "El Monito anduvo en modo influencer en las alturas y probamos un delicioso guiso de castaña."
+    },
+    {
+        fecha: "02 de Abril, 2026",
+        titulo: "Oficialmente novios en las alturas ✈️💑🏻",
+        descripcion: "Con el sol y las nubes de testigos en pleno vuelo, me pediste que fuéramos novios oficialmente y cerramos viendo un sunset mágico en la laguna."
+    },
+    {
+        fecha: "01 de Abril, 2026",
+        titulo: "Primera vez en Cine Prime 🎬",
+        descripcion: "El Monito conoció Cine Prime congelándose de frío y el Goldito le prestó su brazo para darle calor."
+    },
+    {
+        fecha: "30 de Marzo, 2026",
+        titulo: "Nuevas cartas y compras para la selva 🌴",
+        descripcion: "Aunque el Monito andaba con malestar, recogió cartas nuevas e hicimos las compras para nuestro viaje a la selva."
+    },
+    {
+        fecha: "29 de Marzo, 2026",
+        titulo: "Vóley nocturno después de los tragos 🏐",
+        descripcion: "El Monito llegó borrachín al vóley de la noche y cenó olvidándose de lavarse las manos."
+    },
+    {
+        fecha: "28 de Marzo, 2026",
+        titulo: "Gochisō y Teatro Municipal 🎭",
+        descripcion: "Hicimos cola para probar comida japonesa en Gochisō y luego vimos una obra muy bonita en el Teatro Municipal donde el Monito se quedó dormido."
+    },
+    {
+        fecha: "27 de Marzo, 2026",
+        titulo: "Home office en el hotel 💻💨",
+        descripcion: "Trabajamos remoto desde el hotel entre risas, ruidos inesperados y apoyándonos en todo como siempre."
+    },
+    {
+        fecha: "26 de Marzo, 2026",
+        titulo: "Encuentro fugaz antes del vóley 🏐",
+        descripcion: "Nos vimos un ratito antes de ir a jugar vóley, recordando cuánto disfrutamos acompañarnos."
+    },
+    {
+        fecha: "25 de Marzo, 2026",
+        titulo: "Renovación de contrato y accidente con el afeitador 🫂",
+        descripcion: "Celebramos con un abachito que renovaron al Goldito, aunque el Monito se cortó el dedo por llevar su afeitador sin protector en la mochila."
+    },
+    {
+        fecha: "24 de Marzo, 2026",
+        titulo: "Tomando apuntes para la pedida 💍",
+        descripcion: "El Monito estuvo súper atento a una casi pedida de mano para copiarse las ideas."
+    },
+    {
+        fecha: "21 de Marzo, 2026",
+        titulo: "Primer viaje en subterráneo y pasaporte listo 🚇🛂",
+        descripcion: "El Monito estrenó el tren subterráneo y tramitó su pasaporte al toque, dejándolo listo para conquistar otros países."
+    },
+    {
+        fecha: "18 de Marzo, 2026",
+        titulo: "Cartas Pokémon 30 años y alitas 🃏🍗",
+        descripcion: "Recogimos tus cartas conmemorativas del Pokémon Day, buscamos exfoliantes sin suerte y nos llenamos rapidito comiendo alitas."
+    },
+    {
+        fecha: "17 de Marzo, 2026",
+        titulo: "Hamburguesas y problemas con el Metropolitano 🍔",
+        descripcion: "Llegué tarde porque mi tarjeta decía 'ya utilizada' y el Monito se tiró sus gases en la hamburguesería."
+    },
+    {
+        fecha: "16 de Marzo, 2026",
+        titulo: "Sesión de fotos y promesa rota 💨📸",
+        descripcion: "El Monito hizo mil poses hasta quedar agotadísimo y subió sus fotos incumpliendo su promesa, ganándose un comentario de pedito."
+    },
+    {
+        fecha: "15 de Marzo, 2026",
+        titulo: "Yunza, tina y celebración con Hostin 🍻",
+        descripcion: "El Goldito se lanzó a la yunza y ganó su tina y jarra rota; entre tragos, gases y bromas, terminó invitando hamburguesas a todos con Hostin."
+    },
+    {
+        fecha: "14 de Marzo, 2026",
+        titulo: "Ramen aesthetic y cosplay anime 🍜🕺🏻",
+        descripcion: "Conocimos a la Sra. Lisset, comimos ramen, hubo disfraz de anime y cerramos bailando en ValeTodo (aunque luego castigaron al Monito por salir mucho)."
+    },
+    {
+        fecha: "13 de Marzo, 2026",
+        titulo: "El mejor Club Sandwich y odisea de hotel 🥪💨",
+        descripcion: "Comimos el mejor club sandwich hasta ahora, compramos pastillas para mi gripe y pasamos mil anécdotas y gases buscando hotel."
+    },
+    {
+        fecha: "12 de Marzo, 2026",
+        titulo: "Última clase de natación 😴",
+        descripcion: "El Goldito terminó tan agotado con dolor de piernas y brazos que se quedó dormido en su última clase."
+    },
+    {
+        fecha: "09 de Marzo, 2026",
+        titulo: "Indirectas con ChatGPT 📱",
+        descripcion: "El Monito pedorrín recurrió a la inteligencia artificial para buscar indirectas y subirlas a sus estados."
+    },
+    {
+        fecha: "07 de Marzo, 2026",
+        titulo: "Resaca en el Parque de la Imaginación y mentiritas blancas 🥸",
+        descripcion: "Fuimos resaqueados porque nos vieron en Agencia y Babylon, salimos estafados en Chepita Royal y nos enredamos improvisando excusas para despistar a tu amigo en el taxi."
+    },
+    {
+        fecha: "03 de Marzo, 2026",
+        titulo: "El Goldito nadando en tabla 🏊🏻‍♂️",
+        descripcion: "Le salió a la primera en la piscina, aunque los nervios casi le ganan como en la playa."
+    },
+    {
+        fecha: "02 de Marzo, 2026",
+        titulo: "Pasajes comprados ✈️🌴🐒",
+        descripcion: "Aseguramos nuestros pasajes para la próxima gran aventura juntos."
+    },
+    {
+        fecha: "01 de Marzo, 2026",
+        titulo: "Figuras Pokémon y día de votación 💼",
+        descripcion: "Encontramos tus figuras de Pokémon de pura casualidad en Tai Loy y fuimos a votar juntos antes de comer chifa con los polos manchados y sin tarjeta del Metropolitano."
+    },
+    {
+        fecha: "27 de Febrero, 2026",
+        titulo: "Celebrando el Pokémon Day 🃏🍗",
+        descripcion: "Comimos alitas, tomamos tragos aesthetic en ValeTodo y ganamos una lonchera en el sorteo; el Monguito sacó cartas valiosas pero tuvo que esperar un sobre para recuperar lo que regaló."
+    },
+    {
+        fecha: "26 de Febrero, 2026",
+        titulo: "Taper aesthetic y anécdotas en Naplo 🏖️",
+        descripcion: "El Monguito comió en su taper bien aesthetic y no aguantamos las ganas al llegar a la playa Naplo."
+    },
+    {
+        fecha: "25 de Febrero, 2026",
+        titulo: "Cine peruano: Mi peor enemiga 🎬",
+        descripcion: "El pedorrín por fin aceptó ir al cine después de decir que ya habíamos ido mucho."
+    },
+    {
+        fecha: "22 de Febrero, 2026",
+        titulo: "Ramen en Shimaya y postrecitos 🍜☕",
+        descripcion: "Comimos delicioso en Shimaya, llevaste café para tu mami y comimos postres aunque al Monito no le gusten mucho."
+    },
+    {
+        fecha: "21 de Febrero, 2026",
+        titulo: "De vuelta en Lima cansaditos 😩",
+        descripcion: "Regresamos agotados del viaje con ganas de quedarnos en nuestras casitas y dejar todo limpio."
+    },
+    {
+        fecha: "17 de Febrero, 2026",
+        titulo: "Frío y lluvia en Andahuaylas 😪🌧️",
+        descripcion: "Llegamos muertos de frío buscando hostal bajo una lluvia intensa en la que el Monito se empapó y perdimos una pashmina y lentes."
+    },
+    {
+        fecha: "14 de Febrero, 2026",
+        titulo: "San Valentín con soroche en Ayacucho 😵‍💫❤️",
+        descripcion: "Llegamos a Ayacucho con soroche, dormimos toda la mañana y abriste tus cartas originales (aunque el HTML solo abría en Android y no en iOS)."
+    },
+    {
+        fecha: "07 de Febrero, 2026",
+        titulo: "Noche de Pisco Sour y ValeTodo 🥛🕺🏻",
+        descripcion: "Nos emborrachamos a puro pisco sour y terminamos bailando en el ValeTodo, donde el Goldito ya se conocía todos los rincones."
+    },
+    {
+        fecha: "06 de Febrero, 2026",
+        titulo: "Conociendo a Hostin y planes de viaje 🎒",
+        descripcion: "Conocimos a tu amigo Hostin, conversamos un poquito sobre caminatas y luego en casa vimos el hospedaje para Ayacucho."
+    },
+    {
+        fecha: "01 de Febrero, 2026",
+        titulo: "Brindis a la distancia 🍻🍾🥂",
+        descripcion: "El Monguito y el Monito se emborracharon a la distancia haciendo videollamada."
+    },
+    {
+        fecha: "30 de Enero, 2026",
+        titulo: "El Monito y su doble almuerzo 🌭🍕🍖🍔🍚",
+        descripcion: "Un día épico donde el Monito demostró su buen diente comiendo doble almuerzo."
+    },
+    {
+        fecha: "26 de Enero, 2026",
+        titulo: "Sustos en el cine 🖐🏻😌",
+        descripcion: "El Monguito asustó al Monito en el cine y terminaste agarrándome la mano porque la película te daba miedo."
+    },
+    {
+        fecha: "21 de Enero, 2026",
+        titulo: "El Monito conoció Sunass 🧳📂",
+        descripcion: "Una visita especial para que el Monito conociera el lugar de trabajo."
+    },
+    {
+        fecha: "11 de Enero, 2026",
+        titulo: "Tomatodos iguales 💦",
+        descripcion: "Compramos nuestros tomatodos combinados para estar igualitos tomando agüita todo el día."
+    },
+    {
+        fecha: "01 de Enero, 2026",
+        titulo: "Arrancando el año en Paracas 🌊🦭",
+        descripcion: "Nuestro primer viaje del año disfrutando del mar, los lobos marinos y el sol de Paracas."
+    },
+    {
+        fecha: "31 de Diciembre, 2025",
+        titulo: "Despidiendo el año rumbo a Punta Negra 🍇",
+        descripcion: "Aunque el Monito me esperó enojado en la estación, terminamos comiendo conchitas en Chorrillos, comprando uvas, lentes en el mall y recibiendo el Año Nuevo en Punta Negra."
+    },
+    {
+        fecha: "30 de Diciembre, 2025",
+        titulo: "Primer enojo del Monito 😡",
+        descripcion: "El día del primer enojo oficial del Monito, parte de conocernos."
+    },
+    {
+        fecha: "Diciembre, 2025",
+        titulo: "Primera limonada de Starbucks 🥤",
+        descripcion: "El día en que te invité por primera vez mi limonada favorita de Starbucks."
+    },
+    {
+        fecha: "14 de Diciembre, 2025",
+        titulo: "Chifa urbano y flores 🌸",
+        descripcion: "Comimos un buen chifa urbano antes de ir juntos a conocer la flor."
+    },
+    {
+        fecha: "30 de Noviembre, 2025",
+        titulo: "Baile inolvidable en La Agencia 🕺🏻",
+        descripcion: "Una noche de baile increíble donde el Monito, entre su lista de preguntas y pensamientos, terminó de darse cuenta de lo que sentía."
+    },
+    {
+        fecha: "29 de Noviembre, 2025",
+        titulo: "Un beso frente al mar 🌊💚",
+        descripcion: "El beso en la playa donde realmente empezó nuestra historia."
+    },
+    {
+        fecha: "16 de Noviembre, 2025",
+        titulo: "Tarde de vóley 🤾🏻‍♂️",
+        descripcion: "Viniste a verme jugar vóley por primera vez y compartir conmigo algo que me encanta."
+    },
+    {
+        fecha: "02 de Noviembre, 2025",
+        titulo: "Primera salida en Barranco 💚",
+        descripcion: "El día en que aceptamos empezar a salir y dimos el primer paso de nuestra historia."
+    }
+    // Puedes copiar y pegar un bloque { fecha: "...", titulo: "...", descripcion: "..." }, para agregar más días
+];
 
 let modoAdmin = false;
+let albumsData = {};
+let datosCargados = false;
+let ultimoRecuerdoAleatorio = "";
 
-function iniciarSorpresa(archivoAudio) {
-    const audio = document.getElementById("musica");
-    const source = document.getElementById("audioSource");
-    source.src = archivoAudio;
-    audio.load();
-
-    document.getElementById("overlay").style.opacity = "0";
-    setTimeout(() => {
-        document.getElementById("overlay").style.display = "none";
-        audio.play();
-        escribirTextoFree();
-        setInterval(actualizarContador, 1000);
-        setInterval(crearElemento, 400);
-
-        const hoy = new Date().toLocaleString("en-US", { timeZone: "America/Lima" });
-        const fechaPeru = new Date(hoy);
-        const esCumple = fechaPeru.getDate() === 22  && fechaPeru.getMonth()+1 === 4 && fechaPeru.getFullYear() === 2026;
-        
-        if (esCumple) {
-            setTimeout(() => {
-                document.body.classList.add("modal-open");
-                document.getElementById("modal-cumple").style.display = "flex";
-                lanzarConfeti();
-            }, 2000);
-        }
-    }, 500);
-}
-
-function lanzarConfeti() {
-    const colores = ['#F54927', '#2a9d8f', '#ffecd2', '#a1c4fd', '#e63946'];
-    for (let j = 0; j < 50; j++) {
-        setTimeout(() => {
-            const c = document.createElement("div");
-            c.className = "confeti";
-            c.style.left = Math.random() * 100 + "vw";
-            c.style.backgroundColor = colores[Math.floor(Math.random() * colores.length)];
-            c.style.width = (Math.random() * 10 + 5) + "px";
-            c.style.height = c.style.width;
-            c.style.position = "absolute";
-            c.style.animation = "confetiFall 3s linear forwards";
-            document.body.appendChild(c);
-            setTimeout(() => c.remove(), 3000);
-        }, j * 50);
-    }
-}
-
-function cerrarModal() {
-    document.getElementById("modal-cumple").style.display = "none";
-    document.body.classList.remove("modal-open");
-}
-
-function explotarCorazones(e, emoji) {
-    const totalCorazones = 6;
-    for (let j = 0; j < totalCorazones; j++) {
-        setTimeout(() => {
-            const c = document.createElement("div");
-            c.innerHTML = emoji;
-            c.className = "corazon-clic";
-            c.style.left = (e.clientX) + "px";
-            c.style.top = (e.clientY) + "px";
-            document.body.appendChild(c);
-            setTimeout(() => c.remove(), 1500);
-        }, j * 100);
-    }
-}
-
-function escribirTextoFree() {
+// INICIALIZACIÓN AUTOMÁTICA SIN PANTALLA DE MÚSICA
+window.addEventListener("DOMContentLoaded", () => {
     document.getElementById("typing-textFree").innerHTML = mensaje.replace(/\n/g, "<br>");
-    const btn1 = document.getElementById("btn-admin");
-    const btn2 = document.getElementById("btn-fotos");
-	const btnVideo = document.getElementById("btn-reproducir-video"); // Nuevo
-	
-	// Lógica de fecha (Misma que usas para el modal)
+    renderizarRuta();
+    actualizarContador();
+    setInterval(actualizarContador, 1000);
+    setInterval(crearElemento, 650);
+
+    // Precargar datos de Memorias en segundo plano
+    cargarFotosDesdeSheet();
+
+    // Verificación de cumpleaños (Lima, Perú)
     const hoy = new Date().toLocaleString("en-US", { timeZone: "America/Lima" });
     const fechaPeru = new Date(hoy);
-	// Verifica si es el rango de fechas de su cumple en 2026
-    const esCumple = true;
-	
-    btn1.style.display = "inline-block";
-    btn2.style.display = "inline-block";
-	// El botón de video SOLO se muestra si es su cumple
+    const esCumple = fechaPeru.getDate() === 22 && (fechaPeru.getMonth() + 1) === 4 && fechaPeru.getFullYear() === 2026;
+
     if (esCumple) {
-        btnVideo.style.display = "inline-block";
-    } else {
-        btnVideo.style.display = "none";
+        setTimeout(() => {
+            document.getElementById("modal-cumple").style.display = "flex";
+            lanzarConfeti();
+        }, 1200);
     }
-    setTimeout(() => { btn1.style.opacity = "1"; btn2.style.opacity = "1"; btnVideo.style.opacity = "1"; // Aparecer nuevo botón
-	}, 100);
+});
+
+// RENDERIZAR LA LÍNEA DE TIEMPO DE "NUESTRA RUTA"
+function renderizarRuta() {
+    const contenedor = document.getElementById("contenedor-ruta");
+    contenedor.innerHTML = "";
+
+    nuestraRutaData.forEach(hito => {
+        const item = document.createElement("div");
+        item.className = "timeline-item";
+        item.onclick = (e) => explotarCorazones(e, "💚");
+
+        item.innerHTML = `
+            <span class="timeline-dot"></span>
+            <span class="timeline-fecha">${hito.fecha}</span>
+            <h3 class="timeline-titulo">${hito.titulo}</h3>
+            <p class="timeline-desc">${hito.descripcion}</p>
+        `;
+        contenedor.appendChild(item);
+    });
 }
 
+// NAVEGACIÓN DEL NUEVO MENÚ
+function navegar(vista) {
+    document.querySelectorAll(".nav-item").forEach(btn => btn.classList.remove("active"));
+    document.querySelectorAll(".seccion").forEach(sec => sec.classList.remove("activa"));
+
+    const container = document.getElementById("main-container");
+
+    if (vista === "inicio") {
+        modoAdmin = false;
+        document.getElementById("tab-inicio").classList.add("active");
+        document.getElementById("seccion-inicio").classList.add("activa");
+        container.style.borderColor = "rgba(232, 93, 63, 0.18)";
+    } 
+    else if (vista === "baul") {
+        modoAdmin = false;
+        document.getElementById("tab-baul").classList.add("active");
+        document.getElementById("seccion-baul").classList.add("activa");
+        container.style.borderColor = "rgba(232, 93, 63, 0.25)";
+        volverAlbumes();
+        if (!datosCargados) cargarFotosDesdeSheet();
+    } 
+    else if (vista === "ruta") {
+        modoAdmin = false;
+        document.getElementById("tab-ruta").classList.add("active");
+        document.getElementById("seccion-ruta").classList.add("activa");
+        container.style.borderColor = "rgba(232, 93, 63, 0.25)";
+    }
+    else if (vista === "dedicatoria") {
+        modoAdmin = true;
+        document.getElementById("tab-dedicatoria").classList.add("active");
+        document.getElementById("seccion-dedicatoria").classList.add("activa");
+        container.style.borderColor = "rgba(42, 157, 143, 0.35)";
+    }
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+// CONTADOR DE DÍAS, HORAS, MINUTOS Y SEGUNDOS
 function actualizarContador() {
     const ahora = new Date();
     const diferencia = ahora - fechaInicio;
-    const segundos = Math.floor(diferencia / 1000);
-    const dias = Math.floor(segundos / (3600*24));
-    const horas = Math.floor((segundos % (3600*24)) / 3600);
-    const minutos = Math.floor((segundos % 3600) / 60);
-    const seg = segundos % 60;
-    const contadorEl = document.getElementById("contador");
-    if(contadorEl) { contadorEl.innerHTML = dias + " días, " + horas + "h " + minutos + "m " + seg + "s"; }
+    const segundosTotales = Math.max(0, Math.floor(diferencia / 1000));
+
+    const dias = Math.floor(segundosTotales / (3600 * 24));
+    const horas = Math.floor((segundosTotales % (3600 * 24)) / 3600);
+    const minutos = Math.floor((segundosTotales % 3600) / 60);
+    const seg = segundosTotales % 60;
+
+    document.getElementById("cnt-dias").innerText = dias;
+    document.getElementById("cnt-horas").innerText = horas.toString().padStart(2, '0');
+    document.getElementById("cnt-min").innerText = minutos.toString().padStart(2, '0');
+    document.getElementById("cnt-seg").innerText = seg.toString().padStart(2, '0');
 }
 
-function mostrarSorpresaAdmin() {
-    modoAdmin = true;
-    cambiarSeccion("seccion-admin", "2px solid #2a9d8f", "20px");
-}
-
-function mostrarSeccionFotos() {
-    modoAdmin = false;
-    cambiarSeccion("seccion-fotos", "2px solid #F54927", "20px");
-    cargarFotosDesdeSheet(); 
-}
-
-function volverInicio() {
-    modoAdmin = false;
-    document.getElementById("menu-albumes").style.display = "flex";
-    document.getElementById("contenedor-fotos").innerHTML = "";
-    cambiarSeccion("seccion-amor", "2px solid #F54927", "20px");
-    document.getElementById("btn-volver-albumes").style.display = "none";
-}
-
-function volverAlbumes() {
-    document.getElementById("contenedor-fotos").innerHTML = "";
-    document.getElementById("menu-albumes").style.display = "flex";
-    document.getElementById("btn-volver-albumes").style.display = "none";
-}
-
-function cambiarSeccion(idMostrar, borde, radio) {
-    const secciones = ["seccion-amor", "seccion-admin", "seccion-fotos"];
-    const contenedor = document.querySelector(".container");
-    
-    secciones.forEach(id => {
-        const el = document.getElementById(id);
-        if(el.style.display === "block" || (id === "seccion-amor" && el.style.display !== "none")) {
-            el.style.opacity = "0";
-            setTimeout(() => { el.style.display = "none"; }, 500);
-        }
-    });
-
-    setTimeout(() => {
-        const destino = document.getElementById(idMostrar);
-        destino.style.display = "block";
-        contenedor.style.border = borde;
-        contenedor.style.borderRadius = radio;
-        setTimeout(() => { destino.style.opacity = "1"; }, 50);
-    }, 550);
-}
-
-function crearElemento() {
-    const el = document.createElement("div");
-    el.classList.add("falling");
-    let items = ["🌹", "❤️", "✨", "💚"];
-    if (modoAdmin) items = ["📈", "💼", "📎", "📊", "✨"];
-    el.innerHTML = items[Math.floor(Math.random() * items.length)];
-    el.style.left = Math.random() * 100 + "vw";
-    el.style.fontSize = (Math.random() * 20 + 15) + "px";
-    el.style.animationDuration = (Math.random() * 3 + 4) + "s";
-    document.body.appendChild(el);
-    setTimeout(() => el.remove(), 7000);
-}
-
-let albumsData = {};
-
+// LÓGICA ORIGINAL DE EXCEL / GOOGLE SHEETS CONSERVADA
 async function cargarFotosDesdeSheet(tipo) {
     const url = "https://opensheet.elk.sh/1ytc9OLnVTFOQ5GddnzLlLJ4o3J81QhWUC3smN0JeNs8/Hoja1";
 
     try {
-        const res = await fetch(url);
-        const data = await res.json();
-        const contenedor = document.getElementById("contenedor-fotos");
+        if (!datosCargados) {
+            const res = await fetch(url);
+            const data = await res.json();
+            albumsData = {};
 
-        if (Object.keys(albumsData).length === 0) {
-
+            // 1. Detectar portadas de álbumes
             data.forEach(fila => {
                 const nombre = fila.nombre?.trim();
                 const carpeta = fila.carpeta?.trim();
-
                 if (!nombre || !carpeta) return;
 
                 if (isNaN(carpeta)) {
                     const nombreSinExt = nombre.replace(/\.[^/.]+$/, "").toLowerCase();
-
                     albumsData[nombreSinExt] = {
                         nombre: nombreSinExt,
                         portada: convertirLinkDrive(fila.link),
@@ -584,71 +1747,126 @@ async function cargarFotosDesdeSheet(tipo) {
                 }
             });
 
+            // 2. Asignar fotos a cada carpeta
             data.forEach(fila => {
                 const carpeta = fila.carpeta?.trim();
                 const link = convertirLinkDrive(fila.link);
-
                 if (!carpeta || isNaN(carpeta)) return;
 
-                const albumKeys = Object.keys(albumsData);
-
-                const album = Object.values(albumsData)
-                    .find(a => a.carpeta === parseInt(carpeta));
-
+                const album = Object.values(albumsData).find(a => a.carpeta === parseInt(carpeta));
                 if (album) {
                     album.fotos.push(link);
                 }
             });
 
-            // Ordenar los álbumes por número de carpeta
-            const albumsOrdenados = Object.values(albumsData)
-                .sort((a, b) => a.carpeta - b.carpeta);
-
+            // 3. Ordenar álbumes por número
+            const albumsOrdenados = Object.values(albumsData).sort((a, b) => a.carpeta - b.carpeta);
             const menu = document.getElementById("menu-albumes");
             menu.innerHTML = "";
 
             albumsOrdenados.forEach(album => {
-                const div = document.createElement("div");
+                const card = document.createElement("div");
+                card.className = "album-card";
+                card.onclick = () => cargarFotosDesdeSheet(album.nombre);
 
-                div.className = "album-btn";
+                const etiquetaMes = !isNaN(album.carpeta) ? `Mes ${album.carpeta}` : album.nombre;
+                const cantidadFotos = album.fotos.length;
 
-                div.onclick = () => cargarFotosDesdeSheet(album.nombre);
-
-                div.innerHTML = `<img src="${album.portada}">`;
-
-                menu.appendChild(div);
+                card.innerHTML = `
+                    <div class="album-portada-wrap">
+                        <img src="${album.portada}" alt="${etiquetaMes}" loading="lazy">
+                        <span class="album-badge">${cantidadFotos} 📷</span>
+                    </div>
+                `;
+                menu.appendChild(card);
             });
 
             albumsData = {};
-
             albumsOrdenados.forEach(a => {
                 albumsData[a.nombre] = a;
             });
+
+            datosCargados = true;
         }
 
-        if (tipo) {
+        // 4. Si se seleccionó un álbum específico, mostrar sus fotos
+        if (tipo && albumsData[tipo]) {
+            const contenedor = document.getElementById("contenedor-fotos");
             contenedor.innerHTML = "";
 
             document.getElementById("menu-albumes").style.display = "none";
-            document.getElementById("btn-volver-albumes").style.display = "inline-block";
+            document.getElementById("baul-header-principal").style.display = "none";
+            document.getElementById("barra-album-activo").style.display = "flex";
+            contenedor.style.display = "grid";
 
-            const fotos = albumsData[tipo]?.fotos || [];
+            const albumActual = albumsData[tipo];
+            const etiquetaMes = !isNaN(albumActual.carpeta) ? `Mes ${albumActual.carpeta}` : tipo;
+            document.getElementById("titulo-album-abierto").innerText = `Recuerdos · ${etiquetaMes}`;
 
-            fotos.forEach((link, index) => {
+            albumActual.fotos.forEach(link => {
+                const item = document.createElement("div");
+                item.className = "polaroid-item";
+                item.onclick = () => abrirLightbox(link, `Recuerdo · ${etiquetaMes} 💚`);
+
                 const img = document.createElement("img");
-
                 img.src = link;
-                img.className = "foto-galeria";
+                img.loading = "lazy";
+                img.alt = etiquetaMes;
 
-                img.onclick = (e) => explotarElementoPro(e);
-
-                contenedor.appendChild(img);
+                item.appendChild(img);
+                contenedor.appendChild(item);
             });
         }
 
     } catch (error) {
         console.error("Error cargando fotos:", error);
+        document.getElementById("menu-albumes").innerHTML = `
+            <div class="loader-baul">No se pudieron cargar los recuerdos. Revisa tu conexión e intenta de nuevo.</div>
+        `;
     }
+}
+
+// BOTÓN RECUERDO ALEATORIO ("SORPRÉNDEME CON UN MOMENTO")
+async function abrirRecuerdoAleatorio(e) {
+    if (e) e.stopPropagation();
+
+    if (!datosCargados) {
+        await cargarFotosDesdeSheet();
+    }
+
+    const todosLosRecuerdos = [];
+    Object.values(albumsData).forEach(album => {
+        const etiquetaMes = !isNaN(album.carpeta) ? `Mes ${album.carpeta}` : album.nombre;
+        album.fotos.forEach(link => {
+            todosLosRecuerdos.push({
+                link: link,
+                etiqueta: `Recuerdo del ${etiquetaMes} ✨`
+            });
+        });
+    });
+
+    if (todosLosRecuerdos.length === 0) return;
+
+    let elegido = todosLosRecuerdos[Math.floor(Math.random() * todosLosRecuerdos.length)];
+    if (todosLosRecuerdos.length > 1 && elegido.link === ultimoRecuerdoAleatorio) {
+        const filtrados = todosLosRecuerdos.filter(r => r.link !== ultimoRecuerdoAleatorio);
+        elegido = filtrados[Math.floor(Math.random() * filtrados.length)];
+    }
+
+    ultimoRecuerdoAleatorio = elegido.link;
+    abrirLightbox(elegido.link, elegido.etiqueta);
+
+    if (e) {
+        explotarCorazones(e, "✨");
+    }
+}
+
+function volverAlbumes() {
+    document.getElementById("contenedor-fotos").style.display = "none";
+    document.getElementById("contenedor-fotos").innerHTML = "";
+    document.getElementById("barra-album-activo").style.display = "none";
+    document.getElementById("baul-header-principal").style.display = "block";
+    document.getElementById("menu-albumes").style.display = "flex";
 }
 
 function convertirLinkDrive(link) {
@@ -661,11 +1879,90 @@ function convertirLinkDrive(link) {
     return `https://lh3.googleusercontent.com/d/${id}`;
 }
 
-function verVideoLocal() {
-    const audioFondo = document.getElementById("musica");
-    audioFondo.pause();
+// VISOR DE FOTOS AMPLIADAS (LIGHTBOX)
+function abrirLightbox(src, etiqueta = "Nuestro Recuerdo 💚") {
+    const img = document.getElementById("lightbox-img");
+    const tag = document.getElementById("lightbox-tag");
+
+    img.style.opacity = "0.4";
+    img.style.transform = "scale(0.96)";
+    img.src = src;
+    tag.innerText = etiqueta;
+
+    document.getElementById("lightbox").style.display = "flex";
+
+    setTimeout(() => {
+        img.style.opacity = "1";
+        img.style.transform = "scale(1)";
+    }, 60);
+}
+
+function cerrarLightbox(e, forzar = false) {
+    if (forzar || e.target.id === "lightbox") {
+        document.getElementById("lightbox").style.display = "none";
+    }
+}
+
+// EFECTOS VISUALES (CORAZONES, LLUVIA Y CONFETI)
+function explotarCorazones(e, emoji) {
+    e.stopPropagation();
+    const x = e.clientX || (e.touches && e.touches[0].clientX) || window.innerWidth / 2;
+    const y = e.clientY || (e.touches && e.touches[0].clientY) || window.innerHeight / 2;
+
+    for (let j = 0; j < 6; j++) {
+        setTimeout(() => {
+            const c = document.createElement("div");
+            c.innerHTML = emoji;
+            c.className = "corazon-clic";
+            c.style.left = (x + (Math.random() * 40 - 20)) + "px";
+            c.style.top = y + "px";
+            document.body.appendChild(c);
+            setTimeout(() => c.remove(), 1400);
+        }, j * 90);
+    }
+}
+
+function crearElemento() {
+    const el = document.createElement("div");
+    el.classList.add("falling");
+    let items = ["🌹", "❤️", "✨", "💚"];
+    if (modoAdmin) items = ["📈", "💼", "📎", "📊", "✨"];
+    el.innerHTML = items[Math.floor(Math.random() * items.length)];
+    el.style.left = Math.random() * 100 + "vw";
+    el.style.fontSize = (Math.random() * 16 + 14) + "px";
+    el.style.animationDuration = (Math.random() * 3 + 4.5) + "s";
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 7500);
+}
+
+function lanzarConfeti() {
+    const colores = ['#e85d3f', '#2a9d8f', '#ffecd2', '#a1c4fd', '#e63946'];
+    for (let j = 0; j < 50; j++) {
+        setTimeout(() => {
+            const c = document.createElement("div");
+            c.style.left = Math.random() * 100 + "vw";
+            c.style.top = "-20px";
+            c.style.backgroundColor = colores[Math.floor(Math.random() * colores.length)];
+            c.style.width = (Math.random() * 10 + 5) + "px";
+            c.style.height = c.style.width;
+            c.style.position = "fixed";
+            c.style.zIndex = "10002";
+            c.style.borderRadius = "3px";
+            c.style.animation = "confetiFall 3s linear forwards";
+            document.body.appendChild(c);
+            setTimeout(() => c.remove(), 3000);
+        }, j * 45);
+    }
+}
+
+function cerrarModal() {
     document.getElementById("modal-cumple").style.display = "none";
-    
+}
+
+// LÓGICA DEL VIDEO SORPRESA
+function verVideoLocal() {
+    document.getElementById("modal-cumple").style.display = "none";
+
     const contenedor = document.getElementById("video-container");
     const video = document.getElementById("video-sorpresa");
     const btnCerrar = document.getElementById("btn-cerrar-video");
@@ -673,39 +1970,30 @@ function verVideoLocal() {
     const overlay = document.getElementById("countdown-overlay");
     const contador = document.getElementById("countdown-num");
     const latido = document.getElementById("latido-audio");
-    
-    // 1. ACTIVAR PANTALLA COMPLETA INMEDIATAMENTE AL CLIC
-    // Esto es vital para que el navegador lo permita
+
     if (contenedor.requestFullscreen) {
-        contenedor.requestFullscreen();
-    } else if (contenedor.webkitRequestFullscreen) { 
+        contenedor.requestFullscreen().catch(() => {});
+    } else if (contenedor.webkitRequestFullscreen) {
         contenedor.webkitRequestFullscreen();
-    } else if (contenedor.msRequestFullscreen) {
-        contenedor.msRequestFullscreen();
     }
 
-    // 2. Preparar la vista
     contenedor.style.display = "flex";
-    btnCerrar.style.display = "none"; 
+    btnCerrar.style.display = "block";
     btnReplay.style.display = "none";
     overlay.style.display = "flex";
     video.currentTime = 0;
-    
+
     video.onended = function() {
-        btnCerrar.style.display = "block";
         btnReplay.style.display = "block";
     };
 
-    // 3. Iniciar el contador
-    let tiempo = 4;
+    let tiempo = 3;
     function tick() {
         contador.innerText = tiempo;
-        
-        // Reproducir sonido de latido
         latido.pause();
         latido.currentTime = 0;
-        latido.play().catch(e => console.log("Audio bloqueado"));
-        
+        latido.play().catch(() => {});
+
         if (tiempo === 0) {
             latido.pause();
             overlay.style.display = "none";
@@ -720,11 +2008,7 @@ function verVideoLocal() {
 
 function repetirVideo() {
     const video = document.getElementById("video-sorpresa");
-    const btnCerrar = document.getElementById("btn-cerrar-video");
-    const btnReplay = document.getElementById("btn-replay-video");
-    
-    btnCerrar.style.display = "none";
-    btnReplay.style.display = "none";
+    document.getElementById("btn-replay-video").style.display = "none";
     video.currentTime = 0;
     video.play();
 }
@@ -735,18 +2019,13 @@ function cerrarVideo() {
     const latido = document.getElementById("latido-audio");
     latido.pause();
     latido.currentTime = 0;
-    
+
     if (document.fullscreenElement || document.webkitFullscreenElement) {
-        if (document.exitFullscreen) document.exitFullscreen();
+        if (document.exitFullscreen) document.exitFullscreen().catch(() => {});
         else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
     }
-    
-    document.getElementById("video-container").style.display = "none";
-    document.body.classList.remove("modal-open");
 
-    // REANUDAR MÚSICA DE FONDO
-    const audio = document.getElementById("musica");
-    audio.play().catch(e => console.log("Esperando interacción para música"));
+    document.getElementById("video-container").style.display = "none";
 }
 </script>
 
